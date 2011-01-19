@@ -1,0 +1,8 @@
+""" .vromerc
+""" https://github.com/jinzhu/vrome/wiki/vromerc-example-file
+
+map  c <C-y>
+
+
+
+" vim: set ft=vim:

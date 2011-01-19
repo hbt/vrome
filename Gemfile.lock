@@ -1,11 +1,30 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    actionmailer (2.3.10)
+      actionpack (= 2.3.10)
+    actionpack (2.3.10)
+      activesupport (= 2.3.10)
+      rack (~> 1.1.0)
+    activerecord (2.3.10)
+      activesupport (= 2.3.10)
+    activeresource (2.3.10)
+      activesupport (= 2.3.10)
+    activesupport (2.3.10)
     builder (3.0.0)
     crxmake (2.0.3)
       zipruby (>= 0.3.2)
     json (1.4.6)
+    rack (1.1.0)
+    rails (2.3.10)
+      actionmailer (= 2.3.10)
+      actionpack (= 2.3.10)
+      activerecord (= 2.3.10)
+      activeresource (= 2.3.10)
+      activesupport (= 2.3.10)
+      rake (>= 0.8.3)
     rake (0.8.7)
+    vrome (1.0.0)
     zipruby (0.3.6)
 
 PLATFORMS
@@ -15,4 +34,6 @@ DEPENDENCIES
   builder
   crxmake
   json
+  rails
   rake
+  vrome

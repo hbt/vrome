@@ -1,1 +1,2 @@
-sudo rm -rf ~/.config/chromium/Default/Extensions/iiffmolbankaonfoniihhpbpclcenokk
+bundle install
+ln -s .vromerc ~
