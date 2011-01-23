@@ -1,12 +1,16 @@
 var Hint = (function() {
-  var currentHint, new_tab, hintMode, numbers, elements, matched;
+  var currentHint, new_tab, hintMode, stringMode, numbers, elements, matched, subMatched;
   var highlight   = 'vrome_highlight';
+  var linkHintCharacters = 'dsafrewqtgvcxz';
+  var key = null;
 
-  function start(newTab) {
+  function start(newTab, isStringMode) {
 		hintMode    = true;
 		numbers     = 0;
 		currentHint = false;
+    stringMode = isStringMode;
 		new_tab     = newTab;
+    key = null;
     setHints();
     CmdBox.set({title : 'HintMode',pressDown : handleInput,content : ''});
   }
@@ -16,15 +20,18 @@ var Hint = (function() {
 
     var elems = document.body.querySelectorAll('a, input:not([type=hidden]), textarea, select, button, *[onclick]');
     for (var i = 0; i < elems.length; i++) {
-      if (isElementVisible(elems[i])) { elements.push(elems[i]); }
+      if (isElementVisible(elems[i])) {elements.push(elems[i]);}
     }
     setOrder(elements);
     matched = elements;
   }
 
   function setOrder(elems) {
+    subMatched = [];
+    var numDigits = calculateNumHintDigits(elements.length, linkHintCharacters.length);
+
     // clean up old highlight.
-    for (var i = 0; i < elements.length; i++) { elements[i].removeAttribute(highlight); }
+    for (var i = 0; i < elements.length; i++) {elements[i].removeAttribute(highlight);}
 
     var div = document.getElementById('__vim_hint_highlight');
     if (div) document.body.removeChild(div);
@@ -46,25 +53,105 @@ var Hint = (function() {
       span.style.left            = elem_left + 'px';
       span.style.top             = elem_top  + 'px';
       span.style.backgroundColor = 'red';
-      span.innerHTML             = Number(i) + 1; // cur
-      div.appendChild(span);
+
+      var htmlNumber = Number(i) + 1; // cur
+      if (stringMode) {
+        var mnemonic = numberToHintString(htmlNumber, numDigits);
+        subMatched[i] = mnemonic;
+
+        // filter based on input
+        if (getCurrentString() !== null && getCurrentString().length > 0) {
+          var currentString = getCurrentString().toLowerCase();
+
+          if (mnemonic.startsWith(currentString)) {
+            mnemonic = mnemonic.replace(currentString, '');
+          } else {
+            mnemonic = '';
+          }
+        }
+
+        span.innerHTML = mnemonic.toUpperCase();
+      } else {
+        span.innerHTML             = htmlNumber;
+      }
+      
+      if(span.innerHTML !== '')
+        div.appendChild(span);
 
       setHighlight(elem, false);
     }
-    if (elems[0] && elems[0].tagName == 'A') { setHighlight(elems[0], true); }
+    if (elems[0] && elems[0].tagName == 'A') {setHighlight(elems[0], true);}
   }
 
   function setHighlight(elem, is_active) {
-    if (!elem) { return false; }
+    if (!elem) {return false;}
 
     if (is_active) {
       var active_elem = document.body.querySelector('a[' + highlight + '=hint_active]');
-      if (active_elem) { active_elem.setAttribute(highlight, 'hint_elem'); }
+      if (active_elem) {active_elem.setAttribute(highlight, 'hint_elem');}
       elem.setAttribute(highlight, 'hint_active');
     } else {
       elem.setAttribute(highlight, 'hint_elem');
     }
   }
+
+ /*
+ * Converts a number like "8" into a hint string like "JK". This is used to sequentially generate all of
+ * the hint text. The hint string will be "padded with zeroes" to ensure its length is equal to numHintDigits.
+ */
+  function numberToHintString(number, numHintDigits) {
+    var base = linkHintCharacters.length;
+    var hintString = [];
+    var remainder = 0;
+    do {
+      remainder = number % base;
+      hintString.unshift(linkHintCharacters[remainder]);
+      number -= remainder;
+      number /= Math.floor(base);
+    } while (number > 0);
+
+    // Pad the hint string we're returning so that it matches numHintDigits.
+    var hintStringLength = hintString.length;
+    for (var i = 0; i < numHintDigits - hintStringLength; i++)
+      hintString.unshift(linkHintCharacters[0]);
+    return hintString.join("");
+  }
+
+  function calculateNumHintDigits(countVisibleElements, countLinkHintCharacters) {
+    return Math.ceil(Math.log(countVisibleElements) / Math.log(countLinkHintCharacters));
+  }
+
+  /*
+   * retrieves matched elements using string (string mode only)
+   */
+  function getMatchedElementsByString(str) {
+    var newMatched = [];
+    for (var i = 0; i < subMatched.length; i++) {
+      var mnemonic = subMatched[i];
+      if (mnemonic.startsWith(str)) {
+        newMatched.push(elements[i]);
+      }
+    }
+
+    return newMatched;
+  }
+
+  function getCurrentString() {
+    var currentString = null;
+    var content = CmdBox.get().content;
+
+    if (key !== null) {
+      currentString = content + key;
+    }
+
+    if (isBackspaceKey(key)) {
+      currentString = content.substr(0, content.length - 1);
+    }
+
+    return currentString;
+  }
+
+
 
   function remove() {
     if (!hintMode) return;
@@ -76,27 +163,41 @@ var Hint = (function() {
     }
 
     var div = document.getElementById('__vim_hint_highlight');
-    if (div) { document.body.removeChild(div); }
+    if (div) {document.body.removeChild(div);}
   }
 
   function handleInput(e) {
     key = getKey(e);
 
-    if (/^\d$/.test(key) || (key == '<BackSpace>' && numbers != 0)) {
-      numbers = (key == '<BackSpace>') ? parseInt(numbers / 10) : numbers * 10 + Number(key);
-			CmdBox.set({title : 'HintMode (' + numbers + ')'});
-      var cur = numbers - 1;
+    if (stringMode) {
+      var currentString = getCurrentString();
 
-      setHighlight(matched[cur],true);
-      currentHint = matched[cur];
-      e.preventDefault();
+      var newMatched = getMatchedElementsByString(currentString);
+      setOrder(elements);
 
-      if (numbers * 10 > matched.length) {
-        return execSelect( currentHint );
+      if (newMatched.length == 1) {
+        currentHint = newMatched[0];
+        e.preventDefault();
+       
+        return execSelect(currentHint);
       }
     } else {
-			if (isAcceptKey(key)) CmdBox.set({title : 'HintMode'});
-      if (!isEscapeKey(key)) setTimeout(delayToWaitKeyDown,200);
+      if (/^\d$/.test(key) || (key == '<BackSpace>' && numbers != 0)) {
+        numbers = (key == '<BackSpace>') ? parseInt(numbers / 10) : numbers * 10 + Number(key);
+        CmdBox.set({title : 'HintMode (' + numbers + ')'});
+        var cur = numbers - 1;
+
+        setHighlight(matched[cur],true);
+        currentHint = matched[cur];
+        e.preventDefault();
+
+        if (numbers * 10 > matched.length) {
+          return execSelect( currentHint );
+        }
+      } else {
+        if (isAcceptKey(key)) CmdBox.set({title : 'HintMode'});
+        if (!isEscapeKey(key)) setTimeout(delayToWaitKeyDown,200);
+      }
     }
   }
 
@@ -119,7 +220,7 @@ var Hint = (function() {
   }
 
   function execSelect(elem) {
-    if (!elem) { return false; }
+    if (!elem) {return false;}
     var tag_name = elem.tagName.toLowerCase();
     var type     = elem.type ? elem.type.toLowerCase() : "";
 
@@ -156,7 +257,9 @@ var Hint = (function() {
 
   return {
     start         : start,
-    new_tab_start : function(){ start(true); },
+    start_string         : function(){start(false, true);},
+    new_tab_start : function(){start(true);},
+    new_tab_start_string: function(){start(true, true);},
     remove        : remove
   };
 })();

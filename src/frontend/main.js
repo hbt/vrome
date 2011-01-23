@@ -133,6 +133,8 @@ with (KeyEvent) {
   // Hint
   add("f"  , Hint.start         );
   add("F"  , Hint.new_tab_start );
+  add("<M-f>"  , Hint.start_string         );
+  add("<M-c>"  , Hint.new_tab_start_string );
 
 
   // Search

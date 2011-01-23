@@ -4,6 +4,9 @@ var Platform = {
   win   : navigator.userAgent.indexOf("Windows") != -1
 }
 
+var c = console;
+c.l = console.log;
+
 var times = function(/*Boolean*/ raw,/*Boolean*/ read) {
   var count = raw ? KeyEvent.times(read) : (KeyEvent.times(read) || 1);
   Debug('KeyEvent.times:' + count);
