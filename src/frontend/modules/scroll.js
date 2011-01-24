@@ -1,6 +1,6 @@
 var Scroll = (function(){
-	var vertical_moment   = 15;
-	var horizontal_moment = 15;
+	var vertical_moment   = 20;
+	var horizontal_moment = 20;
 
   // API
 	return {
