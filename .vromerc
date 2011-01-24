@@ -1,6 +1,13 @@
 """ .vromerc
 """ https://github.com/jinzhu/vrome/wiki/vromerc-example-file
 
+" Unmap
+"map <C-f> <M-v>
+"map <M-d> <M-v>
+"map <C-n> <M-v>
+"map R <M-v>
+"map D <M-v>
+
 " links
 map  f <M-f> 
 map  c <M-c>
@@ -12,10 +19,11 @@ map s j
 map d l
 map gf G
 
-" Unmap
-map <C-f> <M-v>
-map <M-d> <M-v>
-map <C-n> <M-v>
+" History
+map A H
+map D L
+
+
 
 " properties
 set linkHintCharacters=dsafrewqtgvcxz

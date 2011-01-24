@@ -48,11 +48,6 @@ var KeyEvent = (function() {
 	}
 
   ///////////////////////////////////////////////////
-  function executeOriginalKey() {
-    // equivalent to unmapping a key
-    CmdBox.set({title : 'Original',pressDown : function(e) { e.stopPropagation(false); } ,content : ''});
-  }
-
   function passNextKey() {
 		CmdBox.set({title : ' -- PASS THROUGH (next) -- ',timeout : 2000 });
     pass_next_key  = true;
@@ -162,7 +157,6 @@ var KeyEvent = (function() {
 
     disable : disable,
     passNextKey : passNextKey,
-    executeOriginalKey : executeOriginalKey,
 
     runLast : runLast,
   };

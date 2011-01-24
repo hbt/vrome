@@ -70,14 +70,14 @@ with (KeyEvent) {
   // Url
   add("gu"    , Url.parent             );
   add("gU"    , Url.root               );
-  add("gf"    , Url.viewSource         );
+//  add("gf"    , Url.viewSource         );
   add("gF"    , Url.viewSourceNewTab   );
   add("<C-a>" , Url.increment          );
   add("<C-x>" , Url.decrement          );
   add("o"     , Url.open               );
   add("O"     , Url.openWithDefault    );
-  add("t"     , Url.tabopen            );
-  add("T"     , Url.tabopenWithDefault );
+  add("tt"     , Url.tabopen            );
+//  add("T"     , Url.tabopenWithDefault );
   add("<C-y>" , Url.shortUrl           );
 
 
@@ -93,7 +93,7 @@ with (KeyEvent) {
   add("l"  , Scroll.right     );
   add("%"  , Scroll.toPercent );
 
-  add("<C-f>" , Scroll.nextPage     );
+//  add("<C-f>" , Scroll.nextPage     );
   add("<C-b>" , Scroll.prevPage     );
   add("<C-d>" , Scroll.nextHalfPage );
   add("<C-u>" , Scroll.prevHalfPage );
@@ -102,28 +102,23 @@ with (KeyEvent) {
   // Tab
   add("r"    , Tab.reload       );
   add("R"    , Tab.reloadAll    );
-  add("d"    , Tab.close        );
-  add("D"    , Tab.closeAndFoucsLeft );
-  add("<M-d>", Tab.closeAndFoucsLast );
-  add("u"    , Tab.reopen       );
-  add("<C-p>", Tab.prev         );
-  add("<C-n>", Tab.next         );
-  add("gt"   , Tab.next         );
-  add("gT"   , Tab.prev         );
+  add("tw"    , Tab.close        );
+//  add("D"    , Tab.closeAndFoucsLeft );
+//  add("<M-d>", Tab.closeAndFoucsLast );
+  add("tu"    , Tab.reopen       );
+  add("e"   , Tab.next         );
+  add("q"   , Tab.prev         );
 
-  add("y"     , Tab.copyUrl      );
+  add("yy"     , Tab.copyUrl      );
   add("g0"    , Tab.first        );
   add("g^"    , Tab.first        );
   add("g$"    , Tab.last         );
-  add("<C-6>" , Tab.selectPrevious );
-  add("<C-^>" , Tab.selectPrevious );
+  add("``" , Tab.selectPrevious );
 
 
   // History
   add("H"    , History.back    );
   add("L"    , History.forward );
-  add("<C-o>", History.back    );
-  add("<C-i>", History.forward );
 
 
   // CmdLine
