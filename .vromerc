@@ -1,9 +1,17 @@
 """ .vromerc
 """ https://github.com/jinzhu/vrome/wiki/vromerc-example-file
 
+" links
 map  f <M-f> 
 map  c <M-c>
 
+" Scroll
+map w k
+map a h
+map s j
+map d l
 
+map gf G
 
+set linkHintCharacters=dsafrewqtgvcxz
 " vim: set ft=vim:
