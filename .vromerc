@@ -10,8 +10,13 @@ map w k
 map a h
 map s j
 map d l
-
 map gf G
 
+" Unmap
+map <C-f> <M-v>
+map <M-d> <M-v>
+map <C-n> <M-v>
+
+" properties
 set linkHintCharacters=dsafrewqtgvcxz
 " vim: set ft=vim:
