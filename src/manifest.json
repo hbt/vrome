@@ -74,6 +74,7 @@
     ],
   "name" : "Vrome",
   "permissions" : [ "tabs",
+      "management",
       "http://127.0.0.1/*",
       "http://*/*",
       "http://is.gd/*"

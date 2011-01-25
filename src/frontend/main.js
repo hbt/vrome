@@ -65,6 +65,7 @@ with (KeyEvent) {
   add("]]", Page.next         );
   add("[[", Page.prev         );
   add("Y" , Page.copySelected );
+  add("<M-d>" , Page.toggleDarkPageExtension );
 
 
   // Url

@@ -10,6 +10,10 @@ var Page = (function() {
 		}
 	}
 
+  function toggleDarkPageExtension () {
+    Post({action: "Page.toggleDarkPageExtension"});
+  }
+
   // API
 	return {
 		next : function() {
@@ -18,6 +22,7 @@ var Page = (function() {
 	  prev : function() {
 	    execMatch(Option.get('previouspattern'));
     },
-		copySelected : function() { Post({action: "Tab.copyData", data: getSelected() });  }
+		copySelected : function() { Post({action: "Tab.copyData", data: getSelected() });  },
+    toggleDarkPageExtension: toggleDarkPageExtension
 	};
 })();
