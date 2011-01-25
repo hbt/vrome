@@ -108,6 +108,8 @@ with (KeyEvent) {
   add("tcq"    , Tab.closeLeftTabs        );
   add("tcw"    , Tab.closeOtherWindows        );
   add("td"    , Tab.detachTab        );
+  add("tM"    , Tab.markTabForMove);
+  add("tp"    , Tab.putMarkedTab);
 //  add("D"    , Tab.closeAndFoucsLeft );
 //  add("<M-d>", Tab.closeAndFoucsLast );
   add("tu"    , Tab.reopen       );

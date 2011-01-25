@@ -149,6 +149,22 @@ var Tab = (function() {
     });
   }
 
+  function markTabForMove() {
+    chrome.tabs.getSelected(null, function (tab) {
+          Tab.markedMoveId = tab.id;
+      });
+  }
+
+  function putMarkedTab() {
+    if (Tab.markedMoveId != null) {
+          chrome.tabs.getSelected(null, function(currentTab) {
+              var newIndex = currentTab.index + 1;
+              chrome.tabs.move(Tab.markedMoveId, { windowId : currentTab.windowId, index: newIndex });
+              Tab.markedMoveId = null;
+          });
+      }
+  }
+
   return {
     close          : close,
     reopen         : reopen,
@@ -161,7 +177,9 @@ var Tab = (function() {
     closeLeftTabs: closeLeftTabs,
     closeRightTabs: closeRightTabs,
     closeOtherWindows: closeOtherWindows,
-    detachTab: detachTab
+    detachTab: detachTab,
+    markTabForMove: markTabForMove,
+    putMarkedTab: putMarkedTab
   }
 })()
 

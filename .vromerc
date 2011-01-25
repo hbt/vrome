@@ -23,7 +23,8 @@ map gf G
 map A H
 map D L
 
-
+" misc
+map <M-s> <C-z>
 
 " properties
 set linkHintCharacters=dsafrewqtgvcxz
