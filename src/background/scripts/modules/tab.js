@@ -30,7 +30,7 @@ var Tab = (function() {
         var index = tab.index + msg.offset;
         index = index % tabs.length;
       }
-      if (index < 0) { index = index + tabs.length; }
+      if (index < 0) {index = index + tabs.length;}
 
       Debug("gotoTab:" + index + " index:" + msg.index + " offset:" + msg.offset);
       tab = tabs[index] || tab;
@@ -76,6 +76,44 @@ var Tab = (function() {
     Clipboard.copy(msg.data);
   }
 
+  /**
+  * closes tabs based on direction
+  * @param direction : values are "all", "right", "left"
+  * i.e close tabs "all" tabs, close tabs on the "right/left"
+  */
+  function closeTabs(direction) {
+    chrome.tabs.getSelected(null, function(selectedTab) {
+      chrome.tabs.getAllInWindow(null, function (tabs) {
+        var condition = null;
+
+        for (var i = 0; i < tabs.length; i++) {
+          if (direction == "right") {
+            condition = tabs[i].index > selectedTab.index;
+          } else if (direction == "left") {
+            condition = tabs[i].index < selectedTab.index;
+          } else if (direction == "all") {
+            condition = tabs[i].index != selectedTab.index;
+          }
+
+          if (condition) {
+            chrome.tabs.remove(tabs[i].id);
+          }
+        }
+      });
+    });
+  }
+
+  function closeOtherTabs() {
+    closeTabs("all");
+  }
+
+  function closeLeftTabs() {
+    closeTabs("left");
+  }
+
+  function closeRightTabs() {
+    closeTabs("right");
+  }
 
   return {
     close          : close,
@@ -84,7 +122,10 @@ var Tab = (function() {
     selectPrevious : selectPrevious,
     reloadAll      : reloadAll,
     openUrl       : openUrl,
-    copyData: copyData
+    copyData: copyData,
+    closeOtherTabs: closeOtherTabs,
+    closeLeftTabs: closeLeftTabs,
+    closeRightTabs: closeRightTabs
   }
 })()
 

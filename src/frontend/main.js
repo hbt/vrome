@@ -103,6 +103,10 @@ with (KeyEvent) {
   add("r"    , Tab.reload       );
   add("R"    , Tab.reloadAll    );
   add("tw"    , Tab.close        );
+  add("tcc"    , Tab.closeOtherTabs        );
+  add("tce"    , Tab.closeRightTabs        );
+  add("tcq"    , Tab.closeLeftTabs        );
+  
 //  add("D"    , Tab.closeAndFoucsLeft );
 //  add("<M-d>", Tab.closeAndFoucsLast );
   add("tu"    , Tab.reopen       );

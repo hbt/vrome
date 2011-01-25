@@ -36,6 +36,18 @@ var Tab = (function(){
   function first() { Post({action: "Tab.goto",index  :	0}); }
   function last()  { Post({action: "Tab.goto",index  : -1}); }
 
+  function closeOtherTabs() {
+    Post({action: "Tab.closeOtherTabs"});
+  }
+
+  function closeLeftTabs() {
+    Post({action: "Tab.closeLeftTabs"});
+  }
+
+  function closeRightTabs() {
+    Post({action: "Tab.closeRightTabs"});
+  }
+
   // API
 	return {
     copyUrl   : copyUrl	 ,
@@ -50,5 +62,8 @@ var Tab = (function(){
     selectPrevious : selectPrevious,
 		closeAndFoucsLast : function(){ close({focusLast : true}) },
 		closeAndFoucsLeft : function(){ close({offset : -1}) },
+    closeOtherTabs: closeOtherTabs,
+    closeLeftTabs: closeLeftTabs,
+    closeRightTabs: closeRightTabs
 	}
 })()
