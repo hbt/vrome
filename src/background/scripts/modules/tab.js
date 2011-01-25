@@ -127,6 +127,28 @@ var Tab = (function() {
     });
   }
 
+  function detachTab() {
+    // retrieve current tab
+    chrome.tabs.getSelected(null, function(selectedTab) {
+      // create a new window
+      chrome.windows.create({}, function (window) {
+        // move current tab into new window
+        chrome.tabs.move(selectedTab.id, {
+          windowId: window.id,
+          index: 0
+        }, function (tab) {
+          // retrieve selected tab and remove it.
+          // Note: an extra tab is created when creating a new window
+          chrome.tabs.getSelected(null, function (newSelectedTab) {
+            if (newSelectedTab.index != 0) {
+              chrome.tabs.remove(newSelectedTab.id);
+            }
+          });
+        });
+      });
+    });
+  }
+
   return {
     close          : close,
     reopen         : reopen,
@@ -138,7 +160,8 @@ var Tab = (function() {
     closeOtherTabs: closeOtherTabs,
     closeLeftTabs: closeLeftTabs,
     closeRightTabs: closeRightTabs,
-    closeOtherWindows: closeOtherWindows
+    closeOtherWindows: closeOtherWindows,
+    detachTab: detachTab
   }
 })()
 

@@ -52,6 +52,10 @@ var Tab = (function(){
     Post({action: "Tab.closeOtherWindows"});
   }
 
+  function detachTab() {
+    Post({action: "Tab.detachTab"});
+  }
+
   // API
 	return {
     copyUrl   : copyUrl	 ,
@@ -69,6 +73,7 @@ var Tab = (function(){
     closeOtherTabs: closeOtherTabs,
     closeLeftTabs: closeLeftTabs,
     closeRightTabs: closeRightTabs,
-    closeOtherWindows: closeOtherWindows
+    closeOtherWindows: closeOtherWindows,
+    detachTab: detachTab
 	}
 })()
