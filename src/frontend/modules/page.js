@@ -18,6 +18,6 @@ var Page = (function() {
 	  prev : function() {
 	    execMatch(Option.get('previouspattern'));
     },
-		copySelected : function() { Clipboard.copy(getSelected()) }
+		copySelected : function() { Post({action: "Tab.copyData", data: getSelected() });  }
 	};
 })();

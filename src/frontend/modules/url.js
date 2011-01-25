@@ -106,7 +106,7 @@ var Url = (function(){
 
   function shortUrl(msg) {
     if (msg && msg.url) {
-      Clipboard.copy(msg.url);
+      Post({action: "Tab.copyData", data: msg.url });
       CmdBox.set({ title : "It's copied,the shorten URL: " + msg.url,timeout : 4000 });
     }else{
       CmdBox.set({ title : 'shorten the current URL.',timeout : 4000 });
