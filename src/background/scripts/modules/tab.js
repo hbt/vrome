@@ -72,13 +72,19 @@ var Tab = (function() {
     }
   }
 
+  function copyData(msg) {
+    Clipboard.copy(msg.data);
+  }
+
+
   return {
     close          : close,
     reopen         : reopen,
     goto           : goto,
     selectPrevious : selectPrevious,
     reloadAll      : reloadAll,
-    openUrl       : openUrl
+    openUrl       : openUrl,
+    copyData: copyData
   }
 })()
 

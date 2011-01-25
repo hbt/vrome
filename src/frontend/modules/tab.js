@@ -1,7 +1,8 @@
 var Tab = (function(){
 
   function copyUrl() {
-		Clipboard.copy(document.location);
+    // necessary until http://code.google.com/p/chromium/issues/detail?id=55188 is fixed
+    Post({action: "Tab.copyData", data: document.location.href });
   }
 
   function reload(){
