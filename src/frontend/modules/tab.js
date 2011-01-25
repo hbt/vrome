@@ -48,6 +48,10 @@ var Tab = (function(){
     Post({action: "Tab.closeRightTabs"});
   }
 
+  function closeOtherWindows() {
+    Post({action: "Tab.closeOtherWindows"});
+  }
+
   // API
 	return {
     copyUrl   : copyUrl	 ,
@@ -64,6 +68,7 @@ var Tab = (function(){
 		closeAndFoucsLeft : function(){ close({offset : -1}) },
     closeOtherTabs: closeOtherTabs,
     closeLeftTabs: closeLeftTabs,
-    closeRightTabs: closeRightTabs
+    closeRightTabs: closeRightTabs,
+    closeOtherWindows: closeOtherWindows
 	}
 })()

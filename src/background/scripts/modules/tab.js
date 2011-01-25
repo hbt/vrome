@@ -115,6 +115,18 @@ var Tab = (function() {
     closeTabs("right");
   }
 
+  function closeOtherWindows() {
+    chrome.windows.getAll(null, function (windows) {
+      chrome.windows.getCurrent(function (currentWindow) {
+        for (var i = 0; i < windows.length; i++) {
+          if (windows[i].id != currentWindow.id) {
+            chrome.windows.remove(windows[i].id);
+          }
+        }
+      });
+    });
+  }
+
   return {
     close          : close,
     reopen         : reopen,
@@ -125,7 +137,8 @@ var Tab = (function() {
     copyData: copyData,
     closeOtherTabs: closeOtherTabs,
     closeLeftTabs: closeLeftTabs,
-    closeRightTabs: closeRightTabs
+    closeRightTabs: closeRightTabs,
+    closeOtherWindows: closeOtherWindows
   }
 })()
 

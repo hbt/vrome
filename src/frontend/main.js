@@ -106,7 +106,7 @@ with (KeyEvent) {
   add("tcc"    , Tab.closeOtherTabs        );
   add("tce"    , Tab.closeRightTabs        );
   add("tcq"    , Tab.closeLeftTabs        );
-  
+  add("tcw"    , Tab.closeOtherWindows        );
 //  add("D"    , Tab.closeAndFoucsLeft );
 //  add("<M-d>", Tab.closeAndFoucsLast );
   add("tu"    , Tab.reopen       );
