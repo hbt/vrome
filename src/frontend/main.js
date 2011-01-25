@@ -157,7 +157,6 @@ with (KeyEvent) {
   add("gi" , InsertMode.focusFirstTextInput );
   add("<C-z>" , KeyEvent.disable            );
   add("<C-v>" , KeyEvent.passNextKey        );
-  add("<M-v>" , KeyEvent.passNextKey        );
   add("."     , KeyEvent.runLast            );
 
   // a-zA-Z
