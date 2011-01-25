@@ -6,9 +6,9 @@ var Hint = (function() {
 
   function start(newTab, isStringMode) {
 		hintMode    = true;
-    var config = Settings.get('configure');
-    if (config && config.set.linkHintCharacters) {
-      linkHintCharacters = config.set.linkHintCharacters[0];
+    var config = Settings.get('configure.set.linkHintCharacters');
+    if (config) {
+      linkHintCharacters = config[0];
     }
 		numbers     = 0;
 		currentHint = false;
