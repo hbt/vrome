@@ -65,7 +65,7 @@ with (KeyEvent) {
   add("]]", Page.next         );
   add("[[", Page.prev         );
   add("Y" , Page.copySelected );
-  add("<M-d>" , Page.toggleDarkPageExtension );
+  add("Sd" , Page.toggleDarkPageExtension );
 
 
   // Url
@@ -86,7 +86,9 @@ with (KeyEvent) {
   add("gg" , Scroll.top       );
   add("G"  , Scroll.bottom    );
   add("0"  , Scroll.first     );
+  add("ga"  , Scroll.first     );
   add("$"  , Scroll.last      );
+  add("gd"  , Scroll.last      );
 
   add("k"  , Scroll.up        );
   add("j"  , Scroll.down      );

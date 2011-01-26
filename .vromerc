@@ -18,6 +18,8 @@ map a h
 map s j
 map d l
 map gf G
+map ga 0
+map gd $
 
 " History
 map A H
