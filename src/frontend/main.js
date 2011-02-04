@@ -66,6 +66,7 @@ with (KeyEvent) {
   add("[[", Page.prev         );
   add("Y" , Page.copySelected );
   add("Sd" , Page.toggleDarkPageExtension );
+  add("Ss" , Page.disableStyles );
 
 
   // Url
