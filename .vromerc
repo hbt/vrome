@@ -32,6 +32,6 @@ map <M-s> <C-z>
 set linkHintCharacters=dsafrewqtgvcxz
 
 " url marks
-set url_marks={'e':'http://www.google.ca', 'asd': '::javascript::alert("asd");'}
+set url_marks={'e':'chrome://extensions/', 'asd': '::javascript::alert("asd");', 'dd': '::javascript::var location=window.location.href;location=location.replace("index.php","frontend_debug.php");window.location.href=location;'}
 
 " vim: set ft=vim:

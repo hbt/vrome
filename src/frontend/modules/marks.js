@@ -32,7 +32,8 @@ var Marks = (function() {
       var customMarks= Option.get('url_marks');
       customMarks= eval('(' + customMarks + ')');
       url = customMarks[content];
-      if(url.indexOf('::javascript::', 0) !== -1) {
+      c.l(url, url.indexOf('::javascript::', 0));
+      if(url && url.indexOf('::javascript::', 0) !== -1) {
         var js = url.replace('::javascript::', '');
         url= null;
         eval(js);
