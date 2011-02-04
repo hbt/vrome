@@ -1,13 +1,45 @@
 var Marks = (function() {
-  function addQuickMark() {
-    Post({ action: "Marks.addQuickMark",key  : getKey(this),url : location.href });
-    CmdBox.set({title : "Add Quick Mark " + getKey(this) ,timeout : 1000 });
+  var openNewTab = false;
+
+  function initQuickMark() {
+    CmdBox.set({title : 'Add Quick Mark ',pressUp: handleQuickMarkInput, content : ''});
   }
 
-  function gotoQuickMark(/*Boolean*/ newtab) {
-    var key = getKey(this);
-    var url = Settings.get("background.url_marks")[key];
-    Post({ action: "Tab.openUrl", urls: url, newtab: newtab });
+  function addQuickMark() {
+    var content = CmdBox.get().content;
+    Post({ action: "Marks.addQuickMark", content : content,url : location.href });
+     CmdBox.remove();
+  }
+
+  function handleQuickMarkInput(e)
+  {
+    var key = getKey(e);
+
+    if (isAcceptKey(key)) {
+      addQuickMark();
+    } 
+  }
+
+  function initGotoQuickMark(/*Boolean*/ newtab) {
+    openNewTab= newtab;
+    CmdBox.set({title : 'Goto Quick Mark ',pressUp : handleGotoQuickMark, content : ''});
+  }
+
+  function gotoQuickMark() {
+    var content = CmdBox.get().content;
+    var url = Settings.get("background.url_marks")[content];
+    if(url) {
+      Post({ action: "Tab.openUrl", urls: url, newtab: openNewTab });
+      CmdBox.remove();
+    }
+  }
+
+  function handleGotoQuickMark(e) {
+    var key = getKey(e);
+
+    if(isAcceptKey(key)) {
+      gotoQuickMark();
+    }
   }
 
   function addLocalMark() {
@@ -23,6 +55,7 @@ var Marks = (function() {
     CmdBox.set({title : "Add Local Mark " + key,timeout : 1000 });
   }
 
+
   function gotoLocalMark() {
     var key = getKey(this);
     var setting_key = key.match(/^[A-Z]$/) ? 'background.local_marks' : 'local_marks';
@@ -35,9 +68,9 @@ var Marks = (function() {
   }
 
   return {
-    addQuickMark        : addQuickMark,
-    gotoQuickMark       : gotoQuickMark,
-    gotoQuickMarkNewTab : function() { gotoQuickMark.call(this,true) },
+    addQuickMark        : initQuickMark,
+    gotoQuickMark       : initGotoQuickMark,
+    gotoQuickMarkNewTab : function() { initGotoQuickMark.call(this,true) },
     addLocalMark        : addLocalMark,
     gotoLocalMark       : gotoLocalMark,
   }

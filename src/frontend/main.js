@@ -163,22 +163,26 @@ with (KeyEvent) {
   add("<C-v>" , KeyEvent.passNextKey        );
   add("."     , KeyEvent.runLast            );
 
+  add("M", Marks.addQuickMark);
+  add("go", Marks.gotoQuickMark);
+  add("gn", Marks.gotoQuickMarkNewTab);
+
   // a-zA-Z
   for (var i = 65; i <= 122; i++) {
     if (i > 90 && i < 97) continue;
-    add("M"  + String.fromCharCode(i), Marks.addQuickMark  );
-    add("go" + String.fromCharCode(i), Marks.gotoQuickMark );
-    add("gn" + String.fromCharCode(i), Marks.gotoQuickMarkNewTab );
+//    add("M"  + String.fromCharCode(i), Marks.addQuickMark  );
+//    add("go" + String.fromCharCode(i), Marks.gotoQuickMark );
+//    add("gn" + String.fromCharCode(i), Marks.gotoQuickMarkNewTab );
 
     add("m" + String.fromCharCode(i), Marks.addLocalMark  );
     add("'" + String.fromCharCode(i), Marks.gotoLocalMark );
   }
   // 0-9
-  for (var i = 0; i <= 9; i++) {
-    add("M"  + i, Marks.addQuickMark  );
-    add("go" + i, Marks.gotoQuickMark );
-    add("gn" + i, Marks.gotoQuickMarkNewTab );
-  }
+//  for (var i = 0; i <= 9; i++) {
+//    add("M"  + i, Marks.addQuickMark  );
+//    add("go" + i, Marks.gotoQuickMark );
+//    add("gn" + i, Marks.gotoQuickMarkNewTab );
+//  }
 
 
   // InsertMode
