@@ -7,7 +7,7 @@ var Marks = (function() {
 
   function addQuickMark() {
     var content = CmdBox.get().content;
-    Post({ action: "Marks.addQuickMark", content : content,url : location.href });
+    Post({action: "Marks.addQuickMark", content : content,url : location.href});
      CmdBox.remove();
   }
 
@@ -28,8 +28,19 @@ var Marks = (function() {
   function gotoQuickMark() {
     var content = CmdBox.get().content;
     var url = Settings.get("background.url_marks")[content];
+    if(!url) {
+      var customMarks= Option.get('url_marks');
+      customMarks= eval('(' + customMarks + ')');
+      url = customMarks[content];
+      if(url.indexOf('::javascript::', 0) !== -1) {
+        var js = url.replace('::javascript::', '');
+        url= null;
+        eval(js);
+      }
+    }
+
     if(url) {
-      Post({ action: "Tab.openUrl", urls: url, newtab: openNewTab });
+      Post({action: "Tab.openUrl", urls: url, newtab: openNewTab});
       CmdBox.remove();
     }
   }
@@ -46,13 +57,13 @@ var Marks = (function() {
     // TODO zoom
     var key = getKey(this);
     if (key.match(/^[A-Z]$/)) {
-      Post({ action: "Marks.addLocalMark",key  : key,position : [scrollX, scrollY, location.href]});
+      Post({action: "Marks.addLocalMark",key  : key,position : [scrollX, scrollY, location.href]});
     } else {
       var local_marks = Settings.get('local_marks') || {};
       local_marks[key] = [scrollX, scrollY];
       Settings.add('local_marks',local_marks);
     }
-    CmdBox.set({title : "Add Local Mark " + key,timeout : 1000 });
+    CmdBox.set({title : "Add Local Mark " + key,timeout : 1000});
   }
 
 
@@ -70,7 +81,7 @@ var Marks = (function() {
   return {
     addQuickMark        : initQuickMark,
     gotoQuickMark       : initGotoQuickMark,
-    gotoQuickMarkNewTab : function() { initGotoQuickMark.call(this,true) },
+    gotoQuickMarkNewTab : function() {initGotoQuickMark.call(this,true)},
     addLocalMark        : addLocalMark,
     gotoLocalMark       : gotoLocalMark,
   }

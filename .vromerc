@@ -32,6 +32,6 @@ map <M-s> <C-z>
 set linkHintCharacters=dsafrewqtgvcxz
 
 " url marks
-url_marks={'e': 'http://www.google.ca'}
+set url_marks={'e':'http://www.google.ca', 'asd': '::javascript::alert("asd");'}
 
 " vim: set ft=vim:
