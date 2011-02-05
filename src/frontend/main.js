@@ -116,6 +116,8 @@ with (KeyEvent) {
   add("td"    , Tab.detachTab        );
   add("tM"    , Tab.markTabForMove);
   add("tp"    , Tab.putMarkedTab);
+  add("tq"    , Tab.moveTabLeft);
+  add("te"    , Tab.moveTabRight);
 //  add("D"    , Tab.closeAndFoucsLeft );
 //  add("<M-d>", Tab.closeAndFoucsLast );
   add("tu"    , Tab.reopen       );

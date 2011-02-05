@@ -64,6 +64,14 @@ var Tab = (function(){
     Post({action: "Tab.putMarkedTab"});
   }
 
+  function moveTabLeft() {
+    Post({action: "Tab.moveTabLeft", offset : times()});
+  }
+
+  function moveTabRight() {
+    Post({action: "Tab.moveTabRight", offset : times()});
+  }
+
   // API
 	return {
     copyUrl   : copyUrl	 ,
@@ -84,6 +92,8 @@ var Tab = (function(){
     closeOtherWindows: closeOtherWindows,
     detachTab: detachTab,
     markTabForMove: markTabForMove,
-    putMarkedTab: putMarkedTab
+    putMarkedTab: putMarkedTab,
+    moveTabRight: moveTabRight,
+    moveTabLeft: moveTabLeft
 	}
 })()

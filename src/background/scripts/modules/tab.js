@@ -159,10 +159,45 @@ var Tab = (function() {
     if (Tab.markedMoveId != null) {
           chrome.tabs.getSelected(null, function(currentTab) {
               var newIndex = currentTab.index + 1;
-              chrome.tabs.move(Tab.markedMoveId, { windowId : currentTab.windowId, index: newIndex });
+              chrome.tabs.move(Tab.markedMoveId, {windowId : currentTab.windowId, index: newIndex});
               Tab.markedMoveId = null;
           });
       }
+  }
+
+  // moves selected tab to the left
+  function moveTabLeft(msg) {
+    moveTab("left", msg.offset);
+  }
+
+  // moves selected tab to the right
+  function moveTabRight(msg) {
+    moveTab("right", msg.offset);
+  }
+
+  /**
+   * TODO: refactor and remove unecessary functions
+   * Moves the selected tab
+   * @param position : values are "left" or "right"
+   **/
+  function moveTab(position, times) {
+    times = times == 0 ? 1 : times;
+    chrome.tabs.getSelected(null, function(selectedTab) {
+      chrome.tabs.getAllInWindow(null, function (tabs) {
+        if (tabs.length == 1) // only one tab
+          return;
+
+        var direction = position == "left" ? -1 : 1;
+        var newIndex = (selectedTab.index + times * direction);
+
+        if (newIndex < 0 || newIndex >= tabs.length)
+          newIndex = newIndex + tabs.length * (direction * -1);
+      
+        chrome.tabs.move(selectedTab.id, {
+          index: newIndex
+        });
+      });
+    });
   }
 
   return {
@@ -179,7 +214,9 @@ var Tab = (function() {
     closeOtherWindows: closeOtherWindows,
     detachTab: detachTab,
     markTabForMove: markTabForMove,
-    putMarkedTab: putMarkedTab
+    putMarkedTab: putMarkedTab,
+    moveTabRight: moveTabRight,
+    moveTabLeft: moveTabLeft
   }
 })()
 
