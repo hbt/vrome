@@ -91,6 +91,21 @@ var InsertMode = (function(){
 		elem.setSelectionRange(caret_position + 1,caret_position + 1);
   }
 
+  function gotoForwardChar() {
+    var elem = currentElement();
+
+    CmdBox.set({title: 'Key to go to', pressUp: function(e) {
+      var key = getKey(e);
+      var c = CmdBox.get().content;
+      if (c !== '') {
+        CmdBox.remove();
+        elem.focus();
+        var i = elem.value.indexOf(c, caret_position);
+        elem.setSelectionRange(i+1, i+1);
+      }
+    }, content: ''});
+  }
+
 	function externalEditor() {
     var elem    = this.target;
     var edit_id = String(Math.random());
@@ -127,6 +142,7 @@ var InsertMode = (function(){
     MoveForwardWord        : MoveForwardWord        ,
     MoveBackwardChar       : MoveBackwardChar       ,
     MoveForwardChar        : MoveForwardChar        ,
+    gotoForwardChar        : gotoForwardChar,
 
 		externalEditor 				 : externalEditor,
     externalEditorCallBack : externalEditorCallBack,

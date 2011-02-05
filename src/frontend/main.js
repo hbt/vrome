@@ -48,17 +48,18 @@ with (KeyEvent) {
   add("<F1>", showHelp );
 
   // Zoom
-  add("zi", Zoom["in"]      );
-  add("zo", Zoom.out        );
-  add("zm", Zoom.more       );
-  add("zr", Zoom.reduce     );
-  add("zz", Zoom.reset      );
+  add("z", Zoom["in"]      );
+  add("x", Zoom.out        );
+//  add("zm", Zoom.more       );
+//  add("zr", Zoom.reduce     );
+  add("Zz", Zoom.reset      );
+  add("Zr", Zoom.reset      );
 
-  add("zI", Zoom.cur_in     );
-  add("zO", Zoom.cur_out    );
-  add("zM", Zoom.cur_more   );
-  add("zR", Zoom.cur_reduce );
-  add("zZ", Zoom.cur_reset  );
+//  add("zI", Zoom.cur_in     );
+//  add("zO", Zoom.cur_out    );
+//  add("zM", Zoom.cur_more   );
+//  add("zR", Zoom.cur_reduce );
+//  add("zZ", Zoom.cur_reset  );
 
 
   // Page
@@ -201,6 +202,7 @@ with (KeyEvent) {
 
   add("<M-j>", InsertMode.MoveBackwardChar    , true );
   add("<M-k>", InsertMode.MoveForwardChar     , true );
+  add("<M-f>", InsertMode.gotoForwardChar     , true );
 }
 
 
