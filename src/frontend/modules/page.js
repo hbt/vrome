@@ -40,6 +40,17 @@ var Page = (function() {
     }
   }
 
+  function disableByTag(tag) {
+      var images = window.document.getElementsByTagName(tag);
+      for(var i in images) {
+          try {
+              var image = images[i];
+              image.src= "";
+          } catch(e) {}
+      }
+  }
+
+
   // API
 	return {
 		next : function() {
@@ -53,6 +64,8 @@ var Page = (function() {
         Post({action: "Tab.copyData", data: getSelected()});
     },
     toggleDarkPageExtension: toggleDarkPageExtension,
-    disableStyles: disableStyles
+    disableStyles: disableStyles,
+    disableImages: function() { disableByTag('img'); },
+    disableObjects: function() { disableByTag('object'); }
 	};
 })();

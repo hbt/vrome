@@ -67,6 +67,8 @@ with (KeyEvent) {
   add("Y" , Page.copySelected );
   add("Sd" , Page.toggleDarkPageExtension );
   add("Ss" , Page.disableStyles );
+  add("Si" , Page.disableImages);
+  add("So" , Page.disableObjects );
 
 
   // Url
