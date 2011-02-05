@@ -1,26 +1,32 @@
 var Hint = (function() {
-  var currentHint, new_tab, hintMode, stringMode, numbers, elements, matched, subMatched;
+  var currentHint, new_tab, hintMode, repeat, stringMode, numbers, elements, matched, subMatched;
   var highlight   = 'vrome_highlight';
   var linkHintCharacters = 'dsafrewqtgvcxz';
   var key = null;
 
-  function start(newTab, isStringMode) {
+  function start(newTab, isStringMode, isRepeat) {
 		hintMode    = true;
     var config = Settings.get('configure.set.linkHintCharacters');
     if (config) {
       linkHintCharacters = config[0];
     }
-		numbers     = 0;
-		currentHint = false;
+
+    numbers     = 0;
+    currentHint = false;
     stringMode = isStringMode;
-		new_tab     = newTab;
+    repeat = isRepeat;
+    new_tab     = newTab;
     key = null;
     setHints();
-    CmdBox.set({title : 'HintMode',pressDown : handleInput,content : ''});
+
+    if(isStringMode)
+      CmdBox.set({title : 'HintMode',pressUp: handleInput,content : ''});
+    else
+      CmdBox.set({title : 'HintMode',pressDown: handleInput,content : ''});
   }
 
   function setHints() {
-		elements  = [];
+    elements  = [];
 
     var elems = document.body.querySelectorAll('a, input:not([type=hidden]), textarea, select, button, *[onclick]');
     for (var i = 0; i < elems.length; i++) {
@@ -129,6 +135,7 @@ var Hint = (function() {
    * retrieves matched elements using string (string mode only)
    */
   function getMatchedElementsByString(str) {
+    str = str.toLowerCase();
     var newMatched = [];
     for (var i = 0; i < subMatched.length; i++) {
       var mnemonic = subMatched[i];
@@ -141,21 +148,25 @@ var Hint = (function() {
   }
 
   function getCurrentString() {
-    var currentString = null;
     var content = CmdBox.get().content;
 
-    if (key !== null) {
-      currentString = content + key;
-    }
-
-    if (isBackspaceKey(key)) {
-      currentString = content.substr(0, content.length - 1);
-    }
-
-    return currentString;
+    return content;
   }
 
+  function updateCmdBoxForRepeat() {
+    // keep upper case letters
+    var content = CmdBox.get().content;
+    var res = '';
+    for(var i = 0; i< content.length; i++) {
+      if(content.charCodeAt(i) >= 65 && content.charCodeAt(i) <= 90) {
+        res += content[i];
+      }
+    }
 
+    CmdBox.set({content: res });
+    getMatchedElementsByString(getCurrentString());
+    setOrder(elements);
+  }
 
   function remove() {
     if (!hintMode) return;
@@ -256,7 +267,15 @@ var Hint = (function() {
       elem.focus();
     }
 
-    setTimeout(remove,200);
+    if(!repeat) {
+      remove();
+    } else {
+      var oldContent = getCurrentString();
+      start(true, true, true);
+      CmdBox.set({content: oldContent});
+      updateCmdBoxForRepeat();
+    }
+
   }
 
   return {
@@ -264,6 +283,7 @@ var Hint = (function() {
     start_string         : function(){start(false, true);},
     new_tab_start : function(){start(true);},
     new_tab_start_string: function(){start(true, true);},
+    new_tab_start_string_repeat: function(){start(true, true, true);},
     remove        : remove
   };
 })();

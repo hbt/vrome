@@ -48,7 +48,7 @@ var CmdBox = (function() {
     if (typeof(opt.content) == 'string') {
       var input = cmdBoxInput() || createCmdBoxInput();
       input.value = opt.content;
-      input.setSelectionRange(0, input.value.length);
+//      input.setSelectionRange(0, input.v  alue.length);
       input.addEventListener('keydown',pressDown,false);
       input.addEventListener('keyup'  ,pressUp,false);
       input.focus();
