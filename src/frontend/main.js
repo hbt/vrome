@@ -71,7 +71,7 @@ with (KeyEvent) {
   add("Si" , Page.disableImages);
   add("So" , Page.disableObjects );
   add("<M-y>", Page.multiclipboardCopy);
-//  add("<M-p>", Page.multiclipboardPaste);
+  add("<M-p>", Page.multiclipboardPaste);
 
 
   // Url

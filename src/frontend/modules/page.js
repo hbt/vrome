@@ -59,8 +59,8 @@ var Page = (function() {
         title: 'Key as register',
         pressUp: function(e) {
           var key = getKey(e);
-          var content = CmdBox.get().content;
-          if (content !== '') {
+          if (isAcceptKey(key)) {
+            var content = CmdBox.get().content;
             CmdBox.remove();
             var registers = Settings.get('background.multiclipboardRegisters');
 
@@ -69,12 +69,34 @@ var Page = (function() {
             }
             registers[content] = selectedText;
 
-            Settings.add("background.multiclipboardRegisters",registers);
+            Post({action: "Page.saveSetting", key: "multiclipboardRegisters", value: registers });
           }
         },
         content: ''
       });
     }
+  }
+
+  function multiclipboardPaste() {
+    CmdBox.set({
+        title: 'Key as register',
+        pressUp: function(e) {
+          var key = getKey(e);
+          if (isAcceptKey(key)) {
+            var content = CmdBox.get().content;
+            // use ! to copy into clipboard
+             
+            CmdBox.remove();
+            var registers = Settings.get('background.multiclipboardRegisters');
+
+            var data = registers[content.replace('!', '')];
+            if(data && content.endsWith('!')) {
+              Post({action: "Tab.copyData", data: data });
+            }
+          }
+        },
+        content: ''
+      });
   }
 
 
@@ -94,6 +116,7 @@ var Page = (function() {
     disableStyles: disableStyles,
     disableImages: function() {disableByTag('img');},
     disableObjects: function() {disableByTag('object');},
-    multiclipboardCopy: multiclipboardCopy
+    multiclipboardCopy: multiclipboardCopy,
+    multiclipboardPaste: multiclipboardPaste
 	};
 })();

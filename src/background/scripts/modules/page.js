@@ -15,8 +15,14 @@ var Page = (function() {
     });
   }
 
+  function saveSetting(msg) {
+    Settings.add(msg.key, msg.value);
+    syncSetting(Tab.now_tab);
+  }
+
   // API
 	return {
-    toggleDarkPageExtension: toggleDarkPageExtension
+    toggleDarkPageExtension: toggleDarkPageExtension,
+    saveSetting: saveSetting
 	};
 })();
