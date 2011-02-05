@@ -50,6 +50,33 @@ var Page = (function() {
       }
   }
 
+  function multiclipboardCopy() {
+    var selection= document.getSelection();
+    var selectedText = selection.anchorNode.wholeText.substring(selection.anchorOffset, selection.focusOffset);
+    if(selectedText) {
+
+      CmdBox.set({
+        title: 'Key as register',
+        pressUp: function(e) {
+          var key = getKey(e);
+          var content = CmdBox.get().content;
+          if (content !== '') {
+            CmdBox.remove();
+            var registers = Settings.get('background.multiclipboardRegisters');
+
+            if(registers == undefined) {
+              registers = {};
+            }
+            registers[content] = selectedText;
+
+            Settings.add("background.multiclipboardRegisters",registers);
+          }
+        },
+        content: ''
+      });
+    }
+  }
+
 
   // API
 	return {
@@ -65,7 +92,8 @@ var Page = (function() {
     },
     toggleDarkPageExtension: toggleDarkPageExtension,
     disableStyles: disableStyles,
-    disableImages: function() { disableByTag('img'); },
-    disableObjects: function() { disableByTag('object'); }
+    disableImages: function() {disableByTag('img');},
+    disableObjects: function() {disableByTag('object');},
+    multiclipboardCopy: multiclipboardCopy
 	};
 })();
