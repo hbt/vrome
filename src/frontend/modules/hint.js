@@ -252,7 +252,7 @@ var Hint = (function() {
 
       if (old_target) elem.setAttribute('target',old_target);
 
-    } else if (elem.onclick || (tag_name == 'input' && (type == 'submit' || type == 'button' || type == 'reset' || type == 'radio' || type == 'checkbox'))) {
+    } else if (elem.onclick || (tag_name == 'input' && (type == 'submit' || type == 'button' || type == 'reset' || type == 'radio' || type == 'checkbox')) || tag_name == 'button') {
       clickElement(elem);
 
     } else if (tag_name == 'input' || tag_name == 'textarea') {
