@@ -21,7 +21,7 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
     editor = 'gvim -f' if editor == 'gvim' # Foreground: Don't fork when starting GUI
     system("#{editor} #{tmpfile.path}")
     text = File.read(tmpfile.path)
-    tmpfile.delete
+#    tmpfile.delete
 
     return 200, "text/plain", text
   end
