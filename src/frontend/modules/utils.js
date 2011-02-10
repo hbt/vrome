@@ -30,6 +30,11 @@ function isElementVisible(elem) {
   var elem_left   = win_left + pos.left;
   var elem_right  = win_left + pos.left;
 
+//  var computedStyle = window.getComputedStyle(elem, null);
+//  if (computedStyle.getPropertyValue('visibility') != 'visible' ||
+//      computedStyle.getPropertyValue('display') == 'none')
+//    return false;
+
   return pos.height != 0 && pos.width != 0 && elem_bottom >= win_top && elem_top <= win_bottom && elem_left <= win_right && elem_right >= win_left;
 }
 

@@ -50,6 +50,8 @@ var Hint = (function() {
     div.setAttribute('id', '__vim_hint_highlight');
     document.body.appendChild(div);
 
+    var currentString = getCurrentString();
+
     for (var i = 0; i < elems.length; i++) { //TODO need refactor
       var elem      = elems[i];
       var win_top   = window.scrollY / Zoom.current();
@@ -70,8 +72,8 @@ var Hint = (function() {
         subMatched[i] = mnemonic;
 
         // filter based on input
-        if (getCurrentString() !== null && getCurrentString().length > 0) {
-          var currentString = getCurrentString().toLowerCase();
+        if (currentString !== null && currentString.length > 0) {
+          currentString = currentString.toLowerCase();
 
           if (mnemonic.startsWith(currentString)) {
             mnemonic = mnemonic.replace(currentString, '');
