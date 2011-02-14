@@ -269,6 +269,8 @@ var Hint = (function() {
       elem.focus();
     }
 
+    elem.focus();
+
     if(!repeat) {
       remove();
     } else {
