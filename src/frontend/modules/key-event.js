@@ -43,6 +43,11 @@ var KeyEvent = (function() {
     var bindings    = [];
     var currentKeys = "";
 
+    function getBindings()
+    {
+        return bindings;
+    }
+
     function add(/*String*/ keys,/*Function*/ fun,/*Boolean*/ input) {
         bindings.push([keys,fun,!!input]);
     }
@@ -172,5 +177,6 @@ var KeyEvent = (function() {
         passNextKey : passNextKey,
 
         runLast : runLast,
+        getBindings : getBindings
     };
 })();
