@@ -8,6 +8,8 @@
 "map R <M-v>
 "map D <M-v>
 
+map v <C-v>
+
 " links
 map  f <M-f> 
 map  c <M-c>
