@@ -71,3 +71,10 @@ a[vrome_highlight=hint_active] {
   color: #000 !important;
   z-index     : 100000;
 }
+
+/* TODO(hbt): remove this and replace by custom css injection */
+table.list tr.resolved td,h2.resolved {
+    font-style: italic;
+    font-variant: small-caps;
+    text-decoration: line-through;
+}
