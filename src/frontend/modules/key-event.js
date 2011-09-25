@@ -1,6 +1,8 @@
 var KeyEvent = (function() {
     var times = 0;
     var disableVrome, pass_next_key, last_times;
+    var bindings    = [];
+    var currentKeys = "";
 
     function init() {
         // disable site
@@ -38,10 +40,6 @@ var KeyEvent = (function() {
     function runLast() {
         runCurrentKeys(Settings.get("background.currentKeys"));
     }
-
-    ///////////////////////////////////////////////////
-    var bindings    = [];
-    var currentKeys = "";
 
     function add(/*String*/ keys,/*Function*/ fun,/*Boolean*/ input) {
         bindings.push([keys,fun,!!input]);

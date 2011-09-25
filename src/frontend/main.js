@@ -177,6 +177,7 @@ with (KeyEvent) {
     // InsertMode
     add("ii", InsertMode.enterEditMode);
     add("<C-i>", InsertMode.externalEditor        , true );
+    add("<M-v>", KeyEvent.passNextKey, true );
 
     add("<C-a>", InsertMode.moveToFirstOrSelectAll, true );
     add("<C-e>", InsertMode.moveToEnd             , true );
