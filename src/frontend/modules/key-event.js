@@ -100,9 +100,11 @@ var KeyEvent = (function() {
             var old_times = times;
         }
 
-        CmdBox.set({
-            title : keys
-        });
+        if(!insertMode) {
+            CmdBox.set({
+                title : keys
+            });
+        }
 
         for (var i = 0; i < bindings.length; i++) {
             // insertMode or not
