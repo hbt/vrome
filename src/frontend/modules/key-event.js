@@ -100,6 +100,10 @@ var KeyEvent = (function() {
             var old_times = times;
         }
 
+        CmdBox.set({
+            title : keys
+        });
+
         for (var i = 0; i < bindings.length; i++) {
             // insertMode or not
             if (!!insertMode != bindings[i][2]) continue;
@@ -144,6 +148,9 @@ var KeyEvent = (function() {
             if (!(isAcceptKey(key) && insertMode)) {
                 e.preventDefault();
                 e.stopPropagation();
+
+                if(CmdBox.get().title == keys)
+                    setTimeout(CmdBox.remove,500);
             }
         }
     }
