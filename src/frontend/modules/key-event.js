@@ -114,13 +114,13 @@ var KeyEvent = (function() {
             }
 
             var regexp = new RegExp('^(' + keys.replace(/([(\[{\\^$|)?*+.])/g,"\\$1") + ')');
+
             if (regexp.test(bindings[i][0])) {
                 var someBindingMatched = true;
-            //        if(key == 't')
-            //            {
-            //            e.preventDefault();
-            //            e.stopPropagation();
-            //            }
+                if (!(isAcceptKey(key) && insertMode)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             }
         }
 
