@@ -41,12 +41,12 @@
       }
 
       chrome.tabs.getSelected(null, function(tab) {
-        syncSetting(tab);
+//        syncSetting(tab);
       });
 
       chrome.tabs.onSelectionChanged.addListener(function(tabId) {
         chrome.tabs.get(tabId, function(tab) {
-          syncSetting(tab);
+//          syncSetting(tab);
         });
       });
 
