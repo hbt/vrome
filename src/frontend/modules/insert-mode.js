@@ -1,6 +1,13 @@
 var InsertMode = (function(){
     var caret_position,value;
 
+    function enterEditMode()
+    {
+        KeyEvent.disable();
+        document.body.contentEditable='true';
+        document.designMode='on';
+    }
+
     function currentElement() {
         var elem = document.activeElement;
         caret_position = elem.selectionEnd;
@@ -154,5 +161,6 @@ var InsertMode = (function(){
 
         externalEditor 				 : externalEditor,
         externalEditorCallBack : externalEditorCallBack,
+        enterEditMode: enterEditMode
     }
 })()

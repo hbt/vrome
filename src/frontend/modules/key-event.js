@@ -74,6 +74,8 @@ var KeyEvent = (function() {
         CmdBox.remove();
         disableVrome  = false;
         pass_next_key = false;
+        document.body.contentEditable='false';
+        document.designMode='off';
         reset();
     }
 
