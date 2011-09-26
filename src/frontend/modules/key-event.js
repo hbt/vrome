@@ -1,4 +1,4 @@
-var KeyEvent = (function() {
+    var KeyEvent = (function() {
     var times = 0;
     var disableVrome, pass_next_key, last_times;
     var bindings    = [];
@@ -152,7 +152,10 @@ var KeyEvent = (function() {
                 e.stopPropagation();
 
                 if(CmdBox.get().title == keys)
-                    setTimeout(CmdBox.remove,500);
+                    setTimeout(function() {
+                        if(CmdBox.get().title == keys)
+                            CmdBox.remove();
+                    },500);
             }
         }
     }
