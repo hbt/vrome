@@ -106,6 +106,7 @@ with (KeyEvent) {
     add("tce"    , Tab.closeRightTabs        );
     add("tcq"    , Tab.closeLeftTabs        );
     add("tcw"    , Tab.closeOtherWindows        );
+    add("tW"    , Tab.closeCurrentWindow);
     add("td"    , Tab.detachTab        );
     add("tM"    , Tab.markTabForMove);
     add("tp"    , Tab.putMarkedTab);
