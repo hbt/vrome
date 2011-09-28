@@ -24,6 +24,7 @@
             "frontend/modules/buffer.js",
             "frontend/modules/insert-mode.js",
             "frontend/modules/url.js",
+            "frontend/modules/style.js",
             "frontend/main.js"
           ],
         "matches" : [ "http://*/*",
@@ -57,6 +58,7 @@
             "frontend/modules/buffer.js",
             "frontend/modules/insert-mode.js",
             "frontend/modules/url.js",
+            "frontend/modules/style.js",
             "frontend/main.js"
           ],
         "matches" : [ "http://*/*.jpg*",

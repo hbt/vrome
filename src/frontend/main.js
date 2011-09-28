@@ -176,6 +176,8 @@ with (KeyEvent) {
 
     // InsertMode
     add("ii", InsertMode.enterEditMode);
+    add("ik", InsertMode.test);
+
     add("<C-i>", InsertMode.externalEditor        , true );
     add("<M-v>", KeyEvent.passNextKey, true );
 
@@ -206,5 +208,5 @@ with (CmdLine) {
     }
 
 // Initial
-var initFunction = [ Zoom.init, KeyEvent.init];
+var initFunction = [ Zoom.init, KeyEvent.init, Style.init];
 runIt();

@@ -34,6 +34,6 @@ map D L
 set linkHintCharacters=dsafrewqtgvcxz
 
 " url marks
-set url_marks={'e':'chrome://extensions/', 'pp': '::javascript::var location=window.location.href;location=location.replace("frontend_dev.php","index.php");location=location.replace("frontend_debug.php","index.php");window.location.href=location;', 'dd': '::javascript::var location=window.location.href;location=location.replace("index.php","frontend_debug.php");window.location.href=location;'}
+set url_marks={'e':'chrome://extensions/', 'pp': '::javascript::var location=window.location.href;location=location.replace("frontend_dev.php","index.php");location=location.replace("frontend_debug.php","index.php");window.location.href=location;', 'dd': '::javascript::var location=window.location.href;location=location.replace("index.php","frontend_debug.php");window.location.href=location;', 'f': 'http://localhost:7071/form_editor.php'}
 
 " vim: set ft=vim:
