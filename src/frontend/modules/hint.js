@@ -4,6 +4,13 @@ var Hint = (function() {
   var linkHintCharacters = 'dsafrewqtgvcxz';
   var key = null;
 
+  var actions = {
+    '!' : copyURL,
+    ';' : copyText
+  };
+
+  var currentAction = null;
+
   function start(newTab, isStringMode, isRepeat) {
 		hintMode    = true;
     var config = Settings.get('configure.set.linkHintCharacters');
@@ -13,6 +20,7 @@ var Hint = (function() {
 
     numbers     = 0;
     currentHint = false;
+    currentAction= null;
     stringMode = isStringMode;
     repeat = isRepeat;
     new_tab     = newTab;
@@ -150,10 +158,30 @@ var Hint = (function() {
   }
 
   function getCurrentString() {
-    var content = CmdBox.get().content;
+        var content = CmdBox.get().content;
 
-    return content;
-  }
+        for(actionStarter in actions) {
+            if(content.startsWith(actionStarter)) {
+                currentAction = actions[actionStarter];
+                content= content.substr(1);
+                break;
+            }
+        }
+
+        return content;
+    }
+
+  function getCurrentAction() {
+        var content = CmdBox.get().content;
+        for(actionStarter in actions) {
+            if(content.startsWith(actionStarter)) {
+                currentAction = actions[actionStarter];
+                break;
+            }
+        }
+
+        return currentAction;
+    }
 
   function updateCmdBoxForRepeat() {
     // keep upper case letters
@@ -165,14 +193,17 @@ var Hint = (function() {
       }
     }
 
-    CmdBox.set({content: res });
+    CmdBox.set({content: res});
     getMatchedElementsByString(getCurrentString());
     setOrder(elements);
   }
 
   function remove() {
     if (!hintMode) return;
-    CmdBox.remove();
+
+    if(currentAction == null) {
+        CmdBox.remove();
+    }
 		hintMode = false;
 
     for (var i = 0; i < elements.length; i++) {
@@ -189,6 +220,7 @@ var Hint = (function() {
     if (stringMode) {
       var currentString = getCurrentString();
 
+      
       var newMatched = getMatchedElementsByString(currentString);
       setOrder(elements);
 
@@ -250,7 +282,12 @@ var Hint = (function() {
 
       var options = {};
       options[Platform.mac ? 'meta' : 'ctrl'] = new_tab;
-      clickElement(elem,options);
+
+      if(getCurrentAction() == null) {
+        clickElement(elem,options);
+      } else {
+          currentAction.apply('', [elem]);
+      }
 
       if (old_target) elem.setAttribute('target',old_target);
 
@@ -282,6 +319,34 @@ var Hint = (function() {
     }
 
   }
+
+
+  // actions
+
+  function copyURL(elem) {
+        var url = elem.getAttribute('href');
+        Post({
+            action: "Tab.copyData",
+            data: url
+        });
+        CmdBox.remove();
+        CmdBox.set({
+            title : "Copied " + url,
+            timeout : 3000
+        });
+    }
+
+  function copyText(elem) {
+        Post({
+            action: "Tab.copyData",
+            data: elem.innerText
+        });
+        CmdBox.remove();
+        CmdBox.set({
+            title : "Copied " + elem.innerText,
+            timeout : 3000
+        });
+    }
 
   return {
     start         : start,
