@@ -1,4 +1,4 @@
-    var KeyEvent = (function() {
+var KeyEvent = (function() {
     var times = 0;
     var disableVrome, pass_next_key, last_times;
     var bindings    = [];
@@ -100,9 +100,10 @@
             var old_times = times;
         }
 
-        if(!insertMode) {
+        if(!isNaN(key)) {
+            var tmp =  CmdBox.get().title + keys;
             CmdBox.set({
-                title : keys
+                title : tmp
             });
         }
 
@@ -112,6 +113,7 @@
 
             // escape regexp
             var regexp = new RegExp('^(\\d*)(' + bindings[i][0].replace(/([(\[{\\^$|)?*+.])/g,"\\$1") + ')');
+            var invoke_count = Number(RegExp.$1) || 1;
             if (regexp.test(keys)) {
                 var someFunctionCalled = true;
                 keys.replace(regexp,'');
@@ -126,6 +128,12 @@
                 if (!(isAcceptKey(key) && insertMode)) {
                     e.preventDefault();
                     e.stopPropagation();
+                    var newInsertMode = /^INPUT|TEXTAREA|SELECT|HTML$/i.test(document.activeElement.nodeName);
+                    if(!newInsertMode) {
+                        CmdBox.set({
+                            title : keys
+                        });
+                    }
                 }
             }
         }
@@ -153,7 +161,8 @@
 
                 if(CmdBox.get().title == keys)
                     setTimeout(function() {
-                        if(CmdBox.get().title == keys)
+                        var newInsertMode = /^INPUT|TEXTAREA|SELECT|HTML$/i.test(document.activeElement.nodeName);
+                        if(CmdBox.get().title == keys && !newInsertMode)
                             CmdBox.remove();
                     },500);
             }
