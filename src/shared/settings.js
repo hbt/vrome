@@ -42,6 +42,10 @@ var Settings = (function() {
     }
 
     function setValue(key, value) {
+        if(key instanceof Object) {
+            value = key.value;
+            key = key.key;
+        }
         localStorage[key] = value;
     }
 

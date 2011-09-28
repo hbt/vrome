@@ -1,3 +1,4 @@
+// Zoom is saved in the localstorage of the current page -- key zoom_level
 var Zoom = (function() {
     var levels = ['30%', '50%', '67%', '80%', '90%', '100%', '110%', '120%', '133%', '150%', '170%', '200%', '240%', '300%'];
     var default_index = levels.indexOf('100%');
@@ -15,13 +16,24 @@ var Zoom = (function() {
         // index should >= 0 && < levels.length
         index = Math.min(levels.length - 1, Math.max(0,index));
 
-        Settings.setValue(getKey(), index - default_index);
+        var zoomLevel = index - default_index
+        Settings.setValue('zoom_level', zoomLevel);
+
+        // save zoom level for website in the backgroundlocalstorage
+        //       Post({
+        //            action : "Settings.setValue",
+        //            arguments: {
+        //                key: getKey(),
+        //                value: zoomLevel
+        //            }
+        //        });
         var topPercent = scrollY / document.height;
 
         document.body.style.zoom  = levels[index];
         if(keepCurrentPage) scrollTo(0,topPercent * document.height);
     }
 
+    // background key
     function getKey() {
         return 'vrome_zoom_level_' + location.hostname;
     }
@@ -64,7 +76,7 @@ var Zoom = (function() {
             return (parseInt(levels[currentLevel()]) / 100);
         },
         init       : function() {
-            Zoom.setZoom( Settings.getValue(getKey()));
+            Zoom.setZoom( Settings.getValue('zoom_level'));
         }
     }
 })()
