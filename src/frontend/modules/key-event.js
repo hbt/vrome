@@ -14,6 +14,9 @@ var KeyEvent = (function() {
             }
         }
 
+        eval(Settings.getValue('.vromerc_script'));
+        frontendExec();
+
         document.addEventListener('keydown',KeyEvent.exec, true);
     }
 
@@ -28,7 +31,7 @@ var KeyEvent = (function() {
     ///////////////////////////////////////////////////
     function storeLast(/*Array*/ currentKeys,/*Number*/ times) {
         times = times || 0;
-        Settings.add("background.currentKeys",currentKeys);
+        Settings.setValue("background.currentKeys",currentKeys);
         Post({
             action : "storeLastCommand",
             currentKeys : currentKeys,
@@ -38,7 +41,7 @@ var KeyEvent = (function() {
     }
 
     function runLast() {
-        runCurrentKeys(Settings.get("background.currentKeys"));
+        runCurrentKeys(Settings.getValue("background.currentKeys"));
     }
 
     function add(/*String*/ keys,/*Function*/ fun,/*Boolean*/ input) {

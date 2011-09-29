@@ -50,6 +50,18 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
       return 200, "text/plain", vromeConfig.to_json
     end
   end
+
+
+  def get_configure2(request)
+    config_file = File.join(ENV['HOME'],'.vromerc')
+    data = ''
+
+    if File.exist?(config_file)
+      data = File.read(config_file)
+
+      return 200, "text/plain", data
+    end
+  end
 end
 
 server = WEBrick::HTTPServer.new(:Port => 20000)

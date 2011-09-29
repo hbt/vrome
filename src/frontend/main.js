@@ -61,6 +61,8 @@ with (KeyEvent) {
     add("Ss" , Page.disableStyles );
     add("Si" , Page.disableImages);
     add("So" , Page.disableObjects );
+
+    // TODO: fix me
     add("<M-y>", Page.multiclipboardCopy);
     add("<M-p>", Page.multiclipboardPaste);
 

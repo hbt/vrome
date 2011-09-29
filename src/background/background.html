@@ -21,12 +21,13 @@
         xhr.open("POST", url, true);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
-            Settings.add({ configure : JSON.parse(xhr.responseText) });
+              Settings.setValue('.vromerc_script', xhr.responseText);
+//            Settings.add({ configure : JSON.parse(xhr.responseText) });
           };
         }
 
         xhr.setRequestHeader("Content-type", "text/plain");
-        xhr.send(JSON.stringify({"method":"get_configure"}));
+        xhr.send(JSON.stringify({"method":"get_configure2"}));
       }
       getConfigure();
 
@@ -38,16 +39,19 @@
         }
         Settings.add({currentUrl : tab.url, now_tab_id : Tab.now_tab.id});
 
-        Post(tab,{action : "Settings.add", arguments : { background : Settings.get()} });
+        Post(tab,{action : "Settings.setValue", arguments : {
+                key: '.vromerc_script',
+                value: Settings.getValue('.vromerc_script')
+        } });
       }
 
       chrome.tabs.getSelected(null, function(tab) {
-//        syncSetting(tab);
+//        syncSetting(tab, false);
       });
 
       chrome.tabs.onSelectionChanged.addListener(function(tabId) {
         chrome.tabs.get(tabId, function(tab) {
-//          syncSetting(tab);
+//          syncSetting(tab, false);
         });
       });
 

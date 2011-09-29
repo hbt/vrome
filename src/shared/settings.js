@@ -50,16 +50,51 @@ var Settings = (function() {
     }
 
     function getValue(key, defaultValue) {
+        if(key instanceof Object) {
+            defaultValue = key.defaultValue;
+            key = key.key;
+        }
         if(localStorage[key] === undefined) {
             return defaultValue;
         }
         return localStorage[key];
     }
 
+    // copies a key from the background to the current page and calls the callback function when it is done
+    function copyBackgroundValue(key, defaultValue) {
+        var callback;
+        if(key instanceof Object) {
+            defaultValue = key.defaultValue;
+            key = key.key;
+            callback = key.callback;
+        }
+        if(localStorage[key] === undefined) {
+            return defaultValue;
+        }
+
+//        var tab = arguments[arguments.length-1];
+//        Post(tab,{
+//            action : "Settings.setValue",
+//            arguments : {
+//                key: '.vromerc_script',
+//                value: '.'
+//            }
+//        });
+//        var value = localStorage[key];
+//        Post({
+//            action : "Settings.getValue",
+//            arguments: {
+//                key: '.vromerc_script'
+//            }
+//        });
+
+    }
+
     return {
         add : add,
         get :get,
         setValue: setValue,
-        getValue: getValue
+        getValue: getValue,
+        copyBackgroundValue: copyBackgroundValue
     }
 })();
