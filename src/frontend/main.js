@@ -169,6 +169,13 @@ with (KeyEvent) {
     add("'", Marks.gotoQuickMarkFast);
     add("gn", Marks.gotoQuickMarkNewTab);
 
+
+    // a-z
+    for (var i = 97; i <= 122; i++) {
+        add("m" + String.fromCharCode(i), Marks.addLocalMark  );
+        add("`" + String.fromCharCode(i), Marks.gotoLocalMark );
+    }
+
     // InsertMode
     add("ii", InsertMode.enterEditMode);
     add("ik", InsertMode.test);

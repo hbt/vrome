@@ -8,12 +8,6 @@ var Marks = (function() {
         localStorage['mark_' + key] = url;
     }
 
-    function addLocalMark(msg) {
-        var local_marks = Settings.get('local_marks') || {};
-        local_marks[msg.key] = msg.position;
-        Settings.add('local_marks', local_marks);
-    }
-
     function gotoQuickMark(msg) {
         var key = msg.key;
         var storageKey = 'mark_' + key;
@@ -77,7 +71,6 @@ var Marks = (function() {
     return {
         addQuickMark : addQuickMark,
         setQuickMark: setQuickMark,
-        addLocalMark : addLocalMark,
         gotoQuickMark: gotoQuickMark,
         printAll: printAll,
         clearAllMarks: clearAllMarks
