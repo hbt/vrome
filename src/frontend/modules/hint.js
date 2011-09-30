@@ -47,7 +47,8 @@ var Hint = (function() {
         var elems = document.body.querySelectorAll('a, input:not([type=hidden]), textarea, select, button, *[onclick]');
         for (var i = 0; i < elems.length; i++) {
             if (isElementVisible(elems[i])) {
-                elements.push(elems[i]);
+                if(elems[i].id != "_vrome_cmd_input_box")
+                    elements.push(elems[i]);
             }
         }
         setOrder(elements);
