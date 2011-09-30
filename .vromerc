@@ -1,39 +1,24 @@
-""" .vromerc
-""" https://github.com/jinzhu/vrome/wiki/vromerc-example-file
 
-" Unmap
-"map <C-f> <M-v>
-"map <M-d> <M-v>
-"map <C-n> <M-v>
-"map R <M-v>
-"map D <M-v>
+function frontendExec() {
+    // links
+    KeyEvent.add("f", Hint.start_string);
+    KeyEvent.add("c", Hint.new_tab_start_string);
 
-map v <C-v>
+    // scroll
+    KeyEvent.add("w", Scroll.up);
+    KeyEvent.add("s", Scroll.down);
+    KeyEvent.add("a", Scroll.left);
+    KeyEvent.add("d", Scroll.right);
+    KeyEvent.add("ga", Scroll.first);
+    KeyEvent.add("gd", Scroll.last);
+    KeyEvent.add("gf", Scroll.bottom);
 
-" links
-map  f <M-f> 
-map  c <M-c>
+    // history
+    KeyEvent.add("A", History.back);
+    KeyEvent.add("D", History.forward);
+}
 
-" Scroll
-map w k
-map a h
-map s j
-map d l
-map gf G
-map ga 0
-map gd $
-
-" History
-map A H
-map D L
-
-" misc
-"map <M-s> <C-z>
-
-" properties
-set linkHintCharacters=dsafrewqtgvcxz
-
-" url marks
-set url_marks={'e':'chrome://extensions/', 'pp': '::javascript::var location=window.location.href;location=location.replace("frontend_dev.php","index.php");location=location.replace("frontend_debug.php","index.php");window.location.href=location;', 'dd': '::javascript::var location=window.location.href;location=location.replace("index.php","frontend_debug.php");window.location.href=location;', 'f': 'http://localhost:7071/form_editor.php'}
-
-" vim: set ft=vim:
+function backendExec() {
+    Marks.setQuickMark('e', 'chrome://extensions/');
+    Marks.setQuickMark('j', '::javascript::alert("23asd");');
+}

@@ -22,6 +22,8 @@
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
               Settings.setValue('.vromerc_script', xhr.responseText);
+              eval(xhr.responseText);
+              backendExec();
 //            Settings.add({ configure : JSON.parse(xhr.responseText) });
           };
         }

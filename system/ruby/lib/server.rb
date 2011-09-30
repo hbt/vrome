@@ -53,7 +53,7 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
 
 
   def get_configure2(request)
-    config_file = File.join(ENV['HOME'],'.vromerc')
+    config_file = File.join(ENV['HOME'],'.vromerc.js')
     data = ''
 
     if File.exist?(config_file)
