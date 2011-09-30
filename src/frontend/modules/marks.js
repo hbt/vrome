@@ -1,5 +1,6 @@
 var Marks = (function() {
     var openNewTab = false;
+    var waitForAcceptKey = true;
 
     function initQuickMark() {
         CmdBox.set({
@@ -15,7 +16,7 @@ var Marks = (function() {
             action: "Marks.addQuickMark",
             key: content,
             url : location.href
-            });
+        });
         CmdBox.remove();
     }
 
@@ -28,8 +29,9 @@ var Marks = (function() {
         }
     }
 
-    function initGotoQuickMark(/*Boolean*/ newtab) {
+    function initGotoQuickMark(/*Boolean*/ newtab, wait) {
         openNewTab= newtab;
+        waitForAcceptKey = wait;
         CmdBox.set({
             title : 'Goto Quick Mark ',
             pressUp : handleGotoQuickMark,
@@ -45,22 +47,25 @@ var Marks = (function() {
             key: content,
             newtab: openNewTab
         });
-        CmdBox.remove();
+
+        if(!waitForAcceptKey)
+            CmdBox.remove();
     }
  
     function executeJavascript(msg) {
         eval(msg.js);
+        CmdBox.remove();
     }
 
     function handleGotoQuickMark(e) {
         var key = getKey(e);
 
-        if(isAcceptKey(key)) {
+        if(waitForAcceptKey || isAcceptKey(key)) {
             gotoQuickMark();
         }
     }
 
-// fix local marks
+    // fix local marks
     function addLocalMark() {
         // TODO zoom
         var key = getKey(this);
@@ -69,7 +74,7 @@ var Marks = (function() {
                 action: "Marks.addLocalMark",
                 key  : key,
                 position : [scrollX, scrollY, location.href]
-                });
+            });
         } else {
             var local_marks = Settings.get('local_marks') || {};
             local_marks[key] = [scrollX, scrollY];
@@ -98,7 +103,10 @@ var Marks = (function() {
         gotoQuickMark       : initGotoQuickMark,
         gotoQuickMarkNewTab : function() {
             initGotoQuickMark.call(this,true)
-            },
+        },
+        gotoQuickMarkFast: function() {
+            initGotoQuickMark.call(this,false,true)
+        },
         addLocalMark        : addLocalMark,
         gotoLocalMark       : gotoLocalMark,
         executeJavascript: executeJavascript

@@ -166,16 +166,8 @@ with (KeyEvent) {
 
     add("M", Marks.addQuickMark);
     add("go", Marks.gotoQuickMark);
+    add("'", Marks.gotoQuickMarkFast);
     add("gn", Marks.gotoQuickMarkNewTab);
-
-    // a-zA-Z
-    for (var i = 65; i <= 122; i++) {
-        if (i > 90 && i < 97) continue;
-
-        add("m" + String.fromCharCode(i), Marks.addLocalMark  );
-        add("'" + String.fromCharCode(i), Marks.gotoLocalMark );
-    }
-
 
     // InsertMode
     add("ii", InsertMode.enterEditMode);
