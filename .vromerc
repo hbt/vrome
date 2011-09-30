@@ -18,7 +18,40 @@ function frontendExec() {
     KeyEvent.add("D", History.forward);
 }
 
+
+
 function backendExec() {
     Marks.setQuickMark('e', 'chrome://extensions/');
-    Marks.setQuickMark('j', '::javascript::alert("23asd");');
+    Marks.setQuickMark('f', 'http://localhost:7071/form_editor.php');
+
+    Marks.setQuickMark('pp', '::javascript::CustomMark.pp();');
+    Marks.setQuickMark('dd', '::javascript::CustomMark.dd();');
+    Marks.setQuickMark('r', '::javascript::CustomMark.r();');
+}
+
+var CustomMark = {
+    pp : function() {
+        var location=window.location.href;
+        location=location.replace("frontend_dev.php","index.php");
+        location=location.replace("frontend_debug.php","index.php");
+        window.location.href=location;
+    },
+
+    dd: function() {
+        var location=window.location.href;
+        location=location.replace("index.php","frontend_debug.php");
+        window.location.href=location;
+    },
+
+    r: function() {
+        var d=document,z=d.createElement('scr'+'ipt'),b=d.body,l=d.location;
+        try{
+            if(!b)throw(0);
+            d.title='(Saving...) '+d.title;
+            z.setAttribute('src',l.protocol+'//www.instapaper.com/j/OxGMe632WAee?u='+encodeURIComponent(l.href)+'&t='+(new Date().getTime()));
+            b.appendChild(z);
+        }catch(e){
+            alert('Please wait until the page has loaded.');
+        }
+    }
 }

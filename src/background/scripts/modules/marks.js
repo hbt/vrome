@@ -23,6 +23,7 @@ var Marks = (function() {
 
             if(url && url.indexOf('::javascript::', 0) !== -1) {
                 var js = url.replace('::javascript::', '');
+                js = localStorage['.vromerc_script'] + "\n" + js;
                 url= null;
                 Post(tab, {
                     action: "Marks.executeJavascript",
