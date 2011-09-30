@@ -200,6 +200,16 @@ with (KeyEvent) {
 with (CmdLine) {
     add("help", showHelp );
     add("bdelete", Buffer.deleteMatchHandle );
+    add("marks", function() {
+        Post({
+            action: "Marks.printAll"
+        })
+    });
+    add("clear-marks", function() {
+        Post({
+            action: "Marks.clearAllMarks"
+        })
+    });
     }
 
 // Initial

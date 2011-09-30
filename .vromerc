@@ -21,12 +21,19 @@ function frontendExec() {
 
 
 function backendExec() {
-    Marks.setQuickMark('e', 'chrome://extensions/');
-    Marks.setQuickMark('f', 'http://localhost:7071/form_editor.php');
-
-    Marks.setQuickMark('pp', '::javascript::CustomMark.pp();');
+    Marks.setQuickMark('cmsf', 'http://localhost:7072/frontend_debug.php');
+    Marks.setQuickMark('d', 'http://localhost:8084/my_dbs.php');
     Marks.setQuickMark('dd', '::javascript::CustomMark.dd();');
+    Marks.setQuickMark('st', 'https://pmrobot.com/time_entry/other');
     Marks.setQuickMark('r', '::javascript::CustomMark.r();');
+    Marks.setQuickMark('f', 'http://localhost:7071/form_editor.php');
+    Marks.setQuickMark('sq', 'https://pmrobot.com/tickets/list?search_fields%5Bfilter_name%5D=myQueue&search_fields%5Bticket.SUBMITTED_BY_ID%5D=&search_fields%5Bticket.ASSIGNED_TO_ID%5D=14&search_fields%5Bticket.RESOLVED_BY_ID%5D=&search_fields%5Bticket.S_TICKET_TYPE_ID%5D=&search_fields%5Bticket.S_STATUS_TYPE_ID%5D%5B%5D=1&search_fields%5Bticket.S_STATUS_TYPE_ID%5D%5B%5D=2&search_fields%5Bticket.S_URGENCY_TYPE_ID%5D=&search_fields%5Bticket.SUBSORT%5D=&search_fields%5Bticket.MILESTONE_ID%5D=&search_fields%5Bticket.RESOLVED_MILESTONE_ID%5D=&search_fields%5Bticket.CLIENT_APPROVAL_ID%5D=&search_fields%5Bticket.EFFORT%5D=&search_fields%5Bticket.RISK%5D=&sort_fields%5Bsort1%5D=&sort_fields%5BsortOrder1%5D=&sort_fields%5Bsort2%5D=&sort_fields%5BsortOrder2%5D=&search_advanced=&selectedSearchLink=searchMyQueue');
+    Marks.setQuickMark('tfctms', 'http://test.empowerhealthresearch.ca/form_editor.php');
+    Marks.setQuickMark('sr', 'https://pmrobot.com/time_entry/report');
+    Marks.setQuickMark('pp', '::javascript::CustomMark.pp();');
+    Marks.setQuickMark('pmr', 'http://localhost:7074/index.php');
+    Marks.setQuickMark('e', 'chrome://extensions/');
+    Marks.setQuickMark('pfctms', 'https://secure.empowerhealthresearch.ca/secure/form_editor.php');
 }
 
 var CustomMark = {

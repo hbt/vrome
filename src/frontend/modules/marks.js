@@ -98,6 +98,10 @@ var Marks = (function() {
         }
     }
 
+    function printAll(msg) {
+        document.write(msg.content);
+    }
+
     return {
         addQuickMark        : initQuickMark,
         gotoQuickMark       : initGotoQuickMark,
@@ -109,6 +113,7 @@ var Marks = (function() {
         },
         addLocalMark        : addLocalMark,
         gotoLocalMark       : gotoLocalMark,
-        executeJavascript: executeJavascript
+        executeJavascript: executeJavascript,
+        printAll: printAll
     }
 })()

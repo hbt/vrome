@@ -38,10 +38,48 @@ var Marks = (function() {
         }
     }
 
+    function getAllMarks() {
+        var marks = {};
+
+        for(key in localStorage) {
+            if(key.indexOf('mark_') !== -1) {
+                var markKey = key.replace('mark_', '');
+                marks[markKey] = localStorage[key];
+            }
+        }
+
+        return marks;
+    }
+
+    function printAll() {
+        var tab       = arguments[arguments.length-1];
+        var content = "";
+
+        var marks = getAllMarks();
+
+        for(key in marks) {
+            content += "Marks.setQuickMark('" + key + "', '" + localStorage['mark_' + key] + "');<br/>";
+        }
+
+        Post(tab, {
+            action: "Marks.printAll",
+            content: content
+        });
+    }
+
+    function clearAllMarks() {
+        var marks = getAllMarks();
+        for(key in marks) {
+            localStorage.removeItem('mark_' + key);
+        }
+    }
+
     return {
         addQuickMark : addQuickMark,
         setQuickMark: setQuickMark,
         addLocalMark : addLocalMark,
-        gotoQuickMark: gotoQuickMark
+        gotoQuickMark: gotoQuickMark,
+        printAll: printAll,
+        clearAllMarks: clearAllMarks
     }
 })()
