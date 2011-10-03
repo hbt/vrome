@@ -15,7 +15,11 @@ var KeyEvent = (function() {
         }
 
         eval(Settings.getValue('.vromerc_script'));
-        frontendExec();
+        try {
+            frontendExec();
+        } catch(Exception) {
+            c.l("frontend scripts not loaded");
+        }
 
         document.addEventListener('keydown',KeyEvent.exec, true);
     }
