@@ -1,7 +1,8 @@
 { "background_page" : "background/background.html",
   "content_scripts" : [ { "all_frames" : true,
         "css" : [ "styles/main.css" ],
-        "js" : [ "shared/message.js",
+        "js" : [ 
+            "shared/message.js",
             "shared/settings.js",
             "shared/options.js",
             "shared/utils.js",
@@ -35,7 +36,8 @@
         "run_at" : "document_start"
       },
       { "all_frames" : true,
-        "js" : [ "shared/message.js",
+        "js" : [
+            "shared/message.js",
             "shared/settings.js",
             "shared/options.js",
             "shared/utils.js",
