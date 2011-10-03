@@ -1,10 +1,21 @@
 #!/usr/bin/ruby
 
+# Usage: ruby macro_play.rb [filename] [times]
+
+# Use xmacrorec2 -k 91 > test2.txt to record a file
+
 filename = ARGV[0]
+times = ARGV[1]
 
 if filename == nil
     puts "Provide a filename as first argument"
     exit
+end
+
+if times == nil
+    times = 1
+else
+    times = times.to_i
 end
 
 count = 0
@@ -46,14 +57,16 @@ for k in commands
     # sleep command
     if k =~ /Alt_L\+Shift_L\+\d/
         secs = k.match /\d+/
-        script << 'sleep ' + secs[0]
+        script << 'sleep ' + secs[0] + ";"
     else
-        script << 'sleep .7'
-        script << 'xdotool key "' + k + '"'
+        script << 'sleep .7;'
+        script << 'xdotool key "' + k + '";'
     end
 end
 
 script = script.join("\n")
-puts script
+#puts script
 
-File.open(filename + '.sh', 'w') {|f| f.write(script) }
+for i in 0...times do
+    puts system(script)
+end
