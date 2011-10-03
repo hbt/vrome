@@ -21,7 +21,7 @@ end
 count = 0
 keys=[]
 commands=[]
-File.read(filename).split("\n").map do |line|
+File.read("macros/" + filename).split("\n").map do |line|
     tokens = line.split(/ /)
 
     if !line.start_with?('KeyStr')
