@@ -59,8 +59,7 @@ var KeyEvent = (function() {
     ///////////////////////////////////////////////////
     function passNextKey() {
         CmdBox.set({
-            title : ' -- PASS THROUGH (next) -- ',
-            timeout : 2000
+            title : ' -- PASS THROUGH (next) -- '
         });
         pass_next_key  = true;
         Post({
