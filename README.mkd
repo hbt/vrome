@@ -1,3 +1,165 @@
+## Commands ##
+
+{counter} some commands support counters e.g 3z will "zoom in" three times
+{register} store value in a register e.g "aY will copy the selected text in register a
+{input} command will display an input e.g M-y "test" will copy the selected text in a register named "test"
+{one-key-input}register used right after typing a command e.g tma tab mark as "a" -- use registers for text only, use one-key-input when appropriate
+[insert-mode] command is available in insert-mode
+
+### Help ###
+<F1> Opens help page in another tab -- DEV
+
+
+### Zoom ###
+{counter} z Zoom in
+{counter} x Zoom out
+[Zz , Zr] Zoom reset
+
+### Scrolling ###
+gg go to top
+G go to bottom
+0 go to left
+$ go to right
+h scroll left
+j scroll down
+k scroll up
+l scroll right
+{counter} % scroll to percent of page
+<C-j> Scroll next page
+<C-b> Scroll prev page
+<C-d> Scroll next half page
+<C-u> Scroll prev half page
+
+
+### Navigation ###
+]] Next Page -- DEV (move regex patterns)
+[[ Previous Page -- DEV (move regex patterns)
+{counter} gu Go to parent URL
+gU Go to Root Url
+{counter} <C-a> Increment number in URL
+{counter} <C-x> Decrement number in URL
+o Opens a URL -- DEV use history + autocomplete or remove "o" and "O" "tt" "T"
+
+### Hints ###
+{input} f starts hint mode with strings only
+Sub commands:
+    @[hint] copies the URL -- DEV
+    ;[hint] copies the text
+    ,[hint] focuses on element -- DEV
+    First letter of hint as upper case + Enter : Opens all links matching the first letter -- DEV
+    First letter of hint as upper case + lower case letter: opens link + remove lower case letters and wait for next hints
+    >56 + Enter opens all links with a number greater than 56  -- DEV
+    <56 + Enter opens all links with a number greater than 56  -- DEV
+    !foobar + Enter opens all links not matching text "foobar"  -- DEV
+    /foobar  + Enter opens all links matching text "foobar"  -- DEV
+{input} c same as "f" but opens in new tab
+{input} <M-s> same as "f" but after a match is found, we are back in hint mode
+{input} <M-f> hint mode with numbers instead of mnemonic keys
+{input} <M-c>  same as <M-f> but opens in new tab
+
+
+### History ###
+{counter} H Go back  -- DEV
+{counter} L Go forward  -- DEV
+
+### Text manipulation ###
+{register} Y Copy Selected text -- DEV (Add cmdbox message)
+{register} {input} [insert-mode] <M-y> Copies selected into a register -- DEV
+{register} {input} [insert-mode] <M-p> Pastes text from a register into clipboard -- DEV
+<C-y> Creates short URL and copies in clipboard -- DEV review
+{register} yy Copies current URL  -- DEV
+
+
+### Page ###
+Sd Toggles Dark Page Extension https://github.com/hbt/chrome-readability
+Si Disables images -- DEV (make it toggle)
+So Disables objects
+gF View source code in a new tab
+gi go to first input
+ii enter edit mode
+
+
+### Tabs manipulation ###
+r reload
+R reload all tab in current window
+WR reload all tab in all windows -- DEV
+{counter} tw closes tab and selects the one on the left -- DEV
+tcc Closes all tabs except current
+tce Closes all tabs to the right
+tcq Closes all tabs to the left
+tcw Closes all other windows
+tW Closes current window
+td Detach tab -- DEV doesn't work in incognito
+TM Marks a tab for a move -- DEV allow option to mark multiple tabs then reset after the move is made
+tp Moves marked tabs to new location  -- DEV
+{counter} tq Moves tab to the left  -- DEV
+{counter} te Moves tab to the right  -- DEV
+tu Reopen tab -- DEV inv sending ctrl+shift+t for chrome to reopen it
+tDq Closes and focuses left  -- DEV
+tDe Closes and focuses last -- DEV
+{counter} Next tab  -- DEV
+{counter} Previous tab  -- DEV
+g0 Go to first tab
+g$ Go to last tab
+`` Toggle between current and last selected tab  -- DEV
+t/ search and go to first matched tab
+tc/ delete matched tab
+{one-key-input} tm mark tab
+{one-key-input}t` select marked tab
+
+
+### Search ###
+/ start search
+? backward search
+n next match
+N previous match
+# match selected text forward
+* match selected text backward
+
+
+### Insert Mode ###
+<C-i> Opens external editor
+<M-v> Pass next key
+<C-a>   Move to first words or select all
+<C-d>   Delete forward char
+<C-e>   Move to end
+<C-h>   Delete backward char
+<C-i>   Launch the external editor,default 'editor' is 'gvim -f'.
+<C-k>   Delete forward to the end of the line.
+<C-w>   Delete backward word
+<C-u>   Delete backward to the beginning of the line.
+<M-d>   Delete forward word
+<M-h>   Move back a word
+<M-l>   Move forward a word
+<M-j>   Move back a char
+<M-k>   Move forward a char
+<M-f> go to character (forward)
+
+
+### Marks ###
+{input} M Mark current URL
+{input} go open to Marked URL
+{input} gn open to Marked URL and open in new tab
+{input} ' open marked URL (first match)
+{one-key-input} m Create local mark (page coordinates)
+{one-key-input}` go to local mark
+
+
+### MISC ###
+: start command line
+<C-z> Disable vrome
+<C-v> Pass next key
+. Run last command -- DEV
+
+
+### Commands ###
+:help same as F1 -- DEV
+:marks prints all marks
+:clear-marks deletes all marks
+:make-links (mkl) convert text URL into valid links -- DEV
+
+
+
 [Vrome](http://github.com/jinzhu/vrome)     -- Vim keybindings extension for Chrome
 ======================================================================
 
