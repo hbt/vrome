@@ -82,7 +82,7 @@ var Hint = (function() {
             var elem_left = win_left + pos.left;
 
             var span = document.createElement('span');
-            span.setAttribute('id', '__vim_hint_highlight_span');
+            span.setAttribute('class', '__vim_hint_highlight_span');
             span.style.left            = elem_left + 'px';
             span.style.top             = elem_top  + 'px';
             span.style.backgroundColor = 'red';
