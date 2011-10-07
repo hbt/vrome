@@ -52,8 +52,74 @@ var Hint = (function() {
                     elements.push(elems[i]);
             }
         }
+
+        if(repeat) {
+            elements = experimentalSorting(elements);
+        }
+
         setOrder(elements);
         matched = elements;
+    }
+
+    function experimentalSorting(elems) {
+        var sortedElems = [];
+
+        for (var i = 0; i < elems.length; i++) { 
+            var elem      = elems[i];
+            var tag_name = elem.tagName.toLowerCase();
+            var pushed = false;
+            if(tag_name == "a" && elem.getAttribute('href')) {
+                var closestElement = null;
+                var greatestPercent = 0;
+
+                // find closest element -- most similar based on href
+                for (var j = 0; j < sortedElems.length; j++) {
+                    var sortedElem = sortedElems[j];
+
+                    if(sortedElem.tagName.toLowerCase() == "a" && sortedElem.getAttribute('href'))
+                    {
+                        var percent = getSimilarityPercent(sortedElem.getAttribute('href'), elem.getAttribute('href'));
+                        if(percent > greatestPercent) {
+                            greatestPercent = percent;
+                            closestElement = sortedElem;
+                        }
+                    }
+                }
+
+                if(closestElement && greatestPercent > 80) {
+                    if(!closestElement.els) {
+                        closestElement.els = [];
+                    }
+
+                    closestElement.els.push(elem);
+                    pushed = true;
+                }
+            }
+
+            if(!pushed) {
+                sortedElems.push(elem);
+            }
+        }
+
+        var res = [];
+        for (var i = 0; i < sortedElems.length; i++) {
+            if(sortedElems[i].els) {
+                for(var j = 0; j < sortedElems[i].els.length; j++) {
+                    res.push(sortedElems[i].els[j]);
+                }
+                res.push(sortedElems[i]);
+                sortedElems[i].els = undefined;
+                sortedElems.splice(i, 1);
+            }
+        }
+
+        for (var i = 0; i < sortedElems.length; i++) {
+            res.push(sortedElems[i]);
+        }
+        elements = res;
+        elems = res;
+
+        return res;
     }
 
     function setOrder(elems) {
