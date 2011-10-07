@@ -113,7 +113,7 @@ var Url = (function(){
     }
 
     function viewSource(newTab) {
-        var url = Settings.get('background.currentUrl');
+        var url = location.href;
         url = url.replace(/^(view-source:)?/,/^view-source:/.test(url) ? '' : "view-source:");
         Post({
             action: "Tab.openUrl",
