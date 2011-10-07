@@ -68,6 +68,7 @@ Sub commands:
 {register} {input} [insert-mode] <M-p> Pastes text from a register into clipboard -- DEV
 <C-y> Creates short URL and copies in clipboard -- DEV review
 {register} yy Copies current URL  -- DEV
+ue Opens url in external editor
 
 
 ### Page ###

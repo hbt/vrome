@@ -112,3 +112,13 @@ function simulateKey(keyChar) {
     k.initKeyboardEvent("keypress", true, true, null, keyChar, false, false, false, false, false);
     document.activeElement.dispatchEvent(k);
 }
+
+function isInInsertMode(target)
+{
+    if(!target)
+        target = document.activeElement;
+
+    var newInsertMode = /^INPUT|TEXTAREA|SELECT|HTML$/i.test(target.nodeName);
+    return newInsertMode;
+
+}

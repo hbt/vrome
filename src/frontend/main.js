@@ -68,6 +68,7 @@ with (KeyEvent) {
 
 
     // Url
+    add("ue", Url.openInExternalEditor)
     add("gu"    , Url.parent             );
     add("gU"    , Url.root               );
     add("gF"    , Url.viewSourceNewTab   );

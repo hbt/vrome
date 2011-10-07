@@ -119,6 +119,9 @@ var InsertMode = (function(){
 
     function externalEditor() {
         var elem    = this.target;
+        if(!elem)
+            elem = document.activeElement;
+       
         var edit_id = String(Math.random());
         elem.setAttribute('vrome_edit_id',edit_id);
         elem.setAttribute('readonly','readonly');
@@ -134,6 +137,11 @@ var InsertMode = (function(){
         elem.value = msg.value;
         elem.removeAttribute('vrome_edit_id');
         elem.removeAttribute('readonly');
+
+        // if element is from cmdbox
+        if(elem && elem.id == "_vrome_cmd_input_box") {
+           CmdBox.executeCallback();
+        }
     }
 
     // API
