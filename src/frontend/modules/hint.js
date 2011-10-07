@@ -241,7 +241,9 @@ var Hint = (function() {
     function handleInput(e) {
         key = getKey(e);
 
-        if (stringMode) {
+        if(isAcceptKey(key)) {
+            processActions();
+        } else if (stringMode) {
             var currentString = getCurrentString();
 
       
@@ -352,6 +354,45 @@ var Hint = (function() {
 
 
     // actions
+    function processActions()
+    {
+        // check which action it is
+        var str = getCurrentString();
+
+        if(str.startsWith("<")) {
+            processComparisonOperatorAction("<", str);
+        }
+        else if(str.startsWith(">")) {
+            processComparisonOperatorAction(">", str);
+        }
+    }
+
+    function processComparisonOperatorAction(operator, str)
+    {
+        var value = str.substring(1);
+        new_tab = true;
+
+        for(var index in elements) {
+            var elem = elements[index];
+            var tagName = elem.tagName.toLowerCase();
+
+            if(tagName == "a" && elem.innerText.match(/\d+/)) {
+                var matches = elem.innerText.match(/\d+/);
+                var valid = false;
+                if(operator == ">") {
+                    valid = matches[0] && matches[0] > value;
+                }
+                else if(operator == "<") {
+                    valid = matches[0] && matches[0] < value;
+                }
+
+                if(valid) {
+                    execSelect(elem);
+                }
+            }
+        }
+    }
+
 
     function focusOnElementAction(elem) {
         elem.focus();

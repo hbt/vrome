@@ -43,13 +43,13 @@ o Opens a URL -- DEV use history + autocomplete or remove "o" and "O" "tt" "T"
 ### Hints ###
 {input} f starts hint mode with strings only
 Sub commands:
-    @[hint] copies the URL -- DEV
+    @[hint] copies the URL 
     ;[hint] copies the text
     ,[hint] focuses on element 
     First letter of hint as upper case + Enter : Opens all links matching the first letter -- DEV
     First letter of hint as upper case + lower case letter: opens link + remove lower case letters and wait for next hints
-    >56 + Enter opens all links with a number greater than 56  -- DEV
-    <56 + Enter opens all links with a number greater than 56  -- DEV
+    >56 + Enter opens all links with a number greater than 56  
+    <56 + Enter opens all links with a number greater than 56 
     !foobar + Enter opens all links not matching text "foobar"  -- DEV
     /foobar  + Enter opens all links matching text "foobar"  -- DEV
 {input} c same as "f" but opens in new tab
@@ -102,7 +102,7 @@ tDe Closes and focuses last -- DEV
 {counter} Previous tab  -- DEV
 g0 Go to first tab
 g$ Go to last tab
-`` Toggle between current and last selected tab  -- DEV
+`` Toggle between current and last selected tab 
 t/ search and go to first matched tab
 tc/ delete matched tab
 {one-key-input} tm mark tab
