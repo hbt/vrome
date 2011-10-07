@@ -45,7 +45,7 @@ o Opens a URL -- DEV use history + autocomplete or remove "o" and "O" "tt" "T"
 Sub commands:
     @[hint] copies the URL -- DEV
     ;[hint] copies the text
-    ,[hint] focuses on element -- DEV
+    ,[hint] focuses on element 
     First letter of hint as upper case + Enter : Opens all links matching the first letter -- DEV
     First letter of hint as upper case + lower case letter: opens link + remove lower case letters and wait for next hints
     >56 + Enter opens all links with a number greater than 56  -- DEV

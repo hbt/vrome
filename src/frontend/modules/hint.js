@@ -5,8 +5,9 @@ var Hint = (function() {
     var key = null;
 
     var actions = {
-        '@' : copyURL,
-        ';' : copyText
+        '@' : copyURLAction,
+        ';' : copyTextAction,
+        ',' : focusOnElementAction
     };
 
     var currentAction = null;
@@ -354,7 +355,12 @@ var Hint = (function() {
 
     // actions
 
-    function copyURL(elem) {
+    function focusOnElementAction(elem) {
+        elem.focus();
+        currentAction = null;
+    }
+
+    function copyURLAction(elem) {
         var url = elem.getAttribute('href');
 
         var options = {};
@@ -368,10 +374,9 @@ var Hint = (function() {
         },300);
 
         currentAction = null;
-        Hint.remove();
     }
 
-    function copyText(elem) {
+    function copyTextAction(elem) {
         Post({
             action: "Tab.copyData",
             data: elem.innerText
