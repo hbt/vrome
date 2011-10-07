@@ -1,4 +1,15 @@
 var Tab = (function() {
+    function copyURLHack() {
+        if(Tab.lastCreatedTabId) {
+            chrome.tabs.get(Tab.lastCreatedTabId, function(tab) {
+                console.log(tab.url);
+                Clipboard.copy(tab.url);
+                chrome.tabs.remove(tab.id);
+                Tab.lastCreatedTabId = null;
+            });
+        }
+    }
+   
     function close(msg) {
         var tab = arguments[arguments.length-1];
         Tab.current_closed_tab = tab;
@@ -248,9 +259,11 @@ var Tab = (function() {
         markTabForMove: markTabForMove,
         putMarkedTab: putMarkedTab,
         moveTabRight: moveTabRight,
-        moveTabLeft: moveTabLeft
+        moveTabLeft: moveTabLeft,
+        copyURLHack: copyURLHack
     }
 })()
 
 // Tab.closed_tabs, now_tab, last_selected_tab, current_closed_tab;
 Tab.closed_tabs = [];
+Tab.lastCreatedTabId = null;

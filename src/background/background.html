@@ -63,6 +63,10 @@
         });
       });
 
+      chrome.tabs.onCreated.addListener(function(tab) {
+        Tab.lastCreatedTabId = tab.id;
+      });
+
       chrome.tabs.onRemoved.addListener(function(tabId) {
         var tab = Tab.current_closed_tab || Tab.now_tab;
         if (tab) { Tab.closed_tabs.push(tab); };

@@ -5,7 +5,7 @@ var Hint = (function() {
     var key = null;
 
     var actions = {
-        '!' : copyURL,
+        '@' : copyURL,
         ';' : copyText
     };
 
@@ -258,7 +258,7 @@ var Hint = (function() {
                 numbers = (key == '<BackSpace>') ? parseInt(numbers / 10) : numbers * 10 + Number(key);
                 CmdBox.set({
                     title : 'HintMode (' + numbers + ')'
-                    });
+                });
                 var cur = numbers - 1;
 
                 setHighlight(matched[cur],true);
@@ -356,15 +356,19 @@ var Hint = (function() {
 
     function copyURL(elem) {
         var url = elem.getAttribute('href');
-        Post({
-            action: "Tab.copyData",
-            data: url
-        });
-        CmdBox.remove();
-        CmdBox.set({
-            title : "Copied " + url,
-            timeout : 3000
-        });
+
+        var options = {};
+        options[Platform.mac ? 'meta' : 'ctrl'] = true;
+        clickElement(elem,options);
+
+        setTimeout(function() {
+            Post({
+                action: "Tab.copyURLHack"
+            });
+        },300);
+
+        currentAction = null;
+        Hint.remove();
     }
 
     function copyText(elem) {
@@ -372,10 +376,12 @@ var Hint = (function() {
             action: "Tab.copyData",
             data: elem.innerText
         });
-        CmdBox.remove();
+
+        currentAction = null;
+        Hint.remove();
         CmdBox.set({
             title : "Copied " + elem.innerText,
-            timeout : 3000
+            timeout : 500
         });
     }
 
