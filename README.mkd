@@ -53,7 +53,7 @@ Sub commands:
     !foobar + Enter opens all links not matching text "foobar"  -- DEV
     /foobar  + Enter opens all links matching text "foobar"  -- DEV
 {input} c same as "f" but opens in new tab
-{input} <M-s> same as "f" but after a match is found, we are back in hint mode
+{input} <M-s> same as "f" but after a match is found, we are back in hint mode and the sort order tries to match by href
 {input} <M-f> hint mode with numbers instead of mnemonic keys
 {input} <M-c>  same as <M-f> but opens in new tab
 

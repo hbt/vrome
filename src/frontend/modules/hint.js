@@ -86,7 +86,7 @@ var Hint = (function() {
                     }
                 }
 
-                if(closestElement && greatestPercent > 80) {
+                if(closestElement && greatestPercent > 70) {
                     if(!closestElement.els) {
                         closestElement.els = [];
                     }
@@ -102,18 +102,19 @@ var Hint = (function() {
         }
 
         var res = [];
-        for (var i = 0; i < sortedElems.length; i++) {
+        for (var i in sortedElems) {
             if(sortedElems[i].els) {
+                res.push(sortedElems[i]);
                 for(var j = 0; j < sortedElems[i].els.length; j++) {
                     res.push(sortedElems[i].els[j]);
                 }
-                res.push(sortedElems[i]);
                 sortedElems[i].els = undefined;
-                sortedElems.splice(i, 1);
+                delete sortedElems[i];
+//                sortedElems.splice(i, 1);
             }
         }
 
-        for (var i = 0; i < sortedElems.length; i++) {
+        for (var i in sortedElems) {
             res.push(sortedElems[i]);
         }
         elements = res;
