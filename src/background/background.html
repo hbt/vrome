@@ -35,11 +35,11 @@
 
       function syncSetting(tab) {
         getConfigure();
-        if (tab != Tab.now_tab) {
-          Tab.last_selected_tab = Tab.now_tab || tab;
-          Tab.now_tab = tab;
-        }
-        Settings.add({currentUrl : tab.url, now_tab_id : Tab.now_tab.id});
+//        if (tab != Tab.now_tab) {
+//          Tab.last_selected_tab = Tab.now_tab || tab;
+//          Tab.now_tab = tab;
+//        }
+//        Settings.add({currentUrl : tab.url, now_tab_id : Tab.now_tab.id});
 
         Post(tab,{action : "Settings.setValue", arguments : {
                 key: '.vromerc_script',
@@ -48,13 +48,12 @@
       }
 
       chrome.tabs.getSelected(null, function(tab) {
-//        syncSetting(tab, false);
+          Tab.currentTabId = tab.id;
       });
 
       chrome.tabs.onSelectionChanged.addListener(function(tabId) {
-        chrome.tabs.get(tabId, function(tab) {
-//          syncSetting(tab, false);
-        });
+          Tab.lastSelectedTabId = Tab.currentTabId;
+          Tab.currentTabId = tabId;
       });
 
       chrome.tabs.onUpdated.addListener(function(tabId) {
@@ -65,6 +64,11 @@
 
       chrome.tabs.onCreated.addListener(function(tab) {
         Tab.lastCreatedTabId = tab.id;
+
+        console.log(tab.url);
+
+        if(Tab.currentTabId && tab.url != "chrome://newtab/")
+            chrome.tabs.update(Tab.currentTabId, { selected: true });
       });
 
       chrome.tabs.onRemoved.addListener(function(tabId) {

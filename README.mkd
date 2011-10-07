@@ -107,6 +107,8 @@ t/ search and go to first matched tab
 tc/ delete matched tab
 {one-key-input} tm mark tab
 {one-key-input}t` select marked tab
+tl tab lock (locked tabs cannot be deleted by vrome tab closing commands)  -- DEV
+tL tab unlock  -- DEV
 
 
 ### Search ###

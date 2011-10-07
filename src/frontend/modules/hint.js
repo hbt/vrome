@@ -305,10 +305,9 @@ var Hint = (function() {
 
         if (tag_name == 'a') {
             setHighlight(elem, true);
-            if (!new_tab) {
-                var old_target = elem.getAttribute('target');
-                elem.removeAttribute('target');
-            }
+
+            var old_target = elem.getAttribute('target');
+            elem.removeAttribute('target');
 
             var options = {};
             options[Platform.mac ? 'meta' : 'ctrl'] = new_tab;
@@ -320,7 +319,6 @@ var Hint = (function() {
             }
 
             if (old_target) elem.setAttribute('target',old_target);
-
         }
         else if(elem.onclick && type != 'text') {
             clickElement(elem);
