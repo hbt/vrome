@@ -32,27 +32,15 @@ var Marks = (function() {
         }
     }
 
-    function getAllMarks() {
-        var marks = {};
-
-        for(key in localStorage) {
-            if(key.indexOf('mark_') !== -1) {
-                var markKey = key.replace('mark_', '');
-                marks[markKey] = localStorage[key];
-            }
-        }
-
-        return marks;
-    }
-
     function printAll() {
         var tab       = arguments[arguments.length-1];
         var content = "";
 
-        var marks = getAllMarks();
+        var marks = localStorage.getMatchingKey(/^mark_/);
 
         for(key in marks) {
-            content += "Marks.setQuickMark('" + key + "', '" + localStorage['mark_' + key] + "');<br/>";
+            var val = key.replace('mark_', '');
+            content += "Marks.setQuickMark('" + val + "', '" + localStorage[key] + "');<br/>";
         }
 
         Post(tab, {
@@ -61,11 +49,8 @@ var Marks = (function() {
         });
     }
 
-    function clearAllMarks() {
-        var marks = getAllMarks();
-        for(key in marks) {
-            localStorage.removeItem('mark_' + key);
-        }
+    function clearAll() {
+        localStorage.delMatchingKey(/^mark_/);
     }
 
     return {
@@ -73,6 +58,6 @@ var Marks = (function() {
         setQuickMark: setQuickMark,
         gotoQuickMark: gotoQuickMark,
         printAll: printAll,
-        clearAllMarks: clearAllMarks
+        clearAllMarks: clearAll
     }
 })()

@@ -62,7 +62,6 @@ with (KeyEvent) {
     add("Si" , Page.disableImages);
     add("So" , Page.disableObjects );
 
-    // TODO: fix me
     add("<M-y>", Page.multiclipboardCopy);
     add("<M-p>", Clipboard.registerToClipboard);
 
@@ -182,6 +181,8 @@ with (KeyEvent) {
         add("\"" + String.fromCharCode(i), Register.add);
     }
 
+    add("<M-'>" ,Register.addLong);
+
     // InsertMode
     add("ii", InsertMode.enterEditMode);
     add("ik", InsertMode.test);
@@ -213,16 +214,31 @@ with (KeyEvent) {
 with (CmdLine) {
     add("help", showHelp );
     add("bdelete", Buffer.deleteMatchHandle );
+
     add("marks", function() {
         Post({
             action: "Marks.printAll"
         })
     });
+
+    add("regs", function() {
+        Post({
+            action: "Register.printAll"
+        })
+    });
+
     add("clear-marks", function() {
         Post({
             action: "Marks.clearAllMarks"
         })
     });
+
+    add("clear-regs", function() {
+        Post({
+            action: "Register.clearAll"
+        })
+    });
+
     }
 
 // Initial

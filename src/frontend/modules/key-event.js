@@ -127,7 +127,7 @@ var KeyEvent = (function() {
                 for (var count = 0; count < invoke_count; count++) bindings[i][1].call(e);
 
                 // registers
-                if(bindings[i][1] != Register.add) {
+                if(bindings[i][1] != Register.add && bindings[i][1] != Register.addLong) {
                     Register.currentRegister = null;
                 }
             }
