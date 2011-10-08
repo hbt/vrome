@@ -107,7 +107,11 @@ var Tab = (function() {
     }
 
     function copyData(msg) {
-        Clipboard.copy(msg.data);
+        if(msg.register) {
+            Register.store(msg.register, msg.data);
+        } else {
+            Clipboard.copy(msg.data);
+        }
     }
 
     /**

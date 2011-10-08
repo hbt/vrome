@@ -59,15 +59,15 @@ Sub commands:
 
 
 ### History ###
-{counter} H Go back  -- DEV
-{counter} L Go forward  -- DEV
+{counter} H Go back
+{counter} L Go forward  
 
 ### Text manipulation ###
-{register} Y Copy Selected text -- DEV (Add cmdbox message)
+{register} Y Copy Selected text 
 {register} {input} [insert-mode] <M-y> Copies selected into a register -- DEV
 {register} {input} [insert-mode] <M-p> Pastes text from a register into clipboard -- DEV
 <C-y> Creates short URL and copies in clipboard -- DEV review
-{register} yy Copies current URL  -- DEV
+{register} yy Copies current URL 
 ue Opens url in external editor
 
 

@@ -125,6 +125,11 @@ var KeyEvent = (function() {
                 keys.replace(regexp,'');
                 var invoke_count = Number(RegExp.$1) || 1;
                 for (var count = 0; count < invoke_count; count++) bindings[i][1].call(e);
+
+                // registers
+                if(bindings[i][1] != Register.add) {
+                    Register.currentRegister = null;
+                }
             }
 
             var regexp = new RegExp('^(' + keys.replace(/([(\[{\\^$|)?*+.])/g,"\\$1") + ')');

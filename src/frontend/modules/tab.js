@@ -4,7 +4,8 @@ var Tab = (function(){
         // necessary until http://code.google.com/p/chromium/issues/detail?id=55188 is fixed
         Post({
             action: "Tab.copyData",
-            data: document.location.href
+            data: document.location.href,
+            register: Register.currentRegister
         });
     }
 

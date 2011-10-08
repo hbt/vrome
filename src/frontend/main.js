@@ -64,7 +64,7 @@ with (KeyEvent) {
 
     // TODO: fix me
     add("<M-y>", Page.multiclipboardCopy);
-    add("<M-p>", Page.multiclipboardPaste);
+    add("<M-p>", Clipboard.registerToClipboard);
 
 
     // Url
@@ -175,6 +175,11 @@ with (KeyEvent) {
     for (var i = 97; i <= 122; i++) {
         add("m" + String.fromCharCode(i), Marks.addLocalMark  );
         add("`" + String.fromCharCode(i), Marks.gotoLocalMark );
+    }
+
+    // registers
+    for (var i = 97; i <= 122; i++) {
+        add("\"" + String.fromCharCode(i), Register.add);
     }
 
     // InsertMode

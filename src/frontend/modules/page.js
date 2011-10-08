@@ -110,7 +110,12 @@ var Page = (function() {
     },
 
     copySelected : function() {
-        Post({action: "Tab.copyData", data: getSelected()});
+        var msg = "Copied " + getSelected();
+
+        if(Register.currentRegister) {
+            msg += " into register " + Register.currentRegister;
+        }
+        Post({action: "Tab.copyData", data: getSelected(), register: Register.currentRegister });
     },
     toggleDarkPageExtension: toggleDarkPageExtension,
     disableStyles: disableStyles,
