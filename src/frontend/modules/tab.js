@@ -169,16 +169,25 @@ var Tab = (function(){
         putMarkedTab: putMarkedTab,
         moveTabRight: moveTabRight,
         moveTabLeft: moveTabLeft,
+
         pin: function() {
             Post({
                 action: "Tab.pin"
             });
         },
+
         duplicate: function() {
             Post({
                 action: "Tab.duplicate",
                 count: times()
             });
+        },
+
+        unpinAll: function() {
+             Post({
+                action: "Tab.unpinAll"
+            });
+
         }
     }
 })()

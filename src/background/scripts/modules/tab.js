@@ -16,6 +16,14 @@ var Tab = (function() {
         }
     }
 
+    function unpinAll() {
+        chrome.tabs.getAllInWindow(null, function (tabs) {
+            for(var i = 0; i < tabs.length; i++) {
+                chrome.tabs.update(tabs[i].id, {pinned: false});
+            }
+        });
+    }
+
     function pin() {
         var tab = arguments[arguments.length-1];
         chrome.tabs.update(tab.id, {
@@ -300,6 +308,7 @@ var Tab = (function() {
         moveTabRight: moveTabRight,
         moveTabLeft: moveTabLeft,
         pin: pin,
+        unpinAll: unpinAll,
         duplicate: duplicate,
         copyURLHack: copyURLHack
     }

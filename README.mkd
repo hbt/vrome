@@ -108,7 +108,7 @@
     {one-key-input} tm mark tab
     {one-key-input}t` select marked tab
     tl pin/lock tab
-    tL unlocks all tabs in current window -- DEV
+    tL unlocks all tabs in current window 
     {counter} tv duplicate tab
 
 
