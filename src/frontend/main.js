@@ -111,7 +111,8 @@ with (KeyEvent) {
     add("tW"    , Tab.closeCurrentWindow);
     add("td"    , Tab.detachTab        );
     add("tM"    , Tab.markTabForMove);
-    add("tp"    , Tab.putMarkedTab);
+    add("tP"    , Tab.putMarkedTab);
+    add("tl"    , Tab.pin);
     add("tq"    , Tab.moveTabLeft);
     add("te"    , Tab.moveTabRight);
     //  add("D"    , Tab.closeAndFoucsLeft );

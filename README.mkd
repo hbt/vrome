@@ -90,16 +90,16 @@ tce Closes all tabs to the right
 tcq Closes all tabs to the left
 tcw Closes all other windows
 tW Closes current window
-td Detach tab -- DEV doesn't work in incognito
+td Detach tab 
 TM Marks a tab for a move -- DEV allow option to mark multiple tabs then reset after the move is made
-tp Moves marked tabs to new location  -- DEV
-{counter} tq Moves tab to the left  -- DEV
-{counter} te Moves tab to the right  -- DEV
+tP Moves marked tabs to new location  -- DEV
+{counter} tq Moves tab to the left  
+{counter} te Moves tab to the right 
 tu Reopen tab -- DEV inv sending ctrl+shift+t for chrome to reopen it
 tDq Closes and focuses left  -- DEV
 tDe Closes and focuses last -- DEV
-{counter} Next tab  -- DEV
-{counter} Previous tab  -- DEV
+{counter} Next tab 
+{counter} Previous tab
 g0 Go to first tab
 g$ Go to last tab
 `` Toggle between current and last selected tab 
@@ -107,8 +107,8 @@ t/ search and go to first matched tab
 tc/ delete matched tab
 {one-key-input} tm mark tab
 {one-key-input}t` select marked tab
-tl tab lock (locked tabs cannot be deleted by vrome tab closing commands)  -- DEV
-tL tab unlock  -- DEV
+tl pin/lock tab
+tv duplicate tab
 
 
 ### Search ###

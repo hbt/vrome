@@ -22,7 +22,7 @@ var Tab = (function(){
     function close() {
         Post({
             action: "Tab.close",
-            count: KeyEvent.currentCount
+            count: times()
         });
     }
 
@@ -30,7 +30,7 @@ var Tab = (function(){
         Post({
             action: "Tab.reopen",
             num : times()
-            });
+        });
     }
 
     function selectPrevious() {
@@ -40,7 +40,7 @@ var Tab = (function(){
             Post({
                 action : "Tab.goto",
                 index : count - 1
-                });
+            });
         } else {
             Post({
                 action : "Tab.selectPrevious"
@@ -52,13 +52,13 @@ var Tab = (function(){
         Post({
             action: "Tab.goto",
             offset : -1 * times()
-            });
+        });
     }
     function next()  {
         Post({
             action: "Tab.goto",
             offset : times()
-            });
+        });
     }
     function first() {
         Post({
@@ -82,14 +82,14 @@ var Tab = (function(){
     function closeLeftTabs() {
         Post({
             action: "Tab.closeLeftTabs",
-            count: KeyEvent.currentCount
+            count: times()
         });
     }
 
     function closeRightTabs() {
         Post({
             action: "Tab.closeRightTabs",
-            count: KeyEvent.currentCount
+            count: times()
         });
     }
 
@@ -127,14 +127,14 @@ var Tab = (function(){
         Post({
             action: "Tab.moveTabLeft",
             offset : times()
-            });
+        });
     }
 
     function moveTabRight() {
         Post({
             action: "Tab.moveTabRight",
             offset : times()
-            });
+        });
     }
 
     // API
@@ -168,6 +168,11 @@ var Tab = (function(){
         markTabForMove: markTabForMove,
         putMarkedTab: putMarkedTab,
         moveTabRight: moveTabRight,
-        moveTabLeft: moveTabLeft
+        moveTabLeft: moveTabLeft,
+        pin: function() {
+            Post({
+                action: "Tab.pin"
+            });
+        }
     }
 })()

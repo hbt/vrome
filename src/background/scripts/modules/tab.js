@@ -8,6 +8,11 @@ var Tab = (function() {
             });
         }
     }
+
+    function pin() {
+        var tab = arguments[arguments.length-1];
+        chrome.tabs.update(tab.id, { pinned: !tab.pinned });
+    }
    
     function close(msg) {
         closeTabs("right", msg.count, true);
@@ -123,6 +128,10 @@ var Tab = (function() {
                 var condition = null;
                 var nbDeleted = 0;
 
+                if((!includeCurrent && count == 1) || !count) {
+                    count = 999;
+                }
+
                 if(count) {
                     if(includeCurrent)
                         count--;
@@ -136,7 +145,7 @@ var Tab = (function() {
                             condition = tabs[i].index != selectedTab.index;
                         }
 
-                        if (condition) {
+                        if (condition && !tabs[i].pinned) {
                             chrome.tabs.remove(tabs[i].id);
                             nbDeleted++;
                             if(nbDeleted == count) {
@@ -277,6 +286,7 @@ var Tab = (function() {
         putMarkedTab: putMarkedTab,
         moveTabRight: moveTabRight,
         moveTabLeft: moveTabLeft,
+        pin: pin,
         copyURLHack: copyURLHack
     }
 })()
