@@ -106,7 +106,7 @@ var KeyEvent = (function() {
             var old_times = times;
         }
 
-        if(!isNaN(key)) {
+        if(!isNaN(key) && !isInInsertMode()) {
             var tmp =  CmdBox.get().title + keys;
             CmdBox.set({
                 title : tmp
