@@ -9,9 +9,16 @@ var Tab = (function() {
         }
     }
 
+    function duplicate() {
+        var tab = arguments[arguments.length-1];
+        chrome.tabs.create({index: ++tab.index, url: tab.url });
+    }
+
     function pin() {
         var tab = arguments[arguments.length-1];
-        chrome.tabs.update(tab.id, { pinned: !tab.pinned });
+        chrome.tabs.update(tab.id, {
+            pinned: !tab.pinned
+        });
     }
    
     function close(msg) {
@@ -196,7 +203,9 @@ var Tab = (function() {
         // retrieve current tab
         chrome.tabs.getSelected(null, function(selectedTab) {
             // create a new window
-            chrome.windows.create({incognito: selectedTab.incognito }, function (window) {
+            chrome.windows.create({
+                incognito: selectedTab.incognito
+            }, function (window) {
                 // move current tab into new window
                 chrome.tabs.move(selectedTab.id, {
                     windowId: window.id,
@@ -287,6 +296,7 @@ var Tab = (function() {
         moveTabRight: moveTabRight,
         moveTabLeft: moveTabLeft,
         pin: pin,
+        duplicate: duplicate,
         copyURLHack: copyURLHack
     }
 })()

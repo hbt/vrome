@@ -113,6 +113,7 @@ with (KeyEvent) {
     add("tM"    , Tab.markTabForMove);
     add("tP"    , Tab.putMarkedTab);
     add("tl"    , Tab.pin);
+   add("tv"    , Tab.duplicate);
     add("tq"    , Tab.moveTabLeft);
     add("te"    , Tab.moveTabRight);
     //  add("D"    , Tab.closeAndFoucsLeft );

@@ -173,6 +173,11 @@ var Tab = (function(){
             Post({
                 action: "Tab.pin"
             });
+        },
+        duplicate: function() {
+            Post({
+                action: "Tab.duplicate"
+            });
         }
     }
 })()
