@@ -121,6 +121,7 @@ N previous match
 
 
 ### Insert Mode ###
+<M-s> Toggles webkit speech
 <C-i> Opens external editor
 <M-v> Pass next key
 <C-a>   Move to first words or select all
@@ -159,7 +160,10 @@ N previous match
 :help same as F1 -- DEV
 :marks prints all marks
 :clear-marks deletes all marks
-:make-links (mkl) convert text URL into valid links -- DEV
+:regs prints all registers
+:clear-regs clears all registers
+:exp exports all data
+:make-links (ml) convert text URL into valid links 
 
 
 

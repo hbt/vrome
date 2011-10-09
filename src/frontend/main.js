@@ -228,6 +228,15 @@ with (CmdLine) {
         })
     });
 
+    add("exp", function() {
+        Post({
+            action: "Register.printAll"
+        });
+        Post({
+            action: "Marks.printAll"
+        });
+    });
+
     add("clear-marks", function() {
         Post({
             action: "Marks.clearAllMarks"
@@ -240,7 +249,8 @@ with (CmdLine) {
         })
     });
 
-    }
+    add("ml", Page.makeLinks);
+}
 
 // Initial
 var initFunction = [ Zoom.init, KeyEvent.init, Style.init];
