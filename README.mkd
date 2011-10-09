@@ -108,7 +108,8 @@ tc/ delete matched tab
 {one-key-input} tm mark tab
 {one-key-input}t` select marked tab
 tl pin/lock tab
-tv duplicate tab
+tL unlocks all tabs in current window -- DEV
+{counter} tv duplicate tab
 
 
 ### Search ###
