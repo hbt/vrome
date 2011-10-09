@@ -84,7 +84,7 @@ ii enter edit mode
 r reload
 R reload all tab in current window
 WR reload all tab in all windows -- DEV
-{counter} tw closes tab and selects the one on the left -- DEV
+{counter} tw closes tab and selects the one on the left 
 tcc Closes all tabs except current
 tce Closes all tabs to the right
 tcq Closes all tabs to the left

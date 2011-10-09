@@ -19,10 +19,10 @@ var Tab = (function(){
         });
     }
 
-    function close(argu) {
+    function close() {
         Post({
             action: "Tab.close",
-            arguments : argu
+            count: KeyEvent.currentCount
         });
     }
 
@@ -81,13 +81,15 @@ var Tab = (function(){
 
     function closeLeftTabs() {
         Post({
-            action: "Tab.closeLeftTabs"
+            action: "Tab.closeLeftTabs",
+            count: KeyEvent.currentCount
         });
     }
 
     function closeRightTabs() {
         Post({
-            action: "Tab.closeRightTabs"
+            action: "Tab.closeRightTabs",
+            count: KeyEvent.currentCount
         });
     }
 

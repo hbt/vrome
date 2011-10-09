@@ -10,11 +10,9 @@ var Tab = (function() {
     }
    
     function close(msg) {
-        var tab = arguments[arguments.length-1];
-        Tab.current_closed_tab = tab;
-        chrome.tabs.remove(tab.id);
-        if (msg.focusLast) selectPrevious.apply('',arguments); // close and select last
-        if (msg.offset)    goto.apply('',arguments);           // close and select left
+        closeTabs("right", msg.count, true);
+    //        if (msg.focusLast) selectPrevious.apply('',arguments); // close and select last
+    //        if (msg.offset)    goto.apply('',arguments);           // close and select left
     }
 
     function reopen(msg) {
@@ -27,7 +25,7 @@ var Tab = (function() {
                 chrome.tabs.create({
                     url: last_closed_tab.url,
                     index: last_closed_tab.index
-                    });
+                });
             }
         }
     }
@@ -74,7 +72,7 @@ var Tab = (function() {
                 chrome.tabs.update(tab.id, {
                     url: tab.url,
                     selected: tab.selected
-                    }, null);
+                }, null);
             }
         });
     }
@@ -91,7 +89,7 @@ var Tab = (function() {
                 url: first_url,
                 index: ++index,
                 selected: false
-                });
+            });
         } else {
             chrome.tabs.update(tab.id, {
                 url: first_url
@@ -119,23 +117,37 @@ var Tab = (function() {
   * @param direction : values are "all", "right", "left"
   * i.e close tabs "all" tabs, close tabs on the "right/left"
   */
-    function closeTabs(direction) {
+    function closeTabs(direction, count, includeCurrent) {
         chrome.tabs.getSelected(null, function(selectedTab) {
             chrome.tabs.getAllInWindow(null, function (tabs) {
                 var condition = null;
+                var nbDeleted = 0;
 
-                for (var i = 0; i < tabs.length; i++) {
-                    if (direction == "right") {
-                        condition = tabs[i].index > selectedTab.index;
-                    } else if (direction == "left") {
-                        condition = tabs[i].index < selectedTab.index;
-                    } else if (direction == "all") {
-                        condition = tabs[i].index != selectedTab.index;
-                    }
+                if(count) {
+                    if(includeCurrent)
+                        count--;
+                   
+                    for (var i = 0; i < tabs.length; i++) {
+                        if (direction == "right") {
+                            condition = tabs[i].index > selectedTab.index;
+                        } else if (direction == "left") {
+                            condition = tabs[i].index < selectedTab.index;
+                        } else if (direction == "all") {
+                            condition = tabs[i].index != selectedTab.index;
+                        }
 
-                    if (condition) {
-                        chrome.tabs.remove(tabs[i].id);
+                        if (condition) {
+                            chrome.tabs.remove(tabs[i].id);
+                            nbDeleted++;
+                            if(nbDeleted == count) {
+                                break;
+                            }
+                        }
                     }
+                }
+
+                if(includeCurrent) {
+                    chrome.tabs.remove(selectedTab.id);
                 }
             });
         });
@@ -145,12 +157,12 @@ var Tab = (function() {
         closeTabs("all");
     }
 
-    function closeLeftTabs() {
-        closeTabs("left");
+    function closeLeftTabs(msg) {
+        closeTabs("left", msg.count);
     }
 
-    function closeRightTabs() {
-        closeTabs("right");
+    function closeRightTabs(msg) {
+        closeTabs("right", msg.count);
     }
 
     function closeCurrentWindow() {

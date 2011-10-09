@@ -126,12 +126,17 @@ var KeyEvent = (function() {
                 var someFunctionCalled = true;
                 keys.replace(regexp,'');
                 var invoke_count = Number(RegExp.$1) || 1;
-                for (var count = 0; count < invoke_count; count++) bindings[i][1].call(e);
+                KeyEvent.currentCount = KeyEvent.times(true);
+                for (var count = 0; count < invoke_count; count++) {
+                    bindings[i][1].call(e);
+                }
 
+                // reset
                 // registers
                 if(bindings[i][1] != Register.add && bindings[i][1] != Register.addLong) {
                     Register.currentRegister = null;
                 }
+                KeyEvent.currentCount = null;
             }
 
             var regexp = new RegExp('^(' + keys.replace(/([(\[{\\^$|)?*+.])/g,"\\$1") + ')');
@@ -213,3 +218,5 @@ var KeyEvent = (function() {
         runLast : runLast,
     };
 })();
+
+KeyEvent.currentCount = null;
