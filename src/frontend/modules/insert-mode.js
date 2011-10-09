@@ -140,17 +140,53 @@ var InsertMode = (function(){
 
         // if element is from cmdbox
         if(elem && elem.id == "_vrome_cmd_input_box") {
-           CmdBox.executeCallback();
+            CmdBox.executeCallback();
         }
     }
 
     function toggleSpeech() {
         var elem = document.activeElement;
         var tagName = elem.tagName.toLowerCase();
+
         if(tagName == "input" && elem.getAttribute('type') == "text") {
-           elem.setAttribute('speech');
-           elem.setAttribute('x-webkit-speech');
-           elem.setAttribute('lang', 'en-US');
+            // toggle
+            if(elem.hasAttribute('speech')) {
+                // remove
+                elem.removeAttribute('speech');
+                elem.removeAttribute('x-webkit-speech');
+                elem.removeAttribute('lang');
+            } else {
+                elem.setAttribute('speech');
+                elem.setAttribute('x-webkit-speech');
+                elem.setAttribute('lang', 'en-US');
+            }
+        }
+
+        if(tagName == "textarea" && elem.getAttribute("class") != "xwebkitspeech") {
+            var parent = elem.parentNode;
+            var sibling = elem.nextSibling;
+            var div = document.createElement("div");
+            div.setAttribute("class", "xwebkitspeech");
+            div.appendChild(elem);
+            div.style.cssText = "display: inline; position: relative;";
+            var input = document.createElement("input");
+            input.setAttribute('speech');
+            input.setAttribute('x-webkit-speech');
+            input.setAttribute('lang', 'en-US');
+            input.style.cssText = "width: 30px; position: absolute; right: 7px; bottom: 9px; outline-style: none; outline-width: initial; outline-color: initial; border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgba(255, 255, 255, 0); background-position: initial initial; background-repeat: initial initial;";
+            div.appendChild(input);
+
+            input.addEventListener("webkitspeechchange", function() {
+                elem.focus();
+                elem.value = input.value;
+                input.value = "";
+            });
+
+            if(sibling) {
+                parent.insertBefore(div, sibling);
+            } else {
+                parent.appendChild(div);
+            }
         }
     }
 
