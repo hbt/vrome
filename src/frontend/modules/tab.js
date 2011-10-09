@@ -176,7 +176,8 @@ var Tab = (function(){
         },
         duplicate: function() {
             Post({
-                action: "Tab.duplicate"
+                action: "Tab.duplicate",
+                count: times()
             });
         }
     }

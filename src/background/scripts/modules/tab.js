@@ -9,9 +9,11 @@ var Tab = (function() {
         }
     }
 
-    function duplicate() {
-        var tab = arguments[arguments.length-1];
-        chrome.tabs.create({index: ++tab.index, url: tab.url });
+    function duplicate(msg) {
+        for(var i = 0; i < msg.count; i++) {
+            var tab = arguments[arguments.length-1];
+            chrome.tabs.create({index: ++tab.index, url: tab.url, selected: false });
+        }
     }
 
     function pin() {
@@ -81,6 +83,8 @@ var Tab = (function() {
         chrome.tabs.getAllInWindow(tab.windowId, function(tabs) {
             for (var i in tabs) {
                 var tab = tabs[i];
+                if(tab.pinned)
+                    continue;
                 chrome.tabs.update(tab.id, {
                     url: tab.url,
                     selected: tab.selected
@@ -170,15 +174,15 @@ var Tab = (function() {
     }
 
     function closeOtherTabs() {
-        closeTabs("all");
+        closeTabs("all", 999, false);
     }
 
     function closeLeftTabs(msg) {
-        closeTabs("left", msg.count);
+        closeTabs("left", msg.count, false);
     }
 
     function closeRightTabs(msg) {
-        closeTabs("right", msg.count);
+        closeTabs("right", msg.count, false);
     }
 
     function closeCurrentWindow() {
