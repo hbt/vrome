@@ -9,17 +9,54 @@ var Tab = (function() {
         }
     }
 
+    function countRightTabs() {
+        var tab = arguments[arguments.length-1];
+        countTabs("right", tab);
+    }
+
+    function countLeftTabs() {
+        var tab = arguments[arguments.length-1];
+        countTabs("left", tab);
+    }
+
+    function countTabs(direction, tab) {
+        chrome.tabs.getAllInWindow(null, function (tabs) {
+            var count = 0;
+
+            if(direction == "right") {
+                count = tabs.length - tab.index - 1;
+            }
+            else {
+                count = tab.index;
+            }
+
+            Post(tab, {
+                action: "CmdBox.set",
+                arguments: {
+                    title: count + ' tabs on the ' + direction
+                }
+            });
+
+        });
+    }
+
     function duplicate(msg) {
         for(var i = 0; i < msg.count; i++) {
             var tab = arguments[arguments.length-1];
-            chrome.tabs.create({index: ++tab.index, url: tab.url, selected: false });
+            chrome.tabs.create({
+                index: ++tab.index,
+                url: tab.url,
+                selected: false
+            });
         }
     }
 
     function unpinAll() {
         chrome.tabs.getAllInWindow(null, function (tabs) {
             for(var i = 0; i < tabs.length; i++) {
-                chrome.tabs.update(tabs[i].id, {pinned: false});
+                chrome.tabs.update(tabs[i].id, {
+                    pinned: false
+                });
             }
         });
     }
@@ -310,7 +347,9 @@ var Tab = (function() {
         pin: pin,
         unpinAll: unpinAll,
         duplicate: duplicate,
-        copyURLHack: copyURLHack
+        copyURLHack: copyURLHack,
+        countRightTabs: countRightTabs,
+        countLeftTabs: countLeftTabs
     }
 })()
 

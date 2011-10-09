@@ -187,7 +187,21 @@ var Tab = (function(){
              Post({
                 action: "Tab.unpinAll"
             });
+        },
+        
+        countRightTabs: function() {
+            Post({
+                action: "Tab.countRightTabs"
+            });
+        },
 
+        countLeftTabs: function() {
+            Post({
+                action: "Tab.countLeftTabs"
+            });
         }
+
+
+        
     }
 })()

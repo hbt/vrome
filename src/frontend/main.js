@@ -103,6 +103,8 @@ with (KeyEvent) {
     // Tab
     add("r"    , Tab.reload       );
     add("R"    , Tab.reloadAll    );
+    add("tne"    , Tab.countRightTabs        );
+    add("tnq"    , Tab.countLeftTabs        );
     add("tw"    , Tab.close        );
     add("tcc"    , Tab.closeOtherTabs        );
     add("tce"    , Tab.closeRightTabs        );

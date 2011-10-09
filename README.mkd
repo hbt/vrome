@@ -83,6 +83,8 @@
 ### Tabs manipulation ###
     r reload
     R reload all tab in current window
+    tne counts tabs on the right
+    tnq counts tabs on the left
     WR reload all tab in all windows -- DEV
     {counter} tw closes tab and selects the one on the left
     tcc Closes all tabs except current
