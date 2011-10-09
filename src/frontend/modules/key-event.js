@@ -111,6 +111,8 @@ var KeyEvent = (function() {
             CmdBox.set({
                 title : tmp
             });
+            e.preventDefault();
+            e.stopPropagation();
         }
 
         for (var i = 0; i < bindings.length; i++) {
