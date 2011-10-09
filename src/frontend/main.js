@@ -64,6 +64,8 @@ with (KeyEvent) {
 
     add("<M-y>", Page.multiclipboardCopy);
     add("<M-p>", Clipboard.registerToClipboard);
+    add("<M-q>", Page.recordMacro);
+    add("@", Page.playMacro);
 
 
     // Url
@@ -116,7 +118,7 @@ with (KeyEvent) {
     add("tP"    , Tab.putMarkedTab);
     add("tl"    , Tab.pin);
     add("tL"    , Tab.unpinAll);
-   add("tv"    , Tab.duplicate);
+    add("tv"    , Tab.duplicate);
     add("tq"    , Tab.moveTabLeft);
     add("te"    , Tab.moveTabRight);
     //  add("D"    , Tab.closeAndFoucsLeft );
@@ -255,7 +257,7 @@ with (CmdLine) {
     });
 
     add("ml", Page.makeLinks);
-}
+    }
 
 // Initial
 var initFunction = [ Zoom.init, KeyEvent.init, Style.init];

@@ -4,64 +4,82 @@ require 'json'
 
 class VromeServer < WEBrick::HTTPServlet::AbstractServlet
 
-  def do_POST(request, response)
-    request = JSON.parse(request.body)
-    status, content_type, body = self.send(request['method'].to_sym,request)
+    def do_POST(request, response)
+        request = JSON.parse(request.body)
+        status, content_type, body = self.send(request['method'].to_sym,request)
 
-    response.status          = status
-    response['Content-Type'] = content_type
-    response.body            = body
-  end
+        response.status          = status
+        response['Content-Type'] = content_type
+        response.body            = body
+    end
 
-  def open_editor(request)
-    editor = request['editor']
-    tmpfile = Tempfile.new('editor')
-    tmpfile.write request['data']
-    tmpfile.flush
-    editor = 'gvim -f' if editor == 'gvim' # Foreground: Don't fork when starting GUI
-    system("#{editor} #{tmpfile.path}")
-    text = File.read(tmpfile.path)
-#    tmpfile.delete
+    def open_editor(request)
+        editor = request['editor']
+        tmpfile = Tempfile.new('editor')
+        tmpfile.write request['data']
+        tmpfile.flush
+        editor = 'gvim -f' if editor == 'gvim' # Foreground: Don't fork when starting GUI
+        system("#{editor} #{tmpfile.path}")
+        text = File.read(tmpfile.path)
+        #    tmpfile.delete
 
-    return 200, "text/plain", text
-  end
+        return 200, "text/plain", text
+    end
 
-  def get_configure(request)
-    config_file = File.join(ENV['HOME'],'.vromerc')
-    vromeConfig = {:set => {},:imap => {},:map => {},:cmap => {}};
+    def record_macro(request)
+        macro_dir = File.dirname(File.expand_path(__FILE__)) + "/../../"
+        register = request['register'];
+        Dir.chdir(macro_dir);
+        system(macro_dir + 'macro_record.rb ' + register);
+        return 200, "text/plain", ""
+    end
 
-    if File.exist?(config_file)
-      File.read(config_file).split("\n").map do |line|
-        array = line.split(/\s+/)
-        case line
-        when /^imap\s+/
-          vromeConfig[:imap][array[1]] = array[2];
-        when /^map\s+/
-          vromeConfig[:map][array[1]]  = array[2];
-        when /^cmap\s+/
-          vromeConfig[:cmap][array[1]] = array[2];
-        when /^set\s+/
-          array = line.split(/\s+/,2)
-          array = array[1].split(/\+?=/,2)
-          vromeConfig[:set][array[0]] = [array[1], line =~ /^set\s+\w+\+=/ ? true : false]
+    def play_macro(request)
+        macro_dir = File.dirname(File.expand_path(__FILE__)) + "/../../"
+        register = request['register'];
+        times = request['times'];
+
+        Dir.chdir(macro_dir);
+        system(macro_dir + 'macro_play.rb ' + register + " " + times.to_s);
+        return 200, "text/plain", ""
+    end
+
+    def get_configure(request)
+        config_file = File.join(ENV['HOME'],'.vromerc')
+        vromeConfig = {:set => {},:imap => {},:map => {},:cmap => {}};
+
+        if File.exist?(config_file)
+            File.read(config_file).split("\n").map do |line|
+                array = line.split(/\s+/)
+                case line
+                when /^imap\s+/
+                    vromeConfig[:imap][array[1]] = array[2];
+                when /^map\s+/
+                    vromeConfig[:map][array[1]]  = array[2];
+                when /^cmap\s+/
+                    vromeConfig[:cmap][array[1]] = array[2];
+                when /^set\s+/
+                    array = line.split(/\s+/,2)
+                    array = array[1].split(/\+?=/,2)
+                    vromeConfig[:set][array[0]] = [array[1], line =~ /^set\s+\w+\+=/ ? true : false]
+                end
+            end
+
+            return 200, "text/plain", vromeConfig.to_json
         end
-      end
-
-      return 200, "text/plain", vromeConfig.to_json
     end
-  end
 
 
-  def get_configure2(request)
-    config_file = File.join(ENV['HOME'],'.vromerc.js')
-    data = ''
+    def get_configure2(request)
+        config_file = File.join(ENV['HOME'],'.vromerc.js')
+        data = ''
 
-    if File.exist?(config_file)
-      data = File.read(config_file)
+        if File.exist?(config_file)
+            data = File.read(config_file)
 
-      return 200, "text/plain", data
+            return 200, "text/plain", data
+        end
     end
-  end
 end
 
 server = WEBrick::HTTPServer.new(:Port => 20000)

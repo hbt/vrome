@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/ruby1.8
 
 # Usage: ruby macro_play.rb [filename] [times]
 
@@ -52,14 +52,14 @@ File.read("macros/" + filename).split("\n").map do |line|
 end
 
 script = []
-script << 'sleep 2'
+script << 'sleep 1'
 for k in commands
     # sleep command
     if k =~ /Alt_L\+Shift_L\+\d/
         secs = k.match /\d+/
         script << 'sleep ' + secs[0] + ";"
     else
-        script << 'sleep .7;'
+        script << 'sleep .5;'
         script << 'xdotool key "' + k + '";'
     end
 end

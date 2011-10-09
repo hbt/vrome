@@ -118,6 +118,53 @@ var Page = (function() {
         return text.replace(exp,"<a href='$1'>$1</a>");
     }
 
+    function recordMacro() {
+        CmdBox.set({
+            title: 'Macro RECORDING: Enter register',
+            pressUp: function(e) {
+                var key = getKey(e);
+                if (isAcceptKey(key)) {
+                    var content = CmdBox.get().content;
+                    CmdBox.remove();
+                    Post({
+                        action: "Page.recordMacro",
+                        register: content
+                    });
+                }
+            },
+            content: ''
+        });
+    }
+
+    function playMacro() {
+         CmdBox.set({
+            title: 'Enter count + register format [count;register]',
+            pressUp: function(e) {
+                var key = getKey(e);
+                if (isAcceptKey(key)) {
+                    var content = CmdBox.get().content;
+                    var times = 1;
+                    var reg = content;
+
+                    if(content.indexOf(';') != -1) {
+                       var tmp = content.split(';');
+                       times = tmp[0];
+                       reg = tmp[1];
+                    }
+                    
+                    CmdBox.remove();
+                    Post({
+                        action: "Page.playMacro",
+                        register: reg,
+                        times: times
+                    });
+                }
+            },
+            content: ''
+        });
+  
+    }
+
 
     // API
     return {
@@ -150,6 +197,8 @@ var Page = (function() {
         },
         multiclipboardCopy: multiclipboardCopy,
         multiclipboardPaste: multiclipboardPaste,
-        makeLinks: makeLinks
+        makeLinks: makeLinks,
+        recordMacro: recordMacro,
+        playMacro: playMacro
     };
 })();
