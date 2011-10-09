@@ -187,7 +187,7 @@ var Tab = (function() {
         // retrieve current tab
         chrome.tabs.getSelected(null, function(selectedTab) {
             // create a new window
-            chrome.windows.create({}, function (window) {
+            chrome.windows.create({incognito: selectedTab.incognito }, function (window) {
                 // move current tab into new window
                 chrome.tabs.move(selectedTab.id, {
                     windowId: window.id,
