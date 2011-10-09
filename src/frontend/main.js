@@ -208,6 +208,7 @@ with (KeyEvent) {
     add("<M-j>", InsertMode.MoveBackwardChar    , true );
     add("<M-k>", InsertMode.MoveForwardChar     , true );
     add("<M-f>", InsertMode.gotoForwardChar     , true );
+    add("<M-s>", InsertMode.toggleSpeech, true );
     }
 
 

@@ -144,6 +144,16 @@ var InsertMode = (function(){
         }
     }
 
+    function toggleSpeech() {
+        var elem = document.activeElement;
+        var tagName = elem.tagName.toLowerCase();
+        if(tagName == "input" && elem.getAttribute('type') == "text") {
+           elem.setAttribute('speech');
+           elem.setAttribute('x-webkit-speech');
+           elem.setAttribute('lang', 'en-US');
+        }
+    }
+
     // API
     blurFocus.private = true;
     externalEditorCallBack.private = true;
@@ -166,6 +176,7 @@ var InsertMode = (function(){
         MoveBackwardChar       : MoveBackwardChar       ,
         MoveForwardChar        : MoveForwardChar        ,
         gotoForwardChar        : gotoForwardChar,
+        toggleSpeech: toggleSpeech,
 
         externalEditor 				 : externalEditor,
         externalEditorCallBack : externalEditorCallBack,
