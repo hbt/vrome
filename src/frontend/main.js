@@ -144,11 +144,10 @@ with (KeyEvent) {
 
 
     // Hint
-    add("f"  , Hint.start         );
-    add("F"  , Hint.new_tab_start );
-    add("<M-f>"  , Hint.start_string         );
-    add("<M-c>"  , Hint.new_tab_start_string );
+    add("f"  , Hint.start_string         );
+    add("c"  , Hint.new_tab_start_string );
     add("<M-s>"  , Hint.new_tab_start_string_repeat );
+    add("<M-f>"  , Hint.start);
 
 
     // Search
