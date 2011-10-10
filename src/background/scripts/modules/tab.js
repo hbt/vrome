@@ -284,19 +284,21 @@ var Tab = (function() {
 
     function markTabForMove() {
         chrome.tabs.getSelected(null, function (tab) {
-            Tab.markedMoveId = tab.id;
+            Tab.markedMoveIds.push(tab.id);
         });
     }
 
     function putMarkedTab() {
-        if (Tab.markedMoveId != null) {
+        if (Tab.markedMoveIds.length != 0 ) {
             chrome.tabs.getSelected(null, function(currentTab) {
                 var newIndex = currentTab.index + 1;
-                chrome.tabs.move(Tab.markedMoveId, {
-                    windowId : currentTab.windowId,
-                    index: newIndex
-                });
-                Tab.markedMoveId = null;
+                for(var i = 0; i < Tab.markedMoveIds.length; i++) {
+                    chrome.tabs.move(Tab.markedMoveIds[i], {
+                        windowId : currentTab.windowId,
+                        index: newIndex
+                    });
+                }
+                Tab.markedMoveIds = [];
             });
         }
     }
@@ -370,3 +372,4 @@ Tab.closed_tabs = [];
 Tab.lastCreatedTabId = null;
 Tab.lastSelectedTabId = null;
 Tab.currentTabId = null;
+Tab.markedMoveIds = [];
