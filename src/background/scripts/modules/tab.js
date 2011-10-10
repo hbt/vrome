@@ -9,6 +9,16 @@ var Tab = (function() {
         }
     }
 
+    function addMark(msg) {
+        var tab = arguments[arguments.length-1];
+        localStorage['tabmark_' + msg.mark] = tab.id;
+    }
+
+    function gotoMark(msg) {
+        var tabId = parseInt(localStorage['tabmark_' + msg.mark]);
+        chrome.tabs.update(tabId, {selected: true});
+    }
+
     function countRightTabs() {
         var tab = arguments[arguments.length-1];
         countTabs("right", tab);
@@ -349,7 +359,9 @@ var Tab = (function() {
         duplicate: duplicate,
         copyURLHack: copyURLHack,
         countRightTabs: countRightTabs,
-        countLeftTabs: countLeftTabs
+        countLeftTabs: countLeftTabs,
+        addMark: addMark,
+        gotoMark: gotoMark
     }
 })()
 

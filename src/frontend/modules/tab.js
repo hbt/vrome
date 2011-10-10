@@ -184,7 +184,7 @@ var Tab = (function(){
         },
 
         unpinAll: function() {
-             Post({
+            Post({
                 action: "Tab.unpinAll"
             });
         },
@@ -199,9 +199,22 @@ var Tab = (function(){
             Post({
                 action: "Tab.countLeftTabs"
             });
-        }
-
-
+        },
         
+        addMark: function() {
+            var key = getKey(this);
+            Post({
+                action: "Tab.addMark",
+                mark: key
+            });
+        },
+
+        gotoMark: function() {
+            var key = getKey(this);
+            Post({
+                action: "Tab.gotoMark",
+                mark: key
+            });
+        }
     }
 })()

@@ -93,6 +93,8 @@
     tcw Closes all other windows
     tW Closes current window
     td Detach tab
+    {one-key-input} tm mark tab
+    {one-key-input} tt  go to marked tab
     TM Marks a tab for a move -- DEV allow option to mark multiple tabs then reset after the move is made
     tP Moves marked tabs to new location  -- DEV
     {counter} tq Moves tab to the left

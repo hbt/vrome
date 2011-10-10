@@ -77,7 +77,6 @@ with (KeyEvent) {
     add("<C-x>" , Url.decrement          );
     add("o"     , Url.open               );
     add("O"     , Url.openWithDefault    );
-    add("tt"     , Url.tabopen            );
     //  add("T"     , Url.tabopenWithDefault );
     add("<C-y>" , Url.shortUrl           );
 
@@ -132,6 +131,13 @@ with (KeyEvent) {
     add("g^"    , Tab.first        );
     add("g$"    , Tab.last         );
     add("``" , Tab.selectPrevious );
+
+    // tab keymarks
+    for (var i = 97; i <= 122; i++) {
+        add("tm" + String.fromCharCode(i), Tab.addMark);
+        add("tt" + String.fromCharCode(i), Tab.gotoMark );
+    }
+
 
 
     // History
@@ -261,3 +267,5 @@ with (CmdLine) {
 // Initial
 var initFunction = [ Zoom.init, KeyEvent.init, Style.init];
 runIt();
+
+localStorage.removeItem('__vrome_setting');
