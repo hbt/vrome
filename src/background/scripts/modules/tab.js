@@ -212,16 +212,16 @@ var Tab = (function() {
                         }
 
                         if (condition && !tabs[i].pinned) {
-                            chrome.tabs.remove(tabs[i].id);
-                            nbDeleted++;
-                            if(nbDeleted == count) {
+                            if(nbDeleted >= count) {
                                 break;
                             }
+                            chrome.tabs.remove(tabs[i].id);
+                            nbDeleted++;
                         }
                     }
                 }
 
-                if(includeCurrent) {
+                if(includeCurrent && !selectedTab.pinned) {
                     chrome.tabs.remove(selectedTab.id);
                 }
             });
