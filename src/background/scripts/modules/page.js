@@ -17,7 +17,7 @@ var Page = (function() {
 
     function saveSetting(msg) {
         Settings.add(msg.key, msg.value);
-        syncSetting(Tab.now_tab);
+        syncSetting(Tab.now_tab, false);
     }
 
     function playMacro(msg) {

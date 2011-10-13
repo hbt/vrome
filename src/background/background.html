@@ -1,75 +1,78 @@
 <html>
-  <head>
-    <script src="/shared/utils.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/shared/settings.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/shared/message.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/shared/options.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/shared/clipboard.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/main.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/style.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/tab.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/buffer.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/debug.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/shorturl.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/marks.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/register.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/background/scripts/modules/page.js" type="text/javascript" charset="utf-8"></script>
+    <head>
+        <script src="/shared/utils.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/shared/settings.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/shared/message.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/shared/options.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/shared/clipboard.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/main.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/style.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/tab.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/buffer.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/debug.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/shorturl.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/marks.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/register.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/background/scripts/modules/page.js" type="text/javascript" charset="utf-8"></script>
 
-    <script type='text/javascript'>
-      function getConfigure() {
-        var xhr = new XMLHttpRequest();
-        var url = 'http://127.0.0.1:20000';
-        xhr.open("POST", url, true);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-              Settings.setValue('.vromerc_script', xhr.responseText);
-              eval(xhr.responseText);
-              backendExec();
-//            Settings.add({ configure : JSON.parse(xhr.responseText) });
-          };
-        }
+        <script type='text/javascript'>
+            function getConfigure() {
+                var xhr = new XMLHttpRequest();
+                var url = 'http://127.0.0.1:20000';
+                xhr.open("POST", url, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        Settings.setValue('.vromerc_script', xhr.responseText);
+                        eval(xhr.responseText);
+                        backendExec();
+                        //            Settings.add({ configure : JSON.parse(xhr.responseText) });
+                    };
+                }
 
-        xhr.setRequestHeader("Content-type", "text/plain");
-        xhr.send(JSON.stringify({"method":"get_configure2"}));
-      }
-      getConfigure();
+                xhr.setRequestHeader("Content-type", "text/plain");
+                xhr.send(JSON.stringify({"method":"get_configure2"}));
+            }
+            getConfigure();
 
-      function syncSetting(tab) {
-        getConfigure();
+            function syncSetting(tab, loadConfigure) {
+                if(loadConfigure)
+                    getConfigure();
 
-        Post(tab,{action : "Settings.setValue", arguments : {
-                key: '.vromerc_script',
-                value: Settings.getValue('.vromerc_script')
-        } });
-      }
+                Post(tab,{action : "Settings.setValue", arguments : {
+                        key: '.vromerc_script',
+                        value: Settings.getValue('.vromerc_script')
+                    } });
+            }
 
-      chrome.tabs.getSelected(null, function(tab) {
-          Tab.currentTabId = tab.id;
-      });
+            chrome.tabs.getSelected(null, function(tab) {
+                Tab.currentTabId = tab.id;
+            });
 
-      chrome.tabs.onSelectionChanged.addListener(function(tabId) {
-          Tab.lastSelectedTabId = Tab.currentTabId;
-          Tab.currentTabId = tabId;
-      });
+            chrome.tabs.onSelectionChanged.addListener(function(tabId) {
+                Tab.lastSelectedTabId = Tab.currentTabId;
+                Tab.currentTabId = tabId;
+            });
 
-      chrome.tabs.onUpdated.addListener(function(tabId) {
-        chrome.tabs.get(tabId, function(tab) {
-          syncSetting(tab);
-        });
-      });
+            chrome.tabs.onUpdated.addListener(function(tabId) {
+                chrome.tabs.get(tabId, function(tab) {
+                    syncSetting(tab, false);
+                });
+            });
 
-      chrome.tabs.onCreated.addListener(function(tab) {
-        Tab.lastCreatedTabId = tab.id;
+            chrome.tabs.onCreated.addListener(function(tab) {
+                Tab.lastCreatedTabId = tab.id;
 
-        if(Tab.currentTabId && tab.url != "chrome://newtab/")
-            chrome.tabs.update(Tab.currentTabId, { selected: true });
-      });
+                if(Tab.currentTabId && tab.url != "chrome://newtab/")
+                    chrome.tabs.update(Tab.currentTabId, { selected: true });
 
-      chrome.tabs.onRemoved.addListener(function(tabId) {
-        var tab = Tab.current_closed_tab || Tab.now_tab;
-        if (tab) { Tab.closed_tabs.push(tab); };
-        Tab.current_closed_tab = false;
-      });
-    </script>
-  </head>
+                syncSetting(tab, true);
+            });
+
+            chrome.tabs.onRemoved.addListener(function(tabId) {
+                var tab = Tab.current_closed_tab || Tab.now_tab;
+                if (tab) { Tab.closed_tabs.push(tab); };
+                Tab.current_closed_tab = false;
+            });
+        </script>
+    </head>
 </html>
