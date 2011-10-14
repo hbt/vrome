@@ -16,7 +16,9 @@ var Tab = (function() {
 
     function gotoMark(msg) {
         var tabId = parseInt(localStorage['tabmark_' + msg.mark]);
-        chrome.tabs.update(tabId, {selected: true});
+        chrome.tabs.update(tabId, {
+            selected: true
+        });
     }
 
     function countRightTabs() {
@@ -242,16 +244,38 @@ var Tab = (function() {
 
     function closeCurrentWindow() {
         chrome.windows.getCurrent(function (currentWindow) {
-            chrome.windows.remove(currentWindow.id);
+            chrome.tabs.getAllInWindow(currentWindow.id, function(tabs){
+                if(!hasPinnedTabs(tabs)) {
+                    chrome.windows.remove(currentWindow.id);
+                }
+            });
         });
+    }
+
+    function hasPinnedTabs(tabs) {
+        for (var i = 0; i < tabs.length; i++) {
+            if(tabs[i].pinned) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function closeOtherWindows() {
         chrome.windows.getAll(null, function (windows) {
             chrome.windows.getCurrent(function (currentWindow) {
                 for (var i = 0; i < windows.length; i++) {
-                    if (windows[i].id != currentWindow.id) {
-                        chrome.windows.remove(windows[i].id);
+                    if (windows[i] && windows[i].id != currentWindow.id) {
+                        var windowId = windows[i].id;
+                        chrome.tabs.getAllInWindow(windowId, function(tabs){
+                            try {
+                                if(!hasPinnedTabs(tabs)) {
+                                    chrome.windows.remove(windowId);
+                                }
+                            } catch (e) {
+                            }
+                        });
                     }
                 }
             });
