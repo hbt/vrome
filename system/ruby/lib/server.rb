@@ -69,6 +69,22 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
         end
     end
 
+    def toggle_css(request)
+        dir = File.join(ENV['HOME'], '.config/google-chrome/Default/User StyleSheets/')
+        customCss = dir + 'Custom.css'
+        data = File.read(customCss)
+        if(data.match(/dark_colors/))
+            # use debugger only
+            debuggerFile = dir + 'debugger_only.css'
+            %x[ cp "#{debuggerFile}" "#{customCss}" ]
+        else
+            # use dark
+            darkFile = dir + 'all_dark.css'
+            %x[ cp "#{darkFile}" "#{customCss}" ]
+        end
+
+    end
+
 
     def get_configure2(request)
         config_file = File.join(ENV['HOME'],'.vromerc.js')

@@ -1,18 +1,19 @@
 var Page = (function() {
     function toggleDarkPageExtension() {
-        var extensionId = 'blpkpeopfgjbmcogkhcoemaepcmmaogp';
-        chrome.management.getAll(function (extensions) {
-            for (var i = 0; i < extensions.length; i++) {
-                var extension = extensions[i];
-                if (extension.id == extensionId) {
-                    if (extension.enabled) {
-                        chrome.management.setEnabled('blpkpeopfgjbmcogkhcoemaepcmmaogp', false);
-                    } else {
-                        chrome.management.setEnabled('blpkpeopfgjbmcogkhcoemaepcmmaogp', true);
-                    }
-                }
-            }
-        });
+        var xhr = new XMLHttpRequest();
+        var url = 'http://127.0.0.1:20000';
+        xhr.open("POST", url, true);
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+
+            };
+        }
+
+        xhr.setRequestHeader("Content-type", "text/plain");
+        xhr.send(JSON.stringify({
+            'method':'toggle_css',
+        }));
+
     }
 
     function saveSetting(msg) {
