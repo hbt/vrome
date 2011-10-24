@@ -110,7 +110,7 @@ var Hint = (function() {
                 }
                 sortedElems[i].els = undefined;
                 delete sortedElems[i];
-//                sortedElems.splice(i, 1);
+            //                sortedElems.splice(i, 1);
             }
         }
 
@@ -406,10 +406,11 @@ var Hint = (function() {
             elem.focus();
         }
 
-        if(!repeat) {
+       var oldContent = getCurrentString();
+       var firstCharIsUpperCase = oldContent.charCodeAt(0) >= 65 && oldContent.charCodeAt(0) <= 90;
+        if(!new_tab || !firstCharIsUpperCase) {
             remove();
-        } else {
-            var oldContent = getCurrentString();
+        } else if((new_tab && firstCharIsUpperCase) || repeat) {
             start(true, true, true);
             CmdBox.set({
                 content: oldContent
