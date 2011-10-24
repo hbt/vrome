@@ -1,13 +1,4 @@
 var Tab = (function() {
-    function copyURLHack() {
-        if(Tab.lastCreatedTabId) {
-            chrome.tabs.get(Tab.lastCreatedTabId, function(tab) {
-                Clipboard.copy(tab.url);
-                chrome.tabs.remove(tab.id);
-                Tab.lastCreatedTabId = null;
-            });
-        }
-    }
 
     function addMark(msg) {
         var tab = arguments[arguments.length-1];
@@ -182,6 +173,7 @@ var Tab = (function() {
             Register.store(msg.register, msg.data);
         } else {
             Clipboard.copy(msg.data);
+            displayMessage("Copied " + msg.data);
         }
     }
 
@@ -379,7 +371,6 @@ var Tab = (function() {
         pin: pin,
         unpinAll: unpinAll,
         duplicate: duplicate,
-        copyURLHack: copyURLHack,
         countRightTabs: countRightTabs,
         countLeftTabs: countLeftTabs,
         addMark: addMark,

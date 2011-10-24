@@ -471,13 +471,11 @@ var Hint = (function() {
 
         var options = {};
         options[Platform.mac ? 'meta' : 'ctrl'] = true;
-        clickElement(elem,options);
 
-        setTimeout(function() {
-            Post({
-                action: "Tab.copyURLHack"
-            });
-        },300);
+        Post({
+            action: "Tab.copyData",
+            data: elem.href
+        });
 
         currentAction = null;
     }

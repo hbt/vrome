@@ -39,3 +39,15 @@ Storage.prototype.getMatchingKey = function(reg) {
    
     return res;
 }
+
+// backend only
+function displayMessage(msg) {
+    chrome.tabs.getSelected(null, function(tab){
+        Post(tab, {
+            action: "CmdBox.set",
+            arguments: {
+                title: msg
+            }
+        });
+    });
+}
