@@ -263,22 +263,18 @@ var Tab = (function() {
     }
 
     function closeOtherWindows() {
-        chrome.windows.getAll(null, function (windows) {
-            chrome.windows.getCurrent(function (currentWindow) {
-                for (var i = 0; i < windows.length; i++) {
-                    if (windows[i] && windows[i].id != currentWindow.id) {
-                        var windowId = windows[i].id;
-                        chrome.tabs.getAllInWindow(windowId, function(tabs){
-                            try {
-                                if(!hasPinnedTabs(tabs)) {
-                                    chrome.windows.remove(windowId);
-                                }
-                            } catch (e) {
-                            }
-                        });
+        chrome.windows.getAll({
+            populate: true
+        }, function (windows) {
+            for (var i = 0; i < windows.length; i++) {
+                if (windows[i] && !windows[i].focused)
+                {
+                    var windowId = windows[i].id;
+                    if(!hasPinnedTabs(windows[i].tabs)) {
+                        chrome.windows.remove(windowId);
                     }
                 }
-            });
+            }
         });
     }
 
