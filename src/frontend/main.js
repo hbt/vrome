@@ -85,9 +85,7 @@ with (KeyEvent) {
     add("gg" , Scroll.top       );
     add("G"  , Scroll.bottom    );
     add("0"  , Scroll.first     );
-    add("ga"  , Scroll.first     );
     add("$"  , Scroll.last      );
-    add("gd"  , Scroll.last      );
 
     add("k"  , Scroll.up        );
     add("j"  , Scroll.down      );
@@ -95,8 +93,8 @@ with (KeyEvent) {
     add("l"  , Scroll.right     );
     add("%"  , Scroll.toPercent );
 
-    //  add("<C-f>" , Scroll.nextPage     );
-    add("<C-b>" , Scroll.prevPage     );
+    add("J" , Scroll.nextPage     );
+    add("K" , Scroll.prevPage     );
     add("<C-d>" , Scroll.nextHalfPage );
     add("<C-u>" , Scroll.prevHalfPage );
 

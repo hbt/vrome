@@ -83,7 +83,7 @@ function getSelected() {
 function showHelp() {
     Post({
         action: "Tab.openUrl",
-        url: chrome.extension.getURL("README.html"),
+        url: "https://raw.github.com/hbt/vrome/master/README.mkd",
         newtab : true
     });
 }

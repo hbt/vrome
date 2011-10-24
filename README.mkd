@@ -7,30 +7,30 @@
 [insert-mode] command is available in insert-mode
 
 ### Help ###
-    <F1> Opens help page in another tab -- DEV
+    <F1> : Opens help page | showHelp
 
 
 ### Zoom ###
-    {counter} z     : Zoom in
-    {counter} x     : Zoom out
-    [Zz , Zr]       : Zoom reset
+    {counter} z     : Zoom in    | Zoom.in
+    {counter} x     : Zoom out   | Zoom.out
+    [Zz , Zr]       : Zoom reset | Zoom.reset
+
 
 
 ### Scrolling ###
-    gg          : go to top
-    G           : go to bottom
-    0           : go to left
-    $           : go to right
-    {counter} h : scroll left
-    {counter} j : scroll down
-    {counter} k : scroll up
-    {counter} l : scroll right
-    {counter} % : scroll to percent of page
-    <C-j>       : Scroll next page
-    <C-b>       : Scroll prev page
-    <C-d>       : Scroll next half page
-    <C-u>       : Scroll prev half page
-
+    gg          : go to top                  | Scroll.top
+    G           : go to bottom               | Scroll.bottom
+    0           : go to left                 | Scroll.first
+    $           : go to right                | Scroll.last
+    {counter} h : scroll left                | Scroll.left
+    {counter} j : scroll down                | Scroll.down
+    {counter} k : scroll up                  | Scroll.up
+    {counter} l : scroll right               | Scroll.right
+    {counter} % : scroll to percent of page  | Scroll.toPercent
+    J           : Scroll one page up         | Scroll.nextPage
+    K           : Scroll one page down       | Scroll.prevPage
+    <C-d>       : Scroll half page down      | Scroll.nextHalfPage
+    <C-u>       : Scroll half page up        | Scroll.prevHalfPage
 
 
 ### Navigation ###
