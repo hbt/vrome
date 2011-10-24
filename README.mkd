@@ -11,24 +11,26 @@
 
 
 ### Zoom ###
-    {counter} z Zoom in
-    {counter} x Zoom out
-    [Zz , Zr] Zoom reset
+    {counter} z     : Zoom in
+    {counter} x     : Zoom out
+    [Zz , Zr]       : Zoom reset
+
 
 ### Scrolling ###
-    gg go to top
-    G go to bottom
-    0 go to left
-    $ go to right
-    h scroll left
-    j scroll down
-    k scroll up
-    l scroll right
-    {counter} % scroll to percent of page
-    <C-j> Scroll next page
-    <C-b> Scroll prev page
-    <C-d> Scroll next half page
-    <C-u> Scroll prev half page
+    gg          : go to top
+    G           : go to bottom
+    0           : go to left
+    $           : go to right
+    {counter} h : scroll left
+    {counter} j : scroll down
+    {counter} k : scroll up
+    {counter} l : scroll right
+    {counter} % : scroll to percent of page
+    <C-j>       : Scroll next page
+    <C-b>       : Scroll prev page
+    <C-d>       : Scroll next half page
+    <C-u>       : Scroll prev half page
+
 
 
 ### Navigation ###
