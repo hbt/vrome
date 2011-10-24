@@ -43,26 +43,28 @@
     o Opens a URL -- DEV use history + autocomplete or remove "o" and "O" "tt" "T"
 
 ### Hints ###
-    {input} f starts hint mode with strings only
-    Sub commands:
-        @[hint] copies the URL
-        ;[hint] copies the text
-        ,[hint] focuses on element
-        First letter of hint as upper case + Enter : Opens all links matching the first letter -- DEV
-        First letter of hint as upper case + lower case letter: opens link + remove lower case letters and wait for next hints
-        >56 + Enter opens all links with a number greater than 56
-        <56 + Enter opens all links with a number greater than 56
-        !foobar + Enter opens all links not matching text "foobar"  -- DEV
-        /foobar  + Enter opens all links matching text "foobar"  -- DEV
-    {input} c same as "f" but opens in new tab
-    {input} <M-s> same as "f" but after a match is found, we are back in hint mode and the sort order tries to match by href
-    {input} <M-f> hint mode with numbers instead of mnemonic keys
-    {input} <M-c>  same as <M-f> but opens in new tab
+    {input} f     : starts hint mode with strings only                                                                         | Hint.start_string
+    {input} c     : same as "f" but opens in new tab                                                                           | Hint.new_tab_start_string
+    {input} <M-s> : same as "f" but after a match is found, we are back in hint mode and the sort order tries to match by href | Hint.new_tab_start_string_repeat
+    {input} <M-f> : hint mode with numbers instead of mnemonic keys                                                            | Hint.start
+
+
+    Sub commands when in {input}:
+        @[hint]                                                : copies the URL
+        ;[hint]                                                : copies the text
+        ,[hint]                                                : focuses on element
+        First letter of hint as upper case + Enter             : Opens all links matching the first letter -- DEV
+        First letter of hint as upper case + lower case letter : opens link + remove lower case letters and wait for next hints
+        >56 + Enter                                            : opens all links with a number greater than 56
+        <56 + Enter                                            : opens all links with a number greater than 56
+        !foobar + Enter                                        : opens all links not matching text "foobar"  -- DEV
+        /foobar  + Enter                                       : opens all links matching text "foobar"  -- DEV
 
 
 ### History ###
-    {counter} H Go back
-    {counter} L Go forward
+    {counter} H : Go back
+    {counter} L : Go forward
+
 
 ### Text manipulation ###
     {register} Y Copy Selected text
@@ -171,137 +173,3 @@
     :clear-regs clears all registers
     :exp exports all data
     :make-links (ml) convert text URL into valid links
-
-
-
-[Vrome](http://github.com/jinzhu/vrome)     -- Vim keybindings extension for Chrome
-======================================================================
-
-### Preface
-    Do you want to customize your hotkeys?
-    Do you want to edit with external editor?
-    Do you want to customize your default search engine?
-    Do you want to customize your default disable sites?
-    ...
-    Checkout here:
-    [http://wiki.github.com/jinzhu/vrome/customize-your-vrome](http://wiki.github.com/jinzhu/vrome/customize-your-vrome)
-    [http://wiki.github.com/jinzhu/vrome/vromerc-example-file](http://wiki.github.com/jinzhu/vrome/vromerc-example-file)
-
-## Features ##
-### Insert mode
-    <C-a>   Move to first words or select all
-    <C-d>   Delete forward char
-    <C-e>   Move to end
-    <C-h>   Delete backward char
-    <C-i>   Launch the external editor,default 'editor' is 'gvim -f'.
-    <C-k>   Delete forward to the end of the line.
-    <C-w>   Delete backward word
-    <C-u>   Delete backward to the beginning of the line.
-    <M-d>   Delete forward word
-    <M-h>   Move back a word
-    <M-l>   Move forward a word
-    <M-j>   Move back a char
-    <M-k>   Move forward a char
-
-
-### Normal mode
-    <C-^>   Select the previously selected tab.If [count] is specified, go to the [count]th tab.
-    <C-a>   Increments the last number in URL by 1, or by [count] if given.
-    <C-b>   Scroll up [count] full page.
-    <C-d>   Scroll down [count] half page
-    <C-f>   Scroll down [count] full page
-    <C-i>   Go [count] pages forward in the browser history.
-    <C-o>   Go [count] pages back in the browser history.
-    <C-u>   Scroll up [count] half page
-    <C-v>   Pass through the next key
-    <C-x>   Decrements the last number in URL by 1, or by [count] if given.
-    <C-y>   Shorten current url,and copy it into clipboard
-    <C-z>   Temporarily ignore all Vrome key bindings
-
-    <M-d>	  like `d`,but close current tab and selects the last selected tab.
-
-    <F1>    Open the help page.
-
-    0       Scroll to the absolute left of the document
-    $       Scroll to the absolute right of the document
-
-    D	      Like d but selects the tab to the left of the deleted tab.
-    F       Start QuickHint mode, but open link in a new tab
-    G       Go to the end of the document
-    H       Go back in the browser history
-    L       Go forward in the browser history
-    N       Find previous
-    O       Open one or more URLs, based on current location
-    R       Reload all Tabs
-    T       Open one or more URLs in a new tab, based on current location
-    Y       Copy selected text
-
-    b       goto the [count] tab or the first matched tab.
-    d       close current tab and selects the tab to the right of the deleted tab.
-    f       Start QuickHint mode
-    h       Scroll document to the left.If [count] is specified then move [count] times as much down.
-    j       Scroll document down. If [count] is specified then move [count] times as much down.
-    k       Scroll document up. If [count] is specified then move [count] times as much down.
-    l       Scroll document to the right. If [count] is specified then move [count] times as much down.
-
-    n       Find the next [count]
-    o       Open one or more URLs
-    r       Reload the current web page
-    t       Open one or more URLs in a new tab
-    u       Undo the last closed tab, If a [count] is specified then undo the [count]th last closed tab.
-    y       Yank current location to the clipboard
-
-    :       Enter Command-line mode
-
-    /       Search forward for the next [count] word for a pattern
-    ?       Search backwards for the next [count] word for a pattern
-    *       Find word under cursor
-    #       Find word under cursor backwards
-
-    N%      Scroll to [count] percent of the document
-
-    .       Repeat the last keyboard mapping [count] times.
-
-    ]]      Follow the link labeled 'next' or '>' if it exists
-    [[      Follow the link labeled 'prev', 'previous' or '<' if it exists
-
-    g$      Go to the last tab
-    g0      Go to the first tab
-    gT      Go to the previous [count] tab
-    gU      Go to the root of the website
-    gf      View source
-    gg      Go to the top of the document
-    gi      Focus the [count]th input field
-    gt      Go to the next [count] tab
-    gu      Go to [count]th parent directory
-
-    zI      Enlarge full zoom of current web page,[count]
-    zM      Enlarge full zoom of current web page by a larger amount,[count]
-    zO      Reduce full zoom of current web page,[count]
-    zR      Reduce full zoom of current web page by a larger amount,[count]
-    zZ      Set full zoom value of current web page
-    zi      Enlarge text zoom of current web page,[count]
-    zm      Enlarge text zoom of current web page by a larger amount,[count]
-    zo      Reduce text zoom of current web page,[count]
-    zr      Reduce text zoom of current web page by a larger amount,[count]
-    zz      Set text zoom value of current web page
-
-
-    go{a-zA-Z0-9}   Jump to a QuickMark in the current tab. Open any QuickMark in the current tab. You can mark any URLs with M{a-zA-Z0-9}. These QuickMarks are persistent across browser sessions.
-    gn{a-zA-Z0-9}   Jump to a QuickMark in a new tab. Works like go{a-zA-Z0-9} but opens the QuickMark in a new tab.
-    M{a-zA-Z0-9}    Add new QuickMark for current URL. You can go to a marked URL in the current tab with go{a-zA-Z0-9} or in a new tab with gn{a-zA-Z0-9}. These QuickMarks are persistent across browser sessions.
-
-    m{a-zA-Z}       Set mark at the cursor position. Marks a-z are local to the buffer, whereas A-Z are valid between buffers.
-    '{a-zA-Z}       Jump to the mark. Marks a-z are local to the buffer, whereas A-Z are valid between buffers.
-
-
-### Command Mode
-    :help     Open the help page.
-    :bdelete  Close all matched tabs.
-
-
-## Author ##
-  Jinzhu
-    - github.com/jinzhu
-    - wosmvp@gmail.com
-    - twitter.com/zhangjinzhu
