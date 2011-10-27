@@ -77,12 +77,15 @@
 
 
 ### Page ###
-    Sd Toggles Dark Page Extension https://github.com/hbt/chrome-readability
-    Si Disables images -- DEV (make it toggle)
-    So Disables objects
-    gF View source code in a new tab
-    gi go to first input
-    ii enter edit mode
+    Sd           : Toggles custom CSS sheets     | Page.toggleDarkPageExtension
+    Si           : Disables images               | Page.disableImages
+    So           : Disables objects              | Page.disableObjects
+    gs           : View source code in a new tab | Page.viewSourceNewTab
+    {counter} gF : Go to next frame              | Page.nextFrame
+    gi           : go to first input             | InsertMode.focusFirstTextInput
+    ii           : enter edit mode               | InsertMode.enterEditMode
+
+
 
 
 ### Tabs manipulation ###

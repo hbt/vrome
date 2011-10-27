@@ -6,7 +6,7 @@ var Page = (function() {
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4 && xhr.status == 200) {
 
-            };
+        };
         }
 
         xhr.setRequestHeader("Content-type", "text/plain");
@@ -22,7 +22,7 @@ var Page = (function() {
     }
 
     function playMacro(msg) {
-       if(!msg.register)
+        if(!msg.register)
             return;
 
         if(!msg.times)
@@ -91,7 +91,57 @@ var Page = (function() {
                 title: 'Recording macro... '
             }
         });
+    }
 
+    function registerFrame(msg) {
+        var tab = arguments[arguments.length-1];
+        if(Page.frames[tab.id] === undefined) {
+            Page.frames[tab.id] = [];
+        }
+
+        Page.frames[tab.id].push(msg.frame);
+
+        // loop and select biggest
+        var frames = Page.frames[tab.id];
+        if(frames.length > 1) {
+
+            var largestFrame = frames[0];
+            for (var index=0; index < frames.length; index++) {
+                if(frames[index].area > largestFrame.area) {
+                    largestFrame = frames[index];
+                }
+            }
+
+            Post(tab, {
+                action: "Page.selectFrame",
+                frameId: largestFrame.id
+            });
+        }
+    }
+
+    function nextFrame(msg) {
+        var tab = arguments[arguments.length-1];
+        if(Page.frames[tab.id] && Page.frames[tab.id].length > 0) {
+            var frames = Page.frames[tab.id];
+            
+            // find current frame
+            var index;
+            for (index=0; index < frames.length; index++) {
+                if (frames[index].id == msg.frameId)
+                    break;
+            }
+
+            index += msg.count;
+
+            if (index >= frames.length)
+                index = 0;
+
+            var nextFrameId = frames[index].id;
+            Post(tab, {
+                action: "Page.selectFrame",
+                frameId: nextFrameId
+            });
+        }
     }
 
     // API
@@ -99,6 +149,10 @@ var Page = (function() {
         toggleDarkPageExtension: toggleDarkPageExtension,
         saveSetting: saveSetting,
         recordMacro: recordMacro,
-        playMacro: playMacro
+        playMacro: playMacro,
+        registerFrame: registerFrame,
+        nextFrame: nextFrame
     };
 })();
+
+Page.frames = {};

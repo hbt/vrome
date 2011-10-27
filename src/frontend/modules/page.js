@@ -162,7 +162,17 @@ var Page = (function() {
             },
             content: ''
         });
-  
+    }
+
+    function selectFrame(msg) {
+        if(frameId == msg.frameId) {
+            window.focus();
+            var borderWas = document.body.style.border;
+            document.body.style.border = '5px solid yellow';
+            setTimeout(function(){
+                document.body.style.border = borderWas
+            }, 200);
+        }
     }
 
 
@@ -199,6 +209,16 @@ var Page = (function() {
         multiclipboardPaste: multiclipboardPaste,
         makeLinks: makeLinks,
         recordMacro: recordMacro,
-        playMacro: playMacro
+        playMacro: playMacro,
+        nextFrame: function() {
+            Post({
+                action: "Page.nextFrame",
+                frameId: frameId,
+                count: times()
+            })
+        },
+        
+        selectFrame: selectFrame
+
     };
 })();

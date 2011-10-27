@@ -9,7 +9,7 @@ c.l = console.log;
 
 var times = function(/*Boolean*/ raw,/*Boolean*/ read) {
     var count = raw ? KeyEvent.times(read) : (KeyEvent.times(read) || 1);
-    Debug('KeyEvent.times:' + count);
+    //    Debug('KeyEvent.times:' + count);
     return count;
 };
 
@@ -57,15 +57,27 @@ function clickElement(element,opt) {
 function runIt(func,args) {
     if(func) initFunction.push([func,args]);
 
+    if(window.frameElement && window.frameElement.localName != "iframe") {
+        Post({
+            action: "Page.registerFrame",
+            frame: {
+                id: frameId,
+                area: innerWidth * innerHeight
+            }
+        });
+    } else {
+        window.focus();
+    }
+
     if(document.body){
         for(var i = 0;i < initFunction.length; i++){
             func = initFunction[i];
             if(func instanceof Function){
-                Debug("RunIt:" + func);
+                //                Debug("RunIt:" + func);
                 func.call();
             }else{
                 if(func[0] instanceof Function){
-                    Debug("RunIt: function" + func[0] + " arguments:" + func[1]);
+                    //                    Debug("RunIt: function" + func[0] + " arguments:" + func[1]);
                     func[0].apply('',func[1]);
                 }
             }

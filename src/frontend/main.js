@@ -61,6 +61,7 @@ with (KeyEvent) {
     add("Ss" , Page.disableStyles );
     add("Si" , Page.disableImages);
     add("So" , Page.disableObjects );
+    add("gF" , Page.nextFrame);
 
     add("<M-y>", Page.multiclipboardCopy);
     add("<M-p>", Clipboard.registerToClipboard);
@@ -73,7 +74,7 @@ with (KeyEvent) {
     add("gu"    , Url.parent             );
     add("gy"    , Url.goToClipboardURL);
     add("gU"    , Url.root               );
-    add("gF"    , Url.viewSourceNewTab   );
+    add("gs"    , Url.viewSourceNewTab   );
     add("<C-a>" , Url.increment          );
     add("<C-x>" , Url.decrement          );
     add("o"     , Url.open               );
@@ -265,7 +266,8 @@ with (CmdLine) {
     }
 
 // Initial
+frameId = Math.floor(Math.random()*999999999)
 var initFunction = [ Zoom.init, KeyEvent.init, Style.init];
-runIt();
+window.addEventListener("DOMContentLoaded", runIt);
 
 localStorage.removeItem('__vrome_setting');
