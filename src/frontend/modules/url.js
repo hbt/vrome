@@ -186,6 +186,11 @@ var Url = (function(){
         tabopenWithDefault : function(){
             open(true,true);
         },
-        openInExternalEditor: openInExternalEditor
+        openInExternalEditor: openInExternalEditor,
+        goToClipboardURL: function() {
+            Post({
+                action: "Tab.createFromClipboard"
+            });
+        }
     }
 })()

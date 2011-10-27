@@ -14,6 +14,7 @@ var Clipboard = (function() {
         textNode.select();
         document.execCommand('Copy');
         document.body.removeChild(textNode);
+        localStorage['last_copied_string'] = data;
     }
 
     function registerToClipboard() {

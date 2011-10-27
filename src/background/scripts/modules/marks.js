@@ -2,6 +2,7 @@ var Marks = (function() {
 
     function addQuickMark(msg) {
         Marks.setQuickMark(msg.key, msg.url);
+        displayMessage("Create quick mark `" + msg.key + "` for URL: " + msg.url);
     }
 
     function setQuickMark(key, url) {

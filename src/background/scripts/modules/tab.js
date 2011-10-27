@@ -5,6 +5,13 @@ var Tab = (function() {
         localStorage['tabmark_' + msg.mark] = tab.id;
     }
 
+    function createFromClipboard(msg) {
+        var tab = arguments[arguments.length-1];
+        var data = localStorage['last_copied_string'];
+        chrome.tabs.update(tab.id, {url: data});
+    }
+
+
     function gotoMark(msg) {
         var tabId = parseInt(localStorage['tabmark_' + msg.mark]);
         chrome.tabs.update(tabId, {
@@ -392,7 +399,8 @@ var Tab = (function() {
         countRightTabs: countRightTabs,
         countLeftTabs: countLeftTabs,
         addMark: addMark,
-        gotoMark: gotoMark
+        gotoMark: gotoMark,
+        createFromClipboard: createFromClipboard
     }
 })()
 

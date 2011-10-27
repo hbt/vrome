@@ -12,12 +12,12 @@ var Marks = (function() {
 
     function addQuickMark() {
         var content = CmdBox.get().content;
+        CmdBox.remove();
         Post({
             action: "Marks.addQuickMark",
             key: content,
             url : location.href
         });
-        CmdBox.remove();
     }
 
     function handleQuickMarkInput(e)
@@ -70,13 +70,7 @@ var Marks = (function() {
         var key = getKey(this);
         var obj = [scrollX, scrollY];
         localStorage[key] = JSON.stringify(obj);
-
-        CmdBox.set({
-            title : "Add Local Mark " + key,
-            timeout : 1000
-        });
     }
-
 
     function gotoLocalMark() {
         var key = getKey(this);

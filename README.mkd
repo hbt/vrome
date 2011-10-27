@@ -38,6 +38,7 @@
     [[ Previous Page -- DEV (move regex patterns)
     {counter} gu Go to parent URL
     gU Go to Root Url
+    gy Go to URL in clipboard
     {counter} <C-a> Increment number in URL
     {counter} <C-x> Decrement number in URL
     o Opens a URL -- DEV use history + autocomplete or remove "o" and "O" "tt" "T"
@@ -117,6 +118,7 @@
     {one-key-input}t` select marked tab
     tl pin/lock tab
     tL unlocks all tabs in current window 
+    tal : unlocks all tabs in all windows | Tab.unpinAllWindows
     {counter} tv duplicate tab
 
 

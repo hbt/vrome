@@ -71,6 +71,7 @@ with (KeyEvent) {
     // Url
     add("ue", Url.openInExternalEditor)
     add("gu"    , Url.parent             );
+    add("gy"    , Url.goToClipboardURL);
     add("gU"    , Url.root               );
     add("gF"    , Url.viewSourceNewTab   );
     add("<C-a>" , Url.increment          );
