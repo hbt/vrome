@@ -479,6 +479,7 @@ var Hint = (function() {
         });
 
         currentAction = null;
+        Hint.remove();
     }
 
     function copyTextAction(elem) {
@@ -489,10 +490,6 @@ var Hint = (function() {
 
         currentAction = null;
         Hint.remove();
-        CmdBox.set({
-            title : "Copied " + elem.innerText,
-            timeout : 500
-        });
     }
 
     return {
