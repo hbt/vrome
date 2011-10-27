@@ -35,12 +35,7 @@ var Page = (function() {
         xhr.open("POST", url, true);
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4 && xhr.status == 200) {
-                Post(tab, {
-                    action: "CmdBox.set",
-                    arguments: {
-                        title: 'Done playing macro: ' + msg.register
-                    }
-                });
+                displayMessage('Done playing macro: ' + msg.register);
             };
         }
 

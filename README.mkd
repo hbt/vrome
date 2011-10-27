@@ -67,13 +67,15 @@
     {counter} L : Go forward
 
 
-### Text manipulation ###
+### Text manipulation --DEV ###
     {register} Y Copy Selected text
     {register} {input} [insert-mode] <M-y> Copies selected into a register -- DEV
     {register} {input} [insert-mode] <M-p> Pastes text from a register into clipboard -- DEV
     <C-y> Creates short URL and copies in clipboard -- DEV review
     {register} yy Copies current URL
     ue Opens url in external editor
+    <M-y>
+    <M-p>
 
 
 ### Page ###
@@ -152,7 +154,7 @@
     <M-f> go to character (forward)
 
 
-### Marks ###
+### Marks -- DEV ###
     {input} M Mark current URL
     {input} go open to Marked URL
     {input} gn open to Marked URL and open in new tab
@@ -160,6 +162,10 @@
     {one-key-input} m Create local mark (page coordinates)
     {one-key-input}` go to local mark
 
+
+### Macros ###
+    {input} <M-q> : Enter name for a macro and start recording. Use `.` to stop | Page.recordMacro
+    {input} @ : Enter count + macro name and play | Page.recordMacro
 
 ### MISC ###
     : start command line

@@ -19,6 +19,9 @@ function frontendExec() {
     // history
     KeyEvent.add("A", History.back);
     KeyEvent.add("D", History.forward);
+
+    // marks
+    add("b", Marks.gotoQuickMarkNewTab);
 }
 
 
