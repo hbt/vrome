@@ -64,6 +64,23 @@ var Tab = (function() {
         });
     }
 
+    function unpinAllWindows()
+    {
+        chrome.windows.getAll({
+            populate: true
+        }, function (windows) {
+            for (var i = 0; i < windows.length; i++) {
+                for (var k = 0; k < windows[i].tabs.length; k++) {
+                    if(windows[i].tabs[k].pinned) {
+                        chrome.tabs.update(windows[i].tabs[k].id, {
+                            pinned: false
+                        });
+                    }
+                }
+            }
+        });
+    }
+
     function pin() {
         var tab = arguments[arguments.length-1];
         chrome.tabs.update(tab.id, {
@@ -370,6 +387,7 @@ var Tab = (function() {
         moveTabLeft: moveTabLeft,
         pin: pin,
         unpinAll: unpinAll,
+        unpinAllWindows: unpinAllWindows,
         duplicate: duplicate,
         countRightTabs: countRightTabs,
         countLeftTabs: countLeftTabs,

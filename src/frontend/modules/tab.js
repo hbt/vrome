@@ -189,6 +189,12 @@ var Tab = (function(){
             });
         },
         
+        unpinAllWindows: function() {
+            Post({
+                action: "Tab.unpinAllWindows"
+            });
+        },
+
         countRightTabs: function() {
             Post({
                 action: "Tab.countRightTabs"
