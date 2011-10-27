@@ -168,7 +168,7 @@ with (KeyEvent) {
 
 
     // Buffer
-    add("b" , Buffer.gotoFirstMatch );
+    add("t/" , Buffer.gotoFirstMatch );
     add("B" , Buffer.deleteMatch    );
 
 
