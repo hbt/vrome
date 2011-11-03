@@ -243,10 +243,10 @@ with (CmdLine) {
 
     add("exp", function() {
         Post({
-            action: "Register.printAll"
+            action: "Marks.printAll"
         });
         Post({
-            action: "Marks.printAll"
+            action: "Register.printAll"
         });
     });
 

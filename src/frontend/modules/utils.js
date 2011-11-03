@@ -66,7 +66,7 @@ function runIt(func,args) {
             }
         });
     } else {
-        window.focus();
+//        window.focus();
     }
 
     if(document.body){

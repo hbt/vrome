@@ -175,6 +175,10 @@ var Page = (function() {
         }
     }
 
+    function printAll(msg) {
+        document.write(msg.content);
+    }
+
 
     // API
     return {
@@ -218,7 +222,8 @@ var Page = (function() {
             })
         },
         
-        selectFrame: selectFrame
+        selectFrame: selectFrame,
+        printAll: printAll
 
     };
 })();

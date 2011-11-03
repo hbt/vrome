@@ -39,13 +39,13 @@ var Marks = (function() {
 
         var marks = localStorage.getMatchingKey(/^mark_/);
 
-        for(key in marks) {
+        for(var key in marks) {
             var val = key.replace('mark_', '');
             content += "Marks.setQuickMark('" + val + "', '" + localStorage[key] + "');<br/>";
         }
 
         Post(tab, {
-            action: "Marks.printAll",
+            action: "Page.printAll",
             content: content
         });
     }

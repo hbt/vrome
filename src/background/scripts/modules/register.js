@@ -20,13 +20,13 @@ var Register = (function() {
 
         var registers = localStorage.getMatchingKey(/^reg_/);
 
-        for(key in registers) {
+        for(var key in registers) {
             var val = key.replace('reg_', '');
             content += "Register.store('" + val + "', '" + localStorage[key] + "');<br/>";
         }
 
         Post(tab, {
-            action: "Marks.printAll",
+            action: "Page.printAll",
             content: content
         });
     }
