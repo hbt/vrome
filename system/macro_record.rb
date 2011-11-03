@@ -1,4 +1,4 @@
-#!/usr/bin/ruby1.8
+#!/usr/bin/ruby
 
 # Usage: ruby macro_record.rb [filename]
 
