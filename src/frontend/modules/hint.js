@@ -408,10 +408,10 @@ var Hint = (function() {
 
        var oldContent = getCurrentString();
        var firstCharIsUpperCase = oldContent.charCodeAt(0) >= 65 && oldContent.charCodeAt(0) <= 90;
-        if(!new_tab || !firstCharIsUpperCase) {
+        if((!new_tab || !firstCharIsUpperCase) && !repeat) {
             remove();
         } else if((new_tab && firstCharIsUpperCase) || repeat) {
-            start(true, true, true);
+            start(true, true, repeat);
             CmdBox.set({
                 content: oldContent
             });
