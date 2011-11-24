@@ -57,6 +57,7 @@ function backendExec() {
     Marks.setQuickMark('cmsf', 'http://localhost:7072/frontend_debug.php');
     Marks.setQuickMark('cucp', '::javascript::CustomMark.convertURLCTMSProd();');
     Marks.setQuickMark('pfctms', 'https://secure.empowerhealthresearch.ca/secure/form_editor.php');
+    Marks.setQuickMark('m', 'https://pmrobot.com/ims/next');
 }
 
 var CustomMark = {
