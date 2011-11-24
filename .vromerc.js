@@ -41,7 +41,7 @@ function backendExec() {
     Marks.setQuickMark('dd', '::javascript::CustomMark.debug();');
     Marks.setQuickMark('f', 'http://localhost:7071/form_editor.php');
     Marks.setQuickMark('i', 'http://www.instapaper.com/u');
-    Marks.setQuickMark('cucd', '::javascript::CustomMark.convertURLCTMSDev();');
+    Marks.setQuickMark('cd', '::javascript::CustomMark.convertURLCTMSDev();');
     Marks.setQuickMark('V', 'http://www.vocabulary.com/');
     Marks.setQuickMark('hn', 'http://news.ycombinator.com/classic');
     Marks.setQuickMark('chr', 'http://code.google.com/chrome/extensions/api_index.html');
@@ -55,7 +55,7 @@ function backendExec() {
     Marks.setQuickMark('gr', 'http://www.google.com/reader/view/#overview-page');
     Marks.setQuickMark('tbs', 'http://thepiratebay.org/top/205');
     Marks.setQuickMark('cmsf', 'http://localhost:7072/frontend_debug.php');
-    Marks.setQuickMark('cucp', '::javascript::CustomMark.convertURLCTMSProd();');
+    Marks.setQuickMark('cp', '::javascript::CustomMark.convertURLCTMSProd();');
     Marks.setQuickMark('pfctms', 'https://secure.empowerhealthresearch.ca/secure/form_editor.php');
 }
 
