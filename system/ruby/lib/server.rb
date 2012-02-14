@@ -2,15 +2,32 @@ require 'webrick'
 require 'tempfile'
 require 'json'
 
-class VromeServer < WEBrick::HTTPServlet::AbstractServlet
 
+class VromeServer < WEBrick::HTTPServlet::AbstractServlet
+    
     def do_POST(request, response)
         request = JSON.parse(request.body)
         status, content_type, body = self.send(request['method'].to_sym,request)
-
         response.status          = status
         response['Content-Type'] = content_type
         response.body            = body
+        response['Content-Type'] = "text/plain"
+        response['Access-Control-Allow-Origin'] = '*'
+        response['Access-Control-Allow-Methods'] = 'POST'
+        response['Access-Control-Allow-Headers'] = 'Content-Type, Cache-Control'
+        response['Access-Control-Max-Age'] = 5
+    end
+
+    def do_GET(request, response)
+        body = ""
+        response.status          = 200
+        response['Content-Type'] = "text/plain"
+        response.body            = body
+    end
+
+    def get_latest_version(request)
+        version = File.read(File.dirname(File.expand_path(__FILE__)) + "/../../../utils/version.txt")
+        return 200, "text/plain", version
     end
 
     def open_editor(request)
@@ -73,7 +90,10 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
         dir = File.join(ENV['HOME'], '.config/google-chrome/Default/User StyleSheets/')
         customCss = dir + 'Custom.css'
         data = File.read(customCss)
-        if(data.match(/dark_colors/))
+
+        current_color = "original"
+
+        if(request['color'] == 'original')
             # use debugger only
             debuggerFile = dir + 'debugger_only.css'
             %x[ cp "#{debuggerFile}" "#{customCss}" ]
@@ -81,8 +101,10 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
             # use dark
             darkFile = dir + 'all_dark.css'
             %x[ cp "#{darkFile}" "#{customCss}" ]
+            current_color = "dark"
         end
 
+        return 200, "text/plain", current_color
     end
 
 

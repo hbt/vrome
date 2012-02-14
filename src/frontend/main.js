@@ -57,10 +57,10 @@ with (KeyEvent) {
     add("]]", Page.next         );
     add("[[", Page.prev         );
     add("Y" , Page.copySelected );
-    add("Sd" , Page.toggleDarkPageExtension );
+    add("Sd" , Page.toggleGlobalColors );
     add("Ss" , Page.disableStyles );
     add("Si" , Page.disableImages);
-    add("So" , Page.disableObjects );
+    add("So" , Page.toggleSiteColors);
     add("gF" , Page.nextFrame);
 
     add("<M-y>", Page.multiclipboardCopy);

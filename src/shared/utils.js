@@ -51,3 +51,19 @@ function displayMessage(msg) {
         });
     });
 }
+
+function getDomain(href) {
+    var a = document.createElement('a');
+    a.href = href;
+    return a.hostname;
+}
+
+function getPortNumber(href) {
+    var portNumber = href.match(/:\d+/);
+    if(portNumber) {
+        portNumber = portNumber[0].match(/\d+/)[0];
+    } else {
+        portNumber = 80;
+    }
+    return portNumber;
+}

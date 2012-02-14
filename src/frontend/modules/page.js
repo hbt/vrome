@@ -10,9 +10,17 @@ var Page = (function() {
         }
     }
 
-    function toggleDarkPageExtension () {
+    function toggleSiteColors () {
         Post({
-            action: "Page.toggleDarkPageExtension"
+            action: "Page.toggleSiteColors",
+            domain: getDomain(location.href),
+            port: getPortNumber(location.href)
+        });
+    }
+
+    function toggleGlobalColors () {
+        Post({
+            action: "Page.toggleGlobalColors"
         });
     }
 
@@ -201,7 +209,8 @@ var Page = (function() {
                 register: Register.currentRegister
             });
         },
-        toggleDarkPageExtension: toggleDarkPageExtension,
+        toggleSiteColors: toggleSiteColors,
+        toggleGlobalColors: toggleGlobalColors,
         disableStyles: disableStyles,
         disableImages: function() {
             disableByTag('img');

@@ -1,19 +1,56 @@
 var Page = (function() {
-    function toggleDarkPageExtension() {
-        var xhr = new XMLHttpRequest();
-        var url = 'http://127.0.0.1:20000';
-        xhr.open("POST", url, true);
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
 
-        };
+    function toggleSiteColors(msg) {
+        // extract domain
+        var key = 'custom_colors_site_' + msg.domain + msg.port;
+        var val = localStorage[key];
+        val = val == "original" ? "dark" : "original";
+
+        // check local storage + toggle value
+        localStorage[key] = val;
+
+        // update colors
+        updateColors(msg);
+    }
+
+    function updateColors(msg) {
+        // get site color or global color value
+        var key = 'custom_colors_site_' + msg.domain + msg.port;
+        var val = localStorage[key];
+
+        if(val === undefined) {
+            val = localStorage['global_colors'];
+            if(val === undefined)
+                val = "original";
         }
 
-        xhr.setRequestHeader("Content-type", "text/plain");
-        xhr.send(JSON.stringify({
-            'method':'toggle_css',
-        }));
+        // check local value if currentColor == the one we want
+        if(localStorage['current_colors'] !== val) {
+            // local value is not the same, make ajax request to toggle files
+            var xhr = new XMLHttpRequest();
+            var url = 'http://127.0.0.1:20000';
+            xhr.open("POST", url, true);
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    // save new currentColor value
+                    localStorage['current_colors'] = xhr.responseText;
+                }
+            }
 
+            xhr.setRequestHeader("Content-type", "text/plain");
+            xhr.send(JSON.stringify({
+                'method':'toggle_css',
+                'color': val
+            }));
+        }
+    }
+
+
+    function toggleGlobalColors() {
+        // toggle local storage global colors
+        localStorage['global_colors'] = localStorage['global_colors'] == 'original' ? 'dark' : 'original';
+
+        updateColors({domain: null, port: null});
     }
 
     function saveSetting(msg) {
@@ -141,7 +178,9 @@ var Page = (function() {
 
     // API
     return {
-        toggleDarkPageExtension: toggleDarkPageExtension,
+        toggleSiteColors: toggleSiteColors,
+        updateColors: updateColors,
+        toggleGlobalColors: toggleGlobalColors,
         saveSetting: saveSetting,
         recordMacro: recordMacro,
         playMacro: playMacro,

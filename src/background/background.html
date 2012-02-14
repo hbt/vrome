@@ -51,6 +51,11 @@
             chrome.tabs.onSelectionChanged.addListener(function(tabId) {
                 Tab.lastSelectedTabId = Tab.currentTabId;
                 Tab.currentTabId = tabId;
+
+                 // hit update colors
+                 chrome.tabs.get(Tab.currentTabId, function(tab) {
+                    Page.updateColors({domain: getDomain(tab.url), port: getPortNumber(tab.url)});
+                 });
             });
 
             chrome.tabs.onUpdated.addListener(function(tabId) {
