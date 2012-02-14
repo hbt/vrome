@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 # Usage: ruby macro_play.rb [filename] [times]
 
