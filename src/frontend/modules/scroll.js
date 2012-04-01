@@ -1,15 +1,15 @@
 var Scroll = (function(){
-	var vertical_moment   = 20;
-	var horizontal_moment = 20;
+	var vertical_moment   = 15;
+	var horizontal_moment = 15;
 
   // API
 	return {
 	  top      : function () { scrollTo(scrollX, 0);                 },
-	  bottom   : function () { scrollTo(scrollX, document.height);   },
-	  first    : function () {
-							   if (times(/*read*/true,/*keep*/true) == 0) scrollTo(0, scrollY);
-							 },
-	  last     : function () { scrollTo(document.width, scrollY);    },
+	  bottom   : function () { scrollTo(scrollX, document.body.scrollHeight);   },
+    first    : function () {
+                 if (times(/*read*/true,/*keep*/true) === 0) { scrollTo(0, scrollY); }
+               },
+	  last     : function () { scrollTo(document.body.scrollWidth, scrollY);    },
 
 	  up       : function () { scrollBy(0,times() * -vertical_moment);   },
 	  down     : function () { scrollBy(0,times() * vertical_moment);   },
@@ -21,6 +21,6 @@ var Scroll = (function(){
     nextHalfPage : function () { scrollBy(0,times() * window.innerHeight/2); },
     prevHalfPage : function () { scrollBy(0,times() * -window.innerHeight/2);},
 
-    toPercent : function () { scrollTo(scrollX,times(true) * document.height / 100); },
-	}
-})()
+    toPercent : function () { scrollTo(scrollX,times(true) * document.height / 100); }
+	};
+})();
