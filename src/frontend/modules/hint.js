@@ -510,6 +510,8 @@ var Hint = (function() {
       hintStrings.push(this.numberToHintString(i, digitsNeeded, linkHintCharacters));
 
       dupElements = StringModeHelper.getDuplicatedElements(elems)
+      dupElements = {}
+
 
       if (multi_mode) {
         hintStrings = this.sortBySimilarity(hintStrings, elems);
