@@ -62,6 +62,7 @@ var Tab = (function() {
     }
 
     chrome.tabs.update(tab.id, attr, function(new_tab) {
+      sendTabStatus(new_tab)
       if (msg.callback) {
         runWhenComplete(new_tab.id, {
           code: msg.callback
@@ -500,6 +501,18 @@ var Tab = (function() {
     });
   }
 
+  /**
+   * sends the status of the current tab to the front
+   */
+  function sendTabStatus(msg)
+  {
+    var tab = arguments[arguments.length - 1];
+    if(tab.id)
+    {
+      runWhenComplete(tab.id, {code: "isTabPinned = " + tab.pinned})
+    }
+  }
+
   return {
     update: update,
     close: close,
@@ -523,7 +536,8 @@ var Tab = (function() {
     markForMerging: markForMerging,
     putMarkedTabs: putMarkedTabs,
     initializeCurrentTabs: initializeCurrentTabs,
-    makeLastTabIncognito: makeLastTabIncognito
+    makeLastTabIncognito: makeLastTabIncognito,
+    sendTabStatus: sendTabStatus
   };
 })();
 
