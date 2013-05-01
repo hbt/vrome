@@ -1,6 +1,10 @@
 var KeyEvent = (function() {
   var times = 0;
   var disableVrome, pass_next_key;
+  var last = {
+    currentKeys: null,
+    times: -1
+  }
 
   function init() {
     // disabled sites
@@ -32,13 +36,32 @@ var KeyEvent = (function() {
 
   function storeLast( /*Array*/ currentKeys, /*Number*/ times) {
     times = times || 0;
-    Settings.add("background.currentKeys", currentKeys);
-    Settings.add("background.times", times);
-    Post({
-      action: "storeLastCommand",
-      currentKeys: currentKeys,
-      times: times
-    });
+    var dirty = false
+    if(last.times !== times)
+    {
+      last.times = times
+      if(last.times !== 0)
+      {
+        Settings.add("background.times", times);
+        dirty = true
+      }
+    }
+
+    if(last.currentKeys !== currentKeys)
+    {
+      last.currentKeys = currentKeys
+      Settings.add("background.currentKeys", currentKeys);
+      dirty = true
+    }
+
+    if(dirty)
+    {
+      Post({
+        action:      "storeLastCommand",
+        currentKeys: currentKeys,
+        times:       times
+      });
+    }
   }
 
   function runLast() {

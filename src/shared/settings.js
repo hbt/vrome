@@ -132,7 +132,12 @@ var Settings = (function() {
   function syncBackgroundStorage(value, prefix) {
     var obj = SettingsUtils.getCurrentSettings(prefix)
     obj = SettingsUtils.mergeValues(obj, value)
-    localStorage[SettingsUtils.getStorageName(prefix)] = JSON.stringify(obj)
+    var oldv = localStorage[SettingsUtils.getStorageName(prefix)]
+    var newv = JSON.stringify(obj)
+    if(oldv !== newv)
+    {
+      localStorage[SettingsUtils.getStorageName(prefix)] = newv
+    }
   }
 
   // called from the background page to sync settings to the current tab
@@ -198,7 +203,13 @@ var Settings = (function() {
     obj = SettingsUtils.mergeValues(obj, obj2)
 
     // save in local storage
-    localStorage[SettingsUtils.getStorageName(prefix)] = JSON.stringify(obj)
+    var dirty = false
+    var newv = JSON.stringify(obj)
+    if(localStorage[SettingsUtils.getStorageName(prefix)] !== newv)
+    {
+      localStorage[SettingsUtils.getStorageName(prefix)] = newv
+      dirty = true
+    }
 
     // Note(hbt): This is necessary because the settings are sent asynchronously and therefore runIt could be initialized before any settings are stored
     // in the localstorage of the site
@@ -217,7 +228,7 @@ var Settings = (function() {
     }
 
     // sync in background storage
-    if (typeof syncSettingAllTabs !== "function" && !calledFromBackground) {
+    if (typeof syncSettingAllTabs !== "function" && !calledFromBackground && dirty) {
       obj = SettingsUtils.transformObject(obj, prefix)
       Post({
         action: "Settings.syncBackgroundStorage",
