@@ -6,6 +6,7 @@ var Vrome = {
     // switch to 'dev' to enable reload on file changes
     mode: 'prod'
 }
+
 var currentVersion
 function reloadExtension()
 {
@@ -24,6 +25,7 @@ function reloadExtension()
 if(Vrome.mode === 'dev')
 {
     setInterval(reloadExtension, 500)
+    chrome.tabs.reload()
 }
 
 function syncSettingAllTabs() {
