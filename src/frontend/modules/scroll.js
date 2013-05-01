@@ -47,6 +47,12 @@ var Scroll = (function() {
 
     toPercent: function() {
       scrollTo(scrollX, times(true) * document.height / 100);
+    },
+
+    lastPosition: function()
+    {
+      var lastStoredPosition = Settings.get('hosts.scroll_last_position') || [0, 0]
+      scrollTo(lastStoredPosition[0], lastStoredPosition[1]);
     }
   };
 })();

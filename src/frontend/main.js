@@ -92,6 +92,11 @@ var cmds = {
     }
   },
   'scroll': {
+    'Scroll.lastPosition': {
+      t: 'Last position',
+      d: 'Scroll to the last position',
+      k: "''"
+    },
     'Scroll.top': {
       t: 'Go to top',
       d: 'Scroll to the top of the page',

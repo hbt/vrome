@@ -136,3 +136,32 @@ RegExp.escape = function(text) {
   }
   return text.replace(arguments.callee.sRE, '\\$1');
 }
+
+
+var originalScrollBy = window.scrollBy
+var originalScrollTo = window.scrollTo
+
+function updateLastPosition()
+{
+  // store last location if different
+  var lastStoredPosition = Settings.get('hosts.scroll_last_position') || [0, 0]
+  var currentPosition = [scrollX, scrollY]
+
+  if(lastStoredPosition.join(',') !== currentPosition.join(','))
+  {
+    Settings.add('hosts.scroll_last_position', currentPosition)
+  }
+}
+
+window.scrollBy = function ()
+{
+  updateLastPosition()
+  originalScrollBy.apply(this, arguments)
+}
+
+
+window.scrollTo = function ()
+{
+  updateLastPosition()
+  originalScrollTo.apply(this, arguments)
+}
