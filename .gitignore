@@ -9,3 +9,4 @@ Gemfile.lock
 /src/files/thanks.html
 /nbproject/
 /.idea/
+/src/version.txt
