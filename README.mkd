@@ -182,3 +182,7 @@
     :clear-regs clears all registers
     :exp exports all data
     :make-links (ml) convert text URL into valid links
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/hbt/vrome/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
