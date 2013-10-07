@@ -387,7 +387,7 @@ var Hint = (function() {
         } catch (e) {
           clickElement(elem); // some website don't use standard submit input.
         }
-      } else if (elem.onclick || (tag_name == 'input' && (type == 'submit' || type == 'button' || type == 'reset' || type == 'radio' || type == 'checkbox')) || tag_name == 'button') {
+      } else if ($(elem).attr('onclick') || (tag_name == 'input' && (type == 'submit' || type == 'button' || type == 'reset' || type == 'radio' || type == 'checkbox')) || tag_name == 'button') {
         clickElement(elem);
       } else if (tag_name == 'select') {
         elem.focus();
