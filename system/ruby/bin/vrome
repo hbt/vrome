@@ -54,7 +54,7 @@ class VromeServer < WEBrick::HTTPServlet::AbstractServlet
     res = ''
     if(request['filename'])
       content = open(request['filename']) {|f| f.read }
-      dir = ENV['HOME'] + "/.config/google-chrome/Default/User StyleSheets/".gsub("/", File::SEPARATOR)
+      dir = ENV['HOME'] + "/.config/chromium/Default/User StyleSheets/".gsub("/", File::SEPARATOR)
       # update/create vrome.css file with new content
       vrome_filename = dir + "vrome.css"
       if(content)
