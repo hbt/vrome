@@ -109,7 +109,11 @@ var getKey = (function() {
   };
 
   function getKey(evt) {
-    var key = keyId[evt.keyIdentifier] || evt.keyIdentifier;
+    // Note(hbt) temporary fix for chrome 57 as evt.keyIdentifier no longer works
+    var code = "U+" + String.fromCharCode(evt.keyCode).hexEncode();
+
+    var key = keyId[code] || evt.key;
+    
     var ctrl = evt.ctrlKey ? 'C-' : '';
     var meta = (evt.metaKey || evt.altKey) ? 'M-' : '';
     var shift = evt.shiftKey ? 'S-' : '';
