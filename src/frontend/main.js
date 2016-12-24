@@ -824,20 +824,20 @@ try {
   logError(err)
 }
 
-
-// prevent pinned tabs from being closed without a confirmation
-var isTabPinned = false
-Post({
-  action: "Tab.sendTabStatus"
-});
-
-window.onbeforeunload = function()
-{
-  if(isTabPinned)
-  {
-    return "Are you sure you want to leave?";
-  }
-
-  return null
-}
+//
+//// prevent pinned tabs from being closed without a confirmation
+//var isTabPinned = false
+//Post({
+//  action: "Tab.sendTabStatus"
+//});
+//
+//window.onbeforeunload = function()
+//{
+//  if(isTabPinned)
+//  {
+//    return "Are you sure you want to leave?";
+//  }
+//
+//  return null
+//}
 
