@@ -546,16 +546,16 @@ var cmds = {
 //    }
 //  },
 //  'insert': {
-//    'InsertMode.externalEditor': {
-//      t: 'open active input in external editor',
-//      d: 'sends copy of input to server and open content on gvim then pastes it',
-//      k: '<C-i>',
-//      s: 1,
-//      i: 1,
-//      o: {
-//        'editor': 'editor command'
-//      }
-//    },
+    'InsertMode.externalEditor': {
+      t: 'open active input in external editor',
+      d: 'sends copy of input to server and open content on gvim then pastes it',
+      k: '<C-i>',
+      s: 1,
+      i: 1,
+      o: {
+        'editor': 'editor command'
+      }
+    },
 //    'InsertMode.moveToFirstOrSelectAll': {
 //      t: 'move to beginning or select all',
 //      k: '<C-a>',
