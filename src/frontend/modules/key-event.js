@@ -18,6 +18,7 @@ var KeyEvent = (function() {
 
     if (!document.vromeEventListenerAdded) {
       document.addEventListener('keydown', KeyEvent.exec, true);
+      window.addEventListener('vromekey', KeyEvent.execPassedKeys, true);
       document.vromeEventListenerAdded = true;
     }
   }
@@ -252,6 +253,36 @@ var KeyEvent = (function() {
     e.preventDefault();
   }
 
+  function execPassedKeys(e) {
+    var keys  = e.detail.keys
+    var currentKeys = keys
+
+    // Note(hbt) copied from exec below 
+    // TODO(hbt) NEXT refactor
+    var insertMode = false
+        // if vrome set disabled or pass the next, use <C-Esc> to enable it.
+    if ((pass_next_key || disableVrome) && !insertMode) {
+      if (pass_next_key || isCtrlEscapeKey(key)) enable();
+      return;
+    }
+
+    currentKeys = filterKey(currentKeys, insertMode); //FIXME multi modes
+    showStatusLine(currentKeys)
+
+    if (ignoreKey(currentKeys, insertMode)) {
+      // stop the propagation of commands that start by an unmapped key e.g unmap `t` BUT user adds commands like `tcc`, `tce` and when typing `t`, it will be ignored
+      // e.g http://oscarotero.com/jquery/ where the page grabs the focus whenever we type something that doesn't match a command'
+      var currentKeysBindings = getBindingsStartingBy(currentKeys, insertMode)
+
+      if (currentKeysBindings.length > 1) {
+        stopPropagation(e)
+      }
+
+      return;
+    }
+    runCurrentKeys(currentKeys, insertMode)
+  }
+
   function exec(e) {
     var key = getKey(e);
 
@@ -308,6 +339,7 @@ var KeyEvent = (function() {
   return {
     add: add,
     exec: exec,
+    execPassedKeys: execPassedKeys,
     reset: reset,
     enable: enable,
 

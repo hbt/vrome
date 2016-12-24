@@ -219,7 +219,7 @@ var Settings = (function() {
 
         // Initial
         try {
-          runIt([KeyEvent.init, Frame.register]);
+          runIt([KeyEvent.init, Frame.register, CustomCode.runJS]);
         } catch (err) {
           logError(err)
         }
