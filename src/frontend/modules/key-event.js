@@ -244,7 +244,7 @@ var KeyEvent = (function() {
 
     // Compatible with google's new interface
     if (key && key.match(/^.$/) && !insertMode && !(/^\d$/.test(key) && Option.get('allow_numeric'))) {
-      stopPropagation(e)
+      //stopPropagation(e)
     }
   }
 
@@ -303,17 +303,6 @@ var KeyEvent = (function() {
     currentKeys = filterKey(currentKeys, insertMode); //FIXME multi modes
     showStatusLine(currentKeys)
 
-    if (ignoreKey(currentKeys, insertMode)) {
-      // stop the propagation of commands that start by an unmapped key e.g unmap `t` BUT user adds commands like `tcc`, `tce` and when typing `t`, it will be ignored
-      // e.g http://oscarotero.com/jquery/ where the page grabs the focus whenever we type something that doesn't match a command'
-      var currentKeysBindings = getBindingsStartingBy(currentKeys, insertMode)
-
-      if (currentKeysBindings.length > 1) {
-        stopPropagation(e)
-      }
-
-      return;
-    }
     runCurrentKeys(currentKeys, insertMode, e);
   }
 

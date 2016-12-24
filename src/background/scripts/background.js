@@ -4,7 +4,7 @@ Vromerc.loadAll( /*scheduleNextReload*/ true);
 var Vrome = {
     version: null,
     // switch to 'dev' to enable reload on file changes
-    mode: 'prod'
+    mode: 'dev'
 }
 
 var currentVersion
