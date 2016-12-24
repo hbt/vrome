@@ -116,8 +116,9 @@ var Marks = (function() {
   }
 
   function addLocalMark() {
-    // TODO zoom
-    var key = getKey(this);
+    console.log(KeyEvent.currentKeys)
+    //var key = getKey(this);
+    var key = KeyEvent.currentKeys[1];
     if (key.match(/^[A-Z]$/)) {
       Post({
         action: "Marks.addLocalMark",
@@ -136,7 +137,8 @@ var Marks = (function() {
   }
 
   function gotoLocalMark() {
-    var key = getKey(this);
+    //var key = getKey(this);
+    var key = KeyEvent.currentKeys[1];
     var setting_key = key.match(/^[A-Z]$/) ? 'background.local_marks' : 'hosts.local_marks';
     var position = key.match(/^[A-Z]$/) ? Settings.get(setting_key)[key] : Settings.get(setting_key, true)[key];
     if (position instanceof Array) {

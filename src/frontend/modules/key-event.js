@@ -157,6 +157,7 @@ var KeyEvent = (function() {
       last_times = times;
     }
 
+    KeyEvent.currentKeys = keys;
     for (var i = 0; i < bindings.length; i++) {
       // 0 is a special command. could be used to scroll left, also could be used as run count.
       if (times > 0 && keys.match(/^\d$/)) {
@@ -340,6 +341,7 @@ var KeyEvent = (function() {
     passNextKey: passNextKey,
 
     runLast: runLast,
+    currentKeys: '',
 
     stopPropagation: stopPropagation,
     bindings: bindings,

@@ -13,13 +13,13 @@
  */
 var cmds = {
   'global': {
-    //'Help.show': {
-    //  t: 'Help (Press again for more)',
-    //  d: 'Press key again to expand details and again for options',
-    //  k: '<F1>',
-    //  both: 1,
-    //  c: 1
-    //},
+    'Help.show': {
+      t: 'Help (Press again for more)',
+      d: 'Press key again to expand details and again for options',
+      k: '<F1>',
+      both: 1,
+      c: 1
+    },
     //'CmdLine.start': {
     //  t: 'Start command line',
     //  k: ':'
@@ -617,7 +617,6 @@ var cmds = {
 //      i: 1
 //    }
 //  },
-  'marks': {
     'Marks.addLocalMark':  {
       t:  'local mark',
       d:  'mark position x,y on the page e.g ma',
@@ -650,7 +649,6 @@ var cmds = {
             }
           }
     }
-  }
     //'Marks.addQuickMark': {
     //  t: 'add quick mark',
     //  d: 'associate mark to URL',
