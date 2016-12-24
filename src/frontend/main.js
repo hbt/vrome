@@ -250,25 +250,25 @@ var cmds = {
       s: 1
     },
     // TODO: rethink
-    'Url.open': {
-      t: 'Open URLs or search',
-      d: 'Open URLs from your history, bookmarks, navigation or makes a search. \n\
-Use <C-[0-9]> (red numbers) to open multiple links\n\
-Use arrows to move Up and Down (view options)\n\
-Supports relative paths e.g ../admin',
-      k: 'o',
-      o: {
-        'noautocomplete': 'Disable autocomplete',
-        'searchengines': 'JSON of search engines',
-        'defaultsearch': 'Default search engine name',
-        'autocomplete_prev': 'Previous',
-        'autocomplete_next': 'Next',
-        'autocomplete_next_10': 'Next 10',
-        'autocomplete_prev_10': 'Previous 10',
-        'open_tab_on_the_right': 'Always open new tab next to active one'
-
-      }
-    },
+//    'Url.open': {
+//      t: 'Open URLs or search',
+//      d: 'Open URLs from your history, bookmarks, navigation or makes a search. \n\
+//Use <C-[0-9]> (red numbers) to open multiple links\n\
+//Use arrows to move Up and Down (view options)\n\
+//Supports relative paths e.g ../admin',
+//      k: 'o',
+//      o: {
+//        'noautocomplete': 'Disable autocomplete',
+//        'searchengines': 'JSON of search engines',
+//        'defaultsearch': 'Default search engine name',
+//        'autocomplete_prev': 'Previous',
+//        'autocomplete_next': 'Next',
+//        'autocomplete_next_10': 'Next 10',
+//        'autocomplete_prev_10': 'Previous 10',
+//        'open_tab_on_the_right': 'Always open new tab next to active one'
+//
+//      }
+//    },
     // TODO: rethink
     'Url.openWithDefault': {
       t: 'Open URLs or search (edit current URL)',
