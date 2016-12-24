@@ -244,6 +244,7 @@ var KeyEvent = (function() {
 
     // Compatible with google's new interface
     if (key && key.match(/^.$/) && !insertMode && !(/^\d$/.test(key) && Option.get('allow_numeric'))) {
+      // Note(hbt) disabling this allows keys like Up/Down to work 
       //stopPropagation(e)
     }
   }
