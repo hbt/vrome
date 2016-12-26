@@ -537,7 +537,39 @@ var Tab = (function() {
     putMarkedTabs: putMarkedTabs,
     initializeCurrentTabs: initializeCurrentTabs,
     makeLastTabIncognito: makeLastTabIncognito,
-    sendTabStatus: sendTabStatus
+    sendTabStatus: sendTabStatus,
+    toggleStylesheet: function(msg, tab) {
+      var file = msg.file;
+      var hostname = getHostname(tab.url);
+
+      // toggle stylesheet or replace
+      if(localStorage[hostname] === file)
+      {
+        localStorage[hostname] = '';
+      }
+      else
+      {
+        localStorage[hostname] = file;
+      }
+
+      if(localStorage[hostname])
+      {
+        console.log(file)
+        ajaxGet(file, function(xhr)
+        {
+          //console.log(xhr.responseText)
+          //console.log(tabId)
+          chrome.tabs.insertCSS(tab.id, {
+            code:      xhr.responseText,
+            runAt:     'document_start',
+            allFrames: true
+          }, function(res)
+          {
+          });
+
+        })
+      }
+    }
   };
 })();
 

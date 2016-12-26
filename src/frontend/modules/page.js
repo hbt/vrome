@@ -119,6 +119,18 @@ var Page = (function() {
       });
     },
 
-    hideImages: hideImages
+    hideImages: hideImages,
+    toggleDarkStyle: function() {
+      Post({
+        action: 'Tab.toggleStylesheet',
+        file: 'file:///home/hassen/.js/dark.css'
+      })
+    },
+    toggleGreyStyle: function() {
+      Post({
+        action: 'Tab.toggleStylesheet',
+        file: 'file:///home/hassen/.js/grey.css'
+      })
+    }
   };
 })();

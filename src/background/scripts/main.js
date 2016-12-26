@@ -152,21 +152,21 @@ function addErrorLogger() {
 
 
 function checkNewVersion() {
-  var manifestRequest = new XMLHttpRequest();
-  manifestRequest.open("GET", chrome.extension.getURL("manifest.json"), false);
-  manifestRequest.send(null);
-  var currentVersion = JSON.parse(manifestRequest.responseText).version;
-
-  if (Settings.get("version") !== currentVersion) {
-    if (Settings.get("version")) {
-      openOptions('changelog');
-    } else {
-      openOptions('dashboard');
-    }
-    Settings.add({
-      version: currentVersion
-    });
-  }
+  //var manifestRequest = new XMLHttpRequest();
+  //manifestRequest.open("GET", chrome.extension.getURL("manifest.json"), false);
+  //manifestRequest.send(null);
+  //var currentVersion = JSON.parse(manifestRequest.responseText).version;
+  //
+  //if (Settings.get("version") !== currentVersion) {
+  //  if (Settings.get("version")) {
+  //    openOptions('changelog');
+  //  } else {
+  //    openOptions('dashboard');
+  //  }
+  //  Settings.add({
+  //    version: currentVersion
+  //  });
+  //}
 
 }
 

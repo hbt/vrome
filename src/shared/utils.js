@@ -77,6 +77,25 @@ function object2table(data) {
 }
 
 
+function ajaxGet(url, successcallback, errcallback)
+{
+     var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.onerror = function() {
+  errcallback(xhr)
+  };
+
+  xhr.onreadystatechange = function() {
+    successcallback(xhr)
+    
+  };
+
+  xhr.setRequestHeader("Content-type", "text/plain");
+  xhr.send();
+ 
+}
+
+
 // TODO: add remote error logging
 // Take into consideration uniqIds to identify possible attackers + IPs
 
@@ -86,3 +105,4 @@ function logError(err) {
 
   // no line number or file . it is from the frontend and good luck debugging that cluster fuck. consider adding  more try/catch and hope
 }
+

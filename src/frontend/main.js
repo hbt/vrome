@@ -648,7 +648,7 @@ var cmds = {
               KeyEvent.add("'" + String.fromCharCode(i), Marks.gotoLocalMark);
             }
           }
-    }
+    },
     //'Marks.addQuickMark': {
     //  t: 'add quick mark',
     //  d: 'associate mark to URL',
@@ -671,6 +671,17 @@ var cmds = {
 //      t: 'search bookmarks + open (new tab)',
 //      k: 'gB'
 //    }
+    
+    'Page.toggleDarkStyle': {
+      t: 'toggleDarkStyle',
+      k: ',sd'
+    },
+
+    'Page.toggleGreyStyle': {
+      t: 'toggleGreyStyle',
+      k: ',sg'
+    }
+    
   }
 
 }
@@ -838,4 +849,3 @@ try {
 //
 //  return null
 //}
-

@@ -4,7 +4,7 @@ Vromerc.loadAll( /*scheduleNextReload*/ true);
 var Vrome = {
     version: null,
     // switch to 'dev' to enable reload on file changes
-    mode: 'dev'
+    mode: 'prod'
 }
 
 var currentVersion
@@ -76,7 +76,31 @@ chrome.tabs.onCreated.addListener(function(tab) {
   }
 });
 
-chrome.tabs.onUpdated.addListener(function(tabId) {
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    if(changeInfo.status === 'loading')
+    {
+      var hostname = getHostname(tab.url)
+      console.log(localStorage[hostname])
+      if(localStorage[hostname])
+      {
+        var file = localStorage[hostname]
+        ajaxGet(file, function(xhr)
+        {
+          //console.log(xhr.responseText)
+          //console.log(tabId)
+          chrome.tabs.insertCSS(tab.id, {
+            code:      xhr.responseText,
+            runAt:     'document_start',
+            allFrames: true
+          }, function(res)
+          {
+          });
+
+        })
+      }
+
+    }
+
   chrome.tabs.get(tabId, function(tab) {
     syncSetting(tab);
   });
