@@ -680,6 +680,11 @@ var cmds = {
     'Page.toggleGreyStyle': {
       t: 'toggleGreyStyle',
       k: ',sg'
+    },
+
+    'Page.toggleFullDarkStyle': {
+      t: 'toggleFullDarkStyle',
+      k: ',sf'
     }
     
   }

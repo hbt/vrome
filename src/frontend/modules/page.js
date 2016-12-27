@@ -131,6 +131,13 @@ var Page = (function() {
         action: 'Tab.toggleStylesheet',
         file: 'file:///home/hassen/.js/grey.css'
       })
+    },
+
+    toggleFullDarkStyle: function() {
+       Post({
+        action: 'Tab.toggleStylesheet',
+        file: 'file:///home/hassen/.js/fulldark.css'
+      })     
     }
   };
 })();
