@@ -50,6 +50,7 @@
   "offline_enabled": true,
   "permissions": [
     "tabs",
+    "downloads",
     "storage",
     "bookmarks",
     "history",
