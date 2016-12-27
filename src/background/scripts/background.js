@@ -80,7 +80,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     if(changeInfo.status === 'loading')
     {
       var hostname = getHostname(tab.url)
-      console.log(localStorage[hostname])
       if(localStorage[hostname])
       {
         var file = localStorage[hostname]

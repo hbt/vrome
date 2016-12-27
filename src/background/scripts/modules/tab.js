@@ -569,6 +569,39 @@ var Tab = (function() {
 
         })
       }
+    },
+    bookmark: function(msg, tab) {
+      if(!tab) return;
+      
+        chrome.bookmarks.search({
+         title: msg.folder 
+        }, function(collection) {
+          var folder = collection[0]
+          chrome.bookmarks.getChildren(folder.id, children => {
+            // check if url already in?
+            var url = tab.url
+            
+            var urls = _.pluck(children, 'url')
+            if(!urls.includes(url) && !urls.includes(url + "/")) {
+
+              chrome.bookmarks.create({
+                parentId: folder.id, 
+                url: url,
+                title: tab.title
+              }, function() {
+
+                Post(tab, {
+                  action: "CmdBox.set",
+                  title: 'added bookmark to ' + msg.folder,
+                  timeout: 2000
+                })
+                
+              })
+            }
+            
+          })
+        })
+      
     }
   };
 })();
@@ -578,3 +611,4 @@ Tab.closed_tabs = [];
 Tab.last_open_tabs = [];
 Tab.marked_tabs = [];
 Tab.activeTabs = {};
+

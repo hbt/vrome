@@ -138,6 +138,13 @@ var Page = (function() {
         action: 'Tab.toggleStylesheet',
         file: 'file:///home/hassen/.js/fulldark.css'
       })     
+    },
+    bookmark: function() {
+      Post({
+        action: 'Tab.bookmark',
+        folder: 'later'
+      })
     }
   };
 })();
+

@@ -9,7 +9,7 @@ var Post = function(tab, message) {
         port.postMessage(message);
       }
     } else {
-      messagingQueue.push([tab, message]);
+      //messagingQueue.push([tab, message]);
     }
   };
 
@@ -170,7 +170,6 @@ function checkNewVersion() {
 
 }
 
-var messagingQueue = [];
-window.setInterval(checkMessagingQueue, 100);
-checkNewVersion()
-addErrorLogger()
+//var messagingQueue = [];
+//window.setInterval(checkMessagingQueue, 500);
+//addErrorLogger()

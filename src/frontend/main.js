@@ -685,6 +685,11 @@ var cmds = {
     'Page.toggleFullDarkStyle': {
       t: 'toggleFullDarkStyle',
       k: ',sf'
+    },
+    
+    'Page.bookmark' : {
+      t: 'bookmark',
+      k: 'bc'
     }
     
   }
