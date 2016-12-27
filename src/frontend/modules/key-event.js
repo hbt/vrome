@@ -255,8 +255,17 @@ var KeyEvent = (function() {
     e.preventDefault();
   }
 
+  /**
+   * used by cvim for extra commands
+   * copies code from exec
+   * @param e
+   */
   function execPassedKeys(e) {
     var keys  = e.detail.keys
+    var params  = e.detail.args || []
+    KeyEvent.params = params
+
+    //console.log(keys, params)
     var currentKeys = keys
 
     // Note(hbt) copied from exec below 
@@ -342,6 +351,7 @@ var KeyEvent = (function() {
 
     runLast: runLast,
     currentKeys: '',
+    currentParams: [],
 
     stopPropagation: stopPropagation,
     bindings: bindings,

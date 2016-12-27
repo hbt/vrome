@@ -1,7 +1,7 @@
 cvim plus.
 
 
-adds specific commands and is designed to work in tandem with cvim
+adds specific commands and is designed to work in tandem with [cvim](https://github.com/1995eaton/chromium-vim)
 
 
 Other commands are disabled.
@@ -9,10 +9,15 @@ Other commands are disabled.
 Original vrome work on dev-stable
 
 
-Dev
 
-- watch & reload on changes
+To develop:
 
-background.js
-Vrome.mode = dev
+```
+# watch & reload on changes
 ./scripts/watch.sh
+
+# enable extension reloader
+# uncomment src/background/scripts/extension-reloader.js:25
+```
+
+

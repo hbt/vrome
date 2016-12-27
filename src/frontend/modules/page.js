@@ -140,9 +140,12 @@ var Page = (function() {
       })     
     },
     bookmark: function() {
+      //KeyEvent.params = ['later']
+      //console.log('bc', KeyEvent.params[0])
+      
       Post({
         action: 'Tab.bookmark',
-        folder: 'later'
+        folder: KeyEvent.params[0]
       })
     }
   };

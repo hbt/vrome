@@ -1,5 +1,7 @@
 var Post = function(tab, message) {
     // Note(hbt): due to new tab status, a tab could be either "loading" or "complete"
+    //console.log(message)
+  //console.log(tab.id)
     // we can't connect a port to a loading tab. Therefore, we have to queue it and check it over and over
     if (tab.status == "complete") {
       // new chrome API allows us to access chrome:// tabs

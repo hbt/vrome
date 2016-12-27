@@ -1,32 +1,32 @@
 Vromerc.loadAll( /*scheduleNextReload*/ true);
 
 // reload on changes
-var Vrome = {
-    version: null,
-    // switch to 'dev' to enable reload on file changes
-    mode: 'prod'
-}
+//var Vrome = {
+//    version: null,
+//    // switch to 'dev' to enable reload on file changes
+//    mode: 'dev'
+//}
 
-var currentVersion
-function reloadExtension()
-{
-    $.ajax('/version.txt?b=' + (+new Date())).done(function(txt) {
-        if(Vrome.version === null)
-        {
-            Vrome.version = txt;
-        }
-        else if(Vrome.version < txt)
-        {
-            chrome.runtime.reload()
-        }
-    })
-}
-
-if(Vrome.mode === 'dev')
-{
-    setInterval(reloadExtension, 500)
-    chrome.tabs.reload()
-}
+//var currentVersion
+//function reloadExtension()
+//{
+//    $.ajax('/version.txt?b=' + (+new Date())).done(function(txt) {
+//        if(Vrome.version === null)
+//        {
+//            Vrome.version = txt;
+//        }
+//        else if(Vrome.version < txt)
+//        {
+//            chrome.runtime.reload()
+//        }
+//    })
+//}
+//
+//if(Vrome.mode === 'dev')
+//{
+//    setInterval(reloadExtension, 500)
+//    chrome.tabs.reload()
+//}
 
 function syncSettingAllTabs() {
   chrome.windows.getAll({

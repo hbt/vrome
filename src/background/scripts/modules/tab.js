@@ -571,37 +571,58 @@ var Tab = (function() {
       }
     },
     bookmark: function(msg, tab) {
+      //console.log(msg)
       if(!tab) return;
-      
+
         chrome.bookmarks.search({
          title: msg.folder 
         }, function(collection) {
           var folder = collection[0]
           chrome.bookmarks.getChildren(folder.id, children => {
-            // check if url already in?
-            var url = tab.url
+            // toggle the bookmark
             
-            var urls = _.pluck(children, 'url')
-            if(!urls.includes(url) && !urls.includes(url + "/")) {
+            // fix inconsistent trailing slash in urls
+            children = _.map(children, child => {
+              var url = child.url
+              if(url && url.endsWith("/")) {
+                url = url.substring(0, url.length-1)
+              }
+              child.url = url
+              return child
+            })
+            
+            var children = _.indexBy(children, 'url')
+            
+            if(_.keys(children).includes(tab.url)) {
+
+              var b = children[tab.url]
+              chrome.bookmarks.remove(b.id, function() {
+                Post(tab, {
+                  action: "CmdBox.set",
+                  title: 'removed bookmark from ' + msg.folder,
+                  timeout: 2000
+                })
+              })
+              
+            } else {
 
               chrome.bookmarks.create({
-                parentId: folder.id, 
-                url: url,
+                parentId: folder.id,
+                url: tab.url,
                 title: tab.title
               }, function() {
-
                 Post(tab, {
                   action: "CmdBox.set",
                   title: 'added bookmark to ' + msg.folder,
                   timeout: 2000
                 })
-                
               })
+
+              
             }
             
           })
         })
-      
     }
   };
 })();
