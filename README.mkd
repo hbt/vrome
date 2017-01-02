@@ -1,23 +1,2 @@
-cvim plus.
-
-
-adds specific commands and is designed to work in tandem with [cvim](https://github.com/1995eaton/chromium-vim)
-
-
-Other commands are disabled.
-
-Original vrome work on dev-stable
-
-
-
-To develop:
-
-```
-# watch & reload on changes
-./scripts/watch.sh
-
-# enable extension reloader
-# uncomment src/background/scripts/extension-reloader.js:25
-```
-
+# DEPRECATED in favor of https://github.com/hbt/mouseless
 
